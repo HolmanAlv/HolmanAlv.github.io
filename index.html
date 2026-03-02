@@ -1,44 +1,383 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Portafolio Website</title>
+    <title>HOLMAN · Web / Games / Cine · Portfolio</title>
+    <meta name="description" content="Portafolio de Holman: desarrollo web, creación de videojuegos y cine (edición sonora, montaje, dirección, guión y animación).">
     <link rel = "stylesheet" href="styles.css">
-    <link rel = "stylesheet" href="fontawesome/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-    <div class="header">
-        <nav class="navbar">
-            <!-- <img src = "/img/logo.png" alt="image"> -->
-            <div class="menu">
-                <u1>
-                    <li><a href="#"><span>home</span></a></li>
-                    <li><a href="#">about</a></li>
-                    <li><a href="#">contact</a></li>
-                    <a href="#" class="btn">Buy Now</a>
-                </u1>
+    <header class="header" id="inicio">
+        <nav class="navbar" aria-label="Navegación principal">
+            <a class="brand" href="#inicio">HOLMAN<span class="brand-dot">.EXE</span></a>
+
+            <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-menu">☰</button>
+
+            <div class="menu" id="main-menu">
+                <ul>
+                    <li><a href="#inicio">inicio</a></li>
+                    <li><a href="#proyectos">proyectos</a></li>
+                    <li><a href="#sobre-mi">sobre mí</a></li>
+                    <li><a href="#presencia-digital">Redes</a></li>
+                    <li><a href="#contacto" class="btn">Contacto</a></li>
+                </ul>
             </div>
+
+            <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar modo día/noche">
+                <span class="toggle-day"><i class="fa-solid fa-sun"></i></span>
+                <span class="toggle-night"><i class="fa-solid fa-moon"></i></span>
+            </button>
         </nav>
-    </div>
 
-    <div class="main">
-        <h1>Hola soy <span>holman </span> y este es mi portafolio</h1>
-        <h4>Developer</h4>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum exercitationem optio nostrum nobis beatae ratione assumenda officia iusto porro laboriosam alias voluptate incidunt earum, maiores tempore asperiores molestias reiciendis ullam?
-            asdasd
-        </p>
+        <section class="hero" aria-label="Presentación">
 
-        <div class="last">
-            <h3>find with me</h3>
-            <div class="icon">
-                <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <!-- COLUMNA IZQUIERDA -->
+            <div class="hero-left">
+                <div class="hero-badge">★ DISPONIBLE ★ &nbsp; WEB · GAMES · CINE</div>
+                <h1>Hola, soy <span>Holman</span>.</h1>
+                <h2>Creo productos digitales y relatos interactivos</h2>
+                <div class="hero-dialog">
+                    Construyo <b>experiencias web</b>, desarrollo
+                    <b>videojuegos</b> y produzco piezas
+                    <b>audiovisuales</b>. Edición sonora,
+                    montaje, dirección, guión y animación.
+                    Tecnología + narrativa = mi stack.
+                </div>
+
+                <div class="hero-cta" aria-label="Acciones principales">
+                    <a class="btn" href="#proyectos">Ver proyectos</a>
+                    <a class="btn btn-ghost" href="cv-holman.txt" download>Descargar CV</a>
+                </div>
+
+                <p class="press-start">—  DESLICE PARA CONTINUAR —</p>
+
+                <div class="social" aria-label="Redes principales">
+                    <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://itch.io/" target="_blank" rel="noopener noreferrer" aria-label="Itch.io"><i class="fa-brands fa-itch-io"></i></a>
+                    <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
             </div>
+
+            <!-- COLUMNA DERECHA — Save File Cards -->
+            <div class="hero-right" aria-hidden="true">
+
+                <!-- Tarjeta 1: Datos del trainer -->
+                <div class="trainer-card-hero">
+                    <div class="tc-topbar">
+                        <span>TRAINER DATA</span>
+                        <span>No.00001</span>
+                    </div>
+                    <div class="tc-main">
+                        <div class="tc-fields">
+                            <div class="tc-field">
+                                <span class="tc-lbl">NAME/</span>
+                                <span class="tc-val">HOLMAN</span>
+                            </div>
+                            <div class="tc-field">
+                                <span class="tc-lbl">MONEY/</span>
+                                <span class="tc-val">$0,00 COP</span>
+                            </div>
+                            <div class="tc-field">
+                                <span class="tc-lbl">TIME/</span>
+                                <span class="tc-val" id="tc-time">-- -- --</span>
+                            </div>
+                            <div class="tc-field">
+                                <span class="tc-lbl">LOCATION/</span>
+                                <span class="tc-val">COLOMBIA</span>
+                            </div>
+                        </div>
+                        <div class="tc-sprite" aria-hidden="true">
+                            <svg width="56" height="80" viewBox="0 0 14 20" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="3" y="0" width="8" height="2" fill="#3a2858"/>
+                                <rect x="2" y="1" width="10" height="2" fill="#3a2858"/>
+                                <rect x="3" y="3" width="8" height="5" fill="#f0c8a0"/>
+                                <rect x="2" y="4" width="1" height="3" fill="#f0c8a0"/>
+                                <rect x="11" y="4" width="1" height="3" fill="#f0c8a0"/>
+                                <rect x="4" y="5" width="2" height="1" fill="#1c1830"/>
+                                <rect x="8" y="5" width="2" height="1" fill="#1c1830"/>
+                                <rect x="2" y="0" width="10" height="1" fill="#8850c0"/>
+                                <rect x="1" y="1" width="12" height="1" fill="#8850c0"/>
+                                <rect x="9" y="2" width="4" height="1" fill="#8850c0"/>
+                                <rect x="3" y="8" width="8" height="5" fill="#8850c0"/>
+                                <rect x="2" y="9" width="10" height="4" fill="#8850c0"/>
+                                <rect x="5" y="8" width="4" height="1" fill="#f0e8f8"/>
+                                <rect x="1" y="9" width="2" height="4" fill="#604890"/>
+                                <rect x="11" y="9" width="2" height="4" fill="#604890"/>
+                                <rect x="1" y="13" width="2" height="2" fill="#f0c8a0"/>
+                                <rect x="11" y="13" width="2" height="2" fill="#f0c8a0"/>
+                                <rect x="3" y="13" width="8" height="1" fill="#1c1830"/>
+                                <rect x="3" y="14" width="3" height="4" fill="#443865"/>
+                                <rect x="8" y="14" width="3" height="4" fill="#443865"/>
+                                <rect x="3" y="14" width="8" height="2" fill="#3a2858"/>
+                                <rect x="2" y="18" width="4" height="2" fill="#1c1830"/>
+                                <rect x="8" y="18" width="4" height="2" fill="#1c1830"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 2: Badges -->
+                <div class="trainer-card-badges">
+                    <div class="tc-topbar tc-topbar--center">·BADGES·</div>
+                    <div class="tc-badges-grid">
+                        <div class="tc-badge" title="HTML5"><i class="fa-brands fa-html5"></i></div>
+                        <div class="tc-badge" title="CSS3"><i class="fa-brands fa-css3-alt"></i></div>
+                        <div class="tc-badge" title="JavaScript"><i class="fa-brands fa-js"></i></div>
+                        <div class="tc-badge" title="Git"><i class="fa-brands fa-git-alt"></i></div>
+                        <div class="tc-badge" title="Unity"><i class="fa-brands fa-unity"></i></div>
+                        <div class="tc-badge" title="GitHub"><i class="fa-brands fa-github"></i></div>
+                        <div class="tc-badge" title="Cine / Edición"><i class="fa-solid fa-film"></i></div>
+                        <div class="tc-badge" title="Blender"><i class="fa-brands fa-blender"></i></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+    </header>
+
+    <main>
+        <section class="section" id="proyectos" aria-label="Proyectos">
+            <div class="section-head">
+                <div class="section-label">★ POKÉDEX DE PROYECTOS ★</div>
+                <h3 class="section-title">MIS PROYECTOS</h3>
+                <p class="section-subtitle">Separados por áreas y con enlaces directos. No incluyo todo: elijo lo más original, activo y completo.</p>
+            </div>
+
+            <div class="area">
+                <div class="area-head">
+                    <h4>Videojuegos</h4>
+                    <p class="muted">Aquí muestro mis juegos: demo jugable, repositorio, video corto y mi aporte específico.</p>
+                </div>
+
+                <div class="grid">
+                    <article class="card project">
+                        <img class="project-thumb" src="img/project-game.svg" alt="Captura del juego (placeholder)">
+                        <div class="project-body">
+                            <div class="project-no">No.001</div>
+                            <h5>Juego 01 — Título (placeholder)</h5>
+                            <p>Resumen en 1–2 líneas: qué problema resolví o qué experiencia quería lograr.</p>
+                            <div class="meta">
+                                <span class="tag">Lenguaje: C# (placeholder)</span>
+                                <span class="tag">Motor: Unity (placeholder)</span>
+                                <span class="tag">Última novedad: 2026-03-02 (actualizar)</span>
+                            </div>
+                            <p class="muted"><b>Mi contribución:</b> mecánicas, IA, optimización, UI, audio… (placeholder).</p>
+                            <div class="links">
+                                <a href="https://itch.io/" target="_blank" rel="noopener noreferrer">Jugar / Descargar (Itch.io)</a>
+                                <a href="https://github.com/" target="_blank" rel="noopener noreferrer">Código (GitHub)</a>
+                                <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Video 2–5 min (YouTube)</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card project">
+                        <img class="project-thumb" src="img/project-game.svg" alt="Captura del juego (placeholder)">
+                        <div class="project-body">
+                            <div class="project-no">No.002</div>
+                            <h5>Juego 02 — Colaborativo (placeholder)</h5>
+                            <p>Resumen: género, plataforma y foco técnico (IA, física, gráficos, redes…).</p>
+                            <div class="meta">
+                                <span class="tag">Lenguaje: C++/C# (placeholder)</span>
+                                <span class="tag">Plataforma: PC/Móvil (placeholder)</span>
+                                <span class="tag">Colaboradores: @Nombre1, @Nombre2 (placeholder)</span>
+                            </div>
+                            <p class="muted"><b>Mi aporte:</b> describo exactamente qué implementé y por qué importó.</p>
+                            <div class="links">
+                                <a href="https://itch.io/" target="_blank" rel="noopener noreferrer">Itch.io</a>
+                                <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div class="area">
+                <div class="area-head">
+                    <h4>Desarrollo Web</h4>
+                    <p class="muted">Productos, landing pages, herramientas internas, dashboards o experiencias interactivas.</p>
+                </div>
+
+                <div class="grid">
+                    <article class="card project">
+                        <img class="project-thumb" src="img/project-web.svg" alt="Captura del proyecto web (placeholder)">
+                        <div class="project-body">
+                            <div class="project-no">No.003</div>
+                            <h5>Web 01 — Título (placeholder)</h5>
+                            <p>Resumen: qué construí, para quién, y qué impacto buscaba (performance, UX, SEO, accesibilidad).</p>
+                            <div class="meta">
+                                <span class="tag">Stack: HTML/CSS/JS (placeholder)</span>
+                                <span class="tag">Reto: rendimiento o accesibilidad (placeholder)</span>
+                                <span class="tag">Última novedad: 2026-03-02 (actualizar)</span>
+                            </div>
+                            <div class="links">
+                                <a href="https://github.com/" target="_blank" rel="noopener noreferrer">Repositorio (GitHub)</a>
+                                <a href="https://example.com/" target="_blank" rel="noopener noreferrer">Demo (placeholder)</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card project">
+                        <img class="project-thumb" src="img/project-web.svg" alt="Captura del proyecto web (placeholder)">
+                        <div class="project-body">
+                            <div class="project-no">No.004</div>
+                            <h5>Web 02 — Experiencia interactiva (placeholder)</h5>
+                            <p>Resumen: cómo mezclé narrativa, interacción y una UI clara.</p>
+                            <div class="meta">
+                                <span class="tag">Stack: React/Vue/etc. (placeholder)</span>
+                                <span class="tag">Aprendizaje: X (placeholder)</span>
+                            </div>
+                            <div class="links">
+                                <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a>
+                                <a href="https://example.com/" target="_blank" rel="noopener noreferrer">Sitio</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div class="area">
+                <div class="area-head">
+                    <h4>Cine, Animación y Postproducción</h4>
+                    <p class="muted">Montaje, dirección, guión, animación y edición sonora. También incluyo piezas cortas con proceso.</p>
+                </div>
+
+                <div class="grid">
+                    <article class="card project">
+                        <img class="project-thumb" src="img/project-film.svg" alt="Fotograma o pieza audiovisual (placeholder)">
+                        <div class="project-body">
+                            <div class="project-no">No.005</div>
+                            <h5>Pieza 01 — Título (placeholder)</h5>
+                            <p>Resumen: intención narrativa, técnica usada y resultado final (1–2 líneas).</p>
+                            <div class="meta">
+                                <span class="tag">Roles: montaje + sonido (placeholder)</span>
+                                <span class="tag">Herramientas: Premiere/Resolve/etc. (placeholder)</span>
+                            </div>
+                            <div class="links">
+                                <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Ver video</a>
+                                <a href="https://vimeo.com/" target="_blank" rel="noopener noreferrer">Vimeo (opcional)</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card project">
+                        <img class="project-thumb" src="img/project-film.svg" alt="Fotograma o animación (placeholder)">
+                        <div class="project-body">
+                            <div class="project-no">No.006</div>
+                            <h5>Animación 01 — Título (placeholder)</h5>
+                            <p>Resumen: técnica de animación y aprendizaje aplicado.</p>
+                            <div class="meta">
+                                <span class="tag">Roles: guión + dirección + animación (placeholder)</span>
+                                <span class="tag">Última novedad: 2026-03-02 (actualizar)</span>
+                            </div>
+                            <div class="links">
+                                <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Ver video</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="sobre-mi" aria-label="Sobre mí">
+            <div class="section-head">
+                <div class="section-label">★ TRAINER CARD ★</div>
+                <h3 class="section-title">SOBRE MÍ</h3>
+                <p class="section-subtitle">Por qué soy empleable y qué estoy buscando.</p>
+            </div>
+
+            <div class="two-col">
+                <div class="card">
+                    <div class="trainer-no">TRAINER ID: 001 (placeholder)</div>
+                    <h4>Qué me hace empleable</h4>
+                    <p>
+                        Soy un perfil híbrido: puedo construir una interfaz web, programar mecánicas de juego y terminar una pieza audiovisual con intención.
+                        Eso me permite comunicarme con equipos diferentes, aterrizar ideas y entregar resultados de principio a fin.
+                    </p>
+                    <p class="muted">
+                        Busco oportunidades como <b>desarrollador web</b>, <b>game dev</b> o perfiles híbridos orientados a experiencias interactivas.
+                        (Placeholder: aquí describo mi objetivo actual con 1–2 frases.)
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h4>Mi historia (y mi crecimiento)</h4>
+                    <p>
+                        Mi camino mezcla aprendizaje constante y proyectos personales: cada juego y cada web me deja una lección nueva.
+                        Me gusta mostrar el viaje: qué reto enfrenté, cómo lo medí y qué cambié hasta lograrlo.
+                    </p>
+                    <div class="pill-row" aria-label="Áreas">
+                        <span class="pill">Desarrollo Web</span>
+                        <span class="pill">Videojuegos</span>
+                        <span class="pill">Cine / Animación</span>
+                        <span class="pill">Narrativa</span>
+                        <span class="pill">Optimización</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="presencia-digital" aria-label="Presencia digital">
+            <div class="section-head">
+                <div class="section-label">★ LINK CABLE ★</div>
+                <h3 class="section-title">PRESENCIA DIGITAL</h3>
+                <p class="section-subtitle">GitHub e Itch.io primero. Commits frecuentes y contenido actualizado.</p>
+            </div>
+
+            <div class="two-col">
+                <div class="card">
+                    <h4>GitHub + Itch.io (prioridad)</h4>
+                    <p class="muted">Aquí centralizo repositorios, builds y actualizaciones de mis proyectos.</p>
+                    <div class="links big">
+                        <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub (actualizar)</a>
+                        <a href="https://itch.io/" target="_blank" rel="noopener noreferrer">Itch.io (actualizar)</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4>Otras plataformas</h4>
+                    <p class="muted">Uso estos espacios para mostrar proceso, videos cortos y evolución de mis proyectos.</p>
+                    <div class="links big">
+                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube</a>
+                        <a href="https://www.twitch.tv/" target="_blank" rel="noopener noreferrer">Twitch (opcional)</a>
+                        <a href="https://www.hackerrank.com/" target="_blank" rel="noopener noreferrer">HackerRank (opcional)</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contacto" aria-label="Contacto">
+            <div class="section-head">
+                <div class="section-label">★ TRADE REQUEST ★</div>
+                <h3 class="section-title">CONTACTO</h3>
+                <p class="section-subtitle">Me puedes escribir y responderé lo antes posible. Mantengo esta sección siempre actualizada.</p>
+            </div>
+
+            <div class="card">
+                <h4>Datos</h4>
+                <ul class="contact-list">
+                    <li><b>Email:</b> <a href="mailto:mi-email@ejemplo.com">mi-email@ejemplo.com</a> (actualizar)</li>
+                    <li><b>Ubicación:</b> Ciudad, País (placeholder)</li>
+                    <li><b>Disponibilidad:</b> Freelance / Tiempo completo / Remoto (placeholder)</li>
+                    <li><b>Última actualización:</b> 2026-03-02 (actualizar)</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" aria-label="Pie de página">
+        <div class="footer-inner">
+            <p>© <span id="year">2026</span> HOLMAN · PORTAFOLIO v1.0 · HECHO CON </p>
+            <a class="to-top" href="#inicio">Volver arriba</a>
         </div>
-    </div>
+    </footer>
+
+    <div id="crt" aria-hidden="true"></div>
+    <script src="main.js" defer></script>
 </body>
 </html>

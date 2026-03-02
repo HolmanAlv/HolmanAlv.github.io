@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="320" viewBox="0 0 480 320" shape-rendering="crispEdges">
+  <!-- Cielo coloreado GBC -->
+  <rect width="480" height="320" fill="#2868c8"/>
+  <!-- Estrellas pixel -->
+  <rect x="40"  y="20"  width="4" height="4" fill="#f8f8f0"/>
+  <rect x="120" y="12"  width="4" height="4" fill="#f8f8f0"/>
+  <rect x="200" y="28"  width="4" height="4" fill="#f8d030"/>
+  <rect x="300" y="14"  width="4" height="4" fill="#f8f8f0"/>
+  <rect x="400" y="22"  width="4" height="4" fill="#f8f8f0"/>
+  <rect x="440" y="10"  width="4" height="4" fill="#f8d030"/>
+  <rect x="80"  y="40"  width="4" height="4" fill="#f8f8f0" opacity="0.6"/>
+  <rect x="350" y="36"  width="4" height="4" fill="#f8f8f0" opacity="0.6"/>
+
+  <!-- Colinas pixel -->
+  <rect x="0"   y="200" width="480" height="120" fill="#0f380f"/>
+  <rect x="24"  y="192" width="48"  height="16"  fill="#306230"/>
+  <rect x="16"  y="200" width="64"  height="16"  fill="#306230"/>
+  <rect x="160" y="184" width="80"  height="24"  fill="#306230"/>
+  <rect x="152" y="196" width="96"  height="16"  fill="#306230"/>
+  <rect x="340" y="188" width="64"  height="20"  fill="#306230"/>
+  <rect x="332" y="200" width="80"  height="16"  fill="#306230"/>
+
+  <!-- Film strip top -->
+  <rect x="0" y="0" width="480" height="28" fill="#0a0a0a"/>
+  <rect x="8"  y="4" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="36" y="4" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="64" y="4" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="92" y="4" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="120" y="4" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="148" y="4" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="176" y="4" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="204" y="4" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="232" y="4" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="260" y="4" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="288" y="4" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="316" y="4" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="344" y="4" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="372" y="4" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="400" y="4" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="428" y="4" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="456" y="4" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+
+  <!-- Film strip bottom -->
+  <rect x="0" y="292" width="480" height="28" fill="#0a0a0a"/>
+  <rect x="8"  y="296" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="36" y="296" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="64" y="296" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="92" y="296" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="120" y="296" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="148" y="296" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="176" y="296" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="204" y="296" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="232" y="296" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="260" y="296" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="288" y="296" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="316" y="296" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="344" y="296" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="372" y="296" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="400" y="296" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+  <rect x="428" y="296" width="20" height="20" fill="#f8f8f0" stroke="#0a0a0a" stroke-width="1"/>
+
+  <!-- Luna pixel -->
+  <rect x="380" y="48" width="40" height="40" rx="0" fill="#f8d030"/>
+  <rect x="380" y="48" width="16" height="16" fill="#2868c8"/>
+  <rect x="396" y="64" width="8"  height="8"  fill="#2868c8"/>
+
+  <!-- Personaje pixel (silueta cineasta con cámara) -->
+  <rect x="210" y="148" width="16" height="16" fill="#e8f0d8"/><!-- cabeza -->
+  <rect x="206" y="164" width="24" height="28" fill="#cc2200"/><!-- cuerpo -->
+  <rect x="198" y="168" width="8"  height="16" fill="#cc2200"/><!-- brazo iz -->
+  <rect x="230" y="164" width="8"  height="16" fill="#cc2200"/><!-- brazo der -->
+  <rect x="210" y="192" width="8"  height="16" fill="#0a0a0a"/><!-- pierna iz -->
+  <rect x="220" y="192" width="8"  height="16" fill="#0a0a0a"/><!-- pierna der -->
+  <!-- Cámara -->
+  <rect x="238" y="158" width="24" height="16" fill="#0a0a0a"/>
+  <rect x="258" y="154" width="8"  height="8"  fill="#0a0a0a"/><!-- buscador -->
+  <rect x="242" y="162" width="12" height="8"  fill="#306230"/><!-- lente -->
+
+  <!-- Dialog box inferior -->
+  <rect x="40" y="228" width="400" height="56" fill="#e8f0d8" stroke="#0f380f" stroke-width="3"/>
+  <rect x="44" y="232" width="392" height="48" fill="none" stroke="#306230" stroke-width="2"/>
+  <text x="56" y="252" font-family="monospace" font-size="10" font-weight="bold" fill="#0f380f">CINE / ANIMACION / POSTPROD.</text>
+  <text x="56" y="272" font-family="monospace" font-size="8" fill="#306230">[ Placeholder — reemplazar con captura ]</text>
+  <text x="392" y="276" font-family="monospace" font-size="10" fill="#306230">▼</text>
+</svg>
+

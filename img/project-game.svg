@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="320" viewBox="0 0 480 320" shape-rendering="crispEdges">
+  <!-- BG tile map -->
+  <rect width="480" height="320" fill="#9bbc0f"/>
+  <!-- Dark tiles -->
+  <rect x="0"   y="0"   width="16" height="16" fill="#8bac0f"/>
+  <rect x="32"  y="16"  width="16" height="16" fill="#8bac0f"/>
+  <rect x="64"  y="0"   width="16" height="16" fill="#8bac0f"/>
+  <rect x="96"  y="16"  width="16" height="16" fill="#8bac0f"/>
+  <rect x="128" y="0"   width="16" height="16" fill="#8bac0f"/>
+  <rect x="160" y="16"  width="16" height="16" fill="#8bac0f"/>
+  <rect x="192" y="0"   width="16" height="16" fill="#8bac0f"/>
+  <rect x="224" y="16"  width="16" height="16" fill="#8bac0f"/>
+  <rect x="256" y="0"   width="16" height="16" fill="#8bac0f"/>
+  <rect x="288" y="16"  width="16" height="16" fill="#8bac0f"/>
+  <rect x="320" y="0"   width="16" height="16" fill="#8bac0f"/>
+  <rect x="352" y="16"  width="16" height="16" fill="#8bac0f"/>
+  <rect x="384" y="0"   width="16" height="16" fill="#8bac0f"/>
+  <rect x="416" y="16"  width="16" height="16" fill="#8bac0f"/>
+  <rect x="448" y="0"   width="16" height="16" fill="#8bac0f"/>
+  <!-- Grass sprites (pixel) -->
+  <rect x="32"  y="224" width="16" height="16" fill="#306230"/>
+  <rect x="48"  y="216" width="8"  height="8"  fill="#306230"/>
+  <rect x="160" y="208" width="16" height="16" fill="#306230"/>
+  <rect x="176" y="200" width="8"  height="8"  fill="#306230"/>
+  <rect x="320" y="224" width="16" height="16" fill="#306230"/>
+  <rect x="336" y="216" width="8"  height="8"  fill="#306230"/>
+  <rect x="400" y="208" width="16" height="16" fill="#306230"/>
+
+  <!-- Dialog box -->
+  <rect x="40" y="200" width="400" height="100" fill="#e8f0d8"/>
+  <rect x="40" y="200" width="400" height="100" fill="none" stroke="#0f380f" stroke-width="4"/>
+  <rect x="44" y="204" width="392" height="92"  fill="none" stroke="#306230" stroke-width="2"/>
+
+  <!-- Pokémon pixel sprite (Squirtle style simplified) -->
+  <!-- Shell body -->
+  <rect x="110" y="70"  width="64" height="64" rx="0" fill="#2868c8"/>
+  <rect x="118" y="78"  width="48" height="48" fill="#4090e8"/>
+  <rect x="126" y="62"  width="32" height="16" fill="#2868c8"/>
+  <rect x="102" y="86"  width="16" height="32" fill="#2868c8"/>
+  <rect x="166" y="86"  width="16" height="32" fill="#2868c8"/>
+  <!-- Eyes -->
+  <rect x="126" y="82"  width="8"  height="8"  fill="#0a0a0a"/>
+  <rect x="148" y="82"  width="8"  height="8"  fill="#0a0a0a"/>
+  <!-- Mouth -->
+  <rect x="130" y="98"  width="24" height="4"  fill="#0a0a0a"/>
+  <!-- Shell pattern -->
+  <rect x="126" y="102" width="4"  height="24" fill="#0f380f" opacity="0.4"/>
+  <rect x="134" y="102" width="4"  height="24" fill="#0f380f" opacity="0.4"/>
+  <rect x="142" y="102" width="4"  height="24" fill="#0f380f" opacity="0.4"/>
+  <rect x="150" y="102" width="4"  height="24" fill="#0f380f" opacity="0.4"/>
+  <!-- Tail -->
+  <rect x="170" y="118" width="16" height="8"  fill="#2868c8"/>
+  <rect x="182" y="110" width="8"  height="8"  fill="#2868c8"/>
+  <!-- Feet -->
+  <rect x="114" y="128" width="16" height="8"  fill="#2868c8"/>
+  <rect x="154" y="128" width="16" height="8"  fill="#2868c8"/>
+
+  <!-- Opponent sprite (Bulbasaur style) -->
+  <rect x="310" y="50"  width="56" height="48" fill="#38a838"/>
+  <rect x="318" y="42"  width="40" height="16" fill="#306230"/>
+  <rect x="302" y="62"  width="16" height="24" fill="#38a838"/>
+  <rect x="366" y="62"  width="16" height="24" fill="#38a838"/>
+  <!-- Bulb -->
+  <rect x="326" y="30"  width="24" height="20" fill="#38c838"/>
+  <rect x="318" y="36"  width="8"  height="16" fill="#38c838"/>
+  <rect x="342" y="36"  width="8"  height="16" fill="#38c838"/>
+  <!-- Eyes -->
+  <rect x="318" y="56"  width="8"  height="8"  fill="#cc2200"/>
+  <rect x="342" y="56"  width="8"  height="8"  fill="#cc2200"/>
+  <!-- Spots -->
+  <rect x="326" y="68"  width="8"  height="8"  fill="#306230"/>
+  <rect x="342" y="72"  width="8"  height="8"  fill="#306230"/>
+  <!-- Feet -->
+  <rect x="310" y="94"  width="12" height="8"  fill="#38a838"/>
+  <rect x="326" y="94"  width="12" height="8"  fill="#38a838"/>
+  <rect x="342" y="94"  width="12" height="8"  fill="#38a838"/>
+  <rect x="358" y="94"  width="12" height="8"  fill="#38a838"/>
+
+  <!-- HP Bars frame -->
+  <rect x="56"  y="30"  width="160" height="48" fill="#e8f0d8" stroke="#0f380f" stroke-width="3"/>
+  <text x="64"  y="50"  font-family="monospace" font-size="11" font-weight="bold" fill="#0f380f">SQUIRTLE</text>
+  <text x="64"  y="65"  font-family="monospace" font-size="9"  fill="#0f380f">HP:</text>
+  <rect x="88"  y="57"  width="114" height="8" fill="#0f380f" opacity="0.18"/>
+  <rect x="88"  y="57"  width="90"  height="8" fill="#38a838"/>
+  <rect x="88"  y="57"  width="114" height="8" fill="none" stroke="#0f380f" stroke-width="2"/>
+
+  <rect x="264" y="30"  width="160" height="48" fill="#e8f0d8" stroke="#0f380f" stroke-width="3"/>
+  <text x="272" y="50"  font-family="monospace" font-size="11" font-weight="bold" fill="#0f380f">BULBASAUR</text>
+  <text x="272" y="65"  font-family="monospace" font-size="9"  fill="#0f380f">HP:</text>
+  <rect x="296" y="57"  width="114" height="8" fill="#0f380f" opacity="0.18"/>
+  <rect x="296" y="57"  width="38"  height="8" fill="#cc2200"/>
+  <rect x="296" y="57"  width="114" height="8" fill="none" stroke="#0f380f" stroke-width="2"/>
+
+  <!-- Battle menu -->
+  <rect x="240" y="200" width="200" height="100" fill="#e8f0d8" stroke="#0f380f" stroke-width="4"/>
+  <rect x="244" y="204" width="192" height="92"  fill="none" stroke="#306230" stroke-width="2"/>
+  <text x="254" y="228" font-family="monospace" font-size="11" font-weight="bold" fill="#0f380f">▶ FIGHT    PKM</text>
+  <text x="254" y="252" font-family="monospace" font-size="11" fill="#0f380f">  ITEM    RUN</text>
+
+  <!-- Dialog text -->
+  <text x="56"  y="228" font-family="monospace" font-size="11" fill="#0f380f">What will</text>
+  <text x="56"  y="248" font-family="monospace" font-size="11" fill="#0f380f">SQUIRTLE do?</text>
+  <text x="200" y="290" font-family="monospace" font-size="9"  fill="#306230">▼</text>
+</svg>
+

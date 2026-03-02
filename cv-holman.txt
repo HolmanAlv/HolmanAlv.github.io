@@ -1,0 +1,29 @@
+CV — Holman (placeholder)
+
+Contacto
+- Email: mi-email@ejemplo.com (actualizar)
+- LinkedIn: https://www.linkedin.com/ (actualizar)
+- GitHub: https://github.com/ (actualizar)
+- Itch.io: https://itch.io/ (actualizar)
+
+Resumen
+Soy un perfil híbrido (web + videojuegos + cine) y me interesa construir experiencias interactivas con foco en claridad, narrativa y calidad.
+
+Habilidades técnicas (placeholder)
+- JavaScript / TypeScript
+- HTML / CSS
+- C# / Unity
+- C++
+- Python
+- Git / GitHub
+
+Experiencia (placeholder)
+- Rol / Empresa — Año–Año: logros medibles y entregables
+
+Educación y cursos (placeholder)
+- Formación / Certificación — Año: aplicación práctica (proyecto/demo)
+
+Portafolio
+- Proyectos: ver sección “Proyectos” en el sitio
+
+Última actualización: 2026-03-02
