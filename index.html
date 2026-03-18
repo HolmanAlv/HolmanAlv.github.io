@@ -1,28 +1,13 @@
-<!--
-TODOs
-CAMBIAR PALETA DE COLORES A UNA MAS SIMILAR A PUEBLO LAVANDA Y POKEMONES TIPO FANTASMA, INCLUYENDO COLORES DE TEXTO QUE NO SE PUEDEN LEER
-AGREGAR EFECTO DE GLITCH A LAS LETRAS DE LA IZQUIERDA, TIPO MISSINGNO
-AGREGAR FONDO AL HERO POSIBLEMENTE UN VIDEO O NO SE
-CAMBIAR DISEÑO DE LAS TARJETAS DE LA DERECHA PARA QUE SEAN MÁS SIMILARES A LAS DE GUARDADO DE LOS JUEGOS DE POKÉMON
-CAMBIAR LOS ICONOS DE LAS BADGES POR ICONOS DE LO QUE SI SE UTILIZAR
-COLOCAR FONDO SEMI TRANSPARENTE A LA DESCRIPCION DE LOS PROYECTOS PARA QUE SE LEA MEJOR
-AGREGAR BOTONES DE VER MÁS EN CADA UNO DE LOS PROYECTOS PARA QUE ABRAN UN MODAL CON MÁS INFORMACIÓN, IMÁGENES Y VIDEOS
-AGREGAR UN BOTON DE VER MAS (PERO CON OTRO NOMBRE) PARA QUE DESPLIEGUE MAS PROYECTOS EN CADA SUBSECCIÓN
-AGREGAR INFORMACION REAL MIA
-CAMBIAR LA INFORMACION A INGLES
-AGREGAR BOTON DE CAMBIAR IDIOMA (ES/EN) EN EL HEADER O EN EL HERO
--->
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOLMAN · Web / Games / Cine · Portfolio</title>
+    <title>Holman Dev</title>
     <meta name="description" content="Holman's Portfolio: web dev,  game dev & filmmaker.">
-    <link rel = "stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24'%3E%3Ctitle%3Emood-neutral%3C/title%3E%3Cpath fill='white' d='M5 3h14v2H5zm0 16H3V5h2zm14 0v2H5v-2zm0 0h2V5h-2zM10 8H8v2h2zm4 0h2v2h-2zm1 5H9v2h6z'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
@@ -34,11 +19,11 @@ AGREGAR BOTON DE CAMBIAR IDIOMA (ES/EN) EN EL HEADER O EN EL HERO
 
             <div class="menu" id="main-menu">
                 <ul>
-                    <li><a href="#inicio">inicio</a></li>
-                    <li><a href="#proyectos">proyectos</a></li>
-                    <li><a href="#sobre-mi">sobre mí</a></li>
-                    <li><a href="#presencia-digital">Redes</a></li>
-                    <li><a href="#contacto" class="btn">Contacto</a></li>
+                    <li><a href="#inicio"><svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg>inicio</a></li>
+                    <li><a href="#proyectos"><svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg>proyectos</a></li>
+                    <li><a href="#sobre-mi"><svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg>sobre mí</a></li>
+                    <li><a href="#presencia-digital"><svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg>Redes</a></li>
+                    <li><a href="#contacto"><svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg>Contacto</a></li>
                 </ul>
             </div>
 
@@ -52,15 +37,21 @@ AGREGAR BOTON DE CAMBIAR IDIOMA (ES/EN) EN EL HEADER O EN EL HERO
 
             <!-- COLUMNA IZQUIERDA -->
             <div class="hero-left">
-                <div class="hero-badge">★ DISPONIBLE ★ &nbsp; WEB · GAMES · CINE</div>
-                <h1>Hola, soy <span>Holman</span>.</h1>
-                <h2>Creo productos digitales y relatos interactivos</h2>
+                <div class="hero-badge">INTERNET - VIDEOJUEGOS - CINEMATOGRAFÍA</div>
+                <h1>
+                    <span class="glitch-line" data-text="Hola, soy">Hola, soy</span>
+                    <span class="glitch-name" data-text="Holman">Holman</span><span class="glitch-line glitch-line--dot" data-text=".">.</span>
+                </h1>
+                <h2>Me gusta mesclar el arte y la tecnología</h2>
                 <div class="hero-dialog">
                     Construyo <b>experiencias web</b>, desarrollo
                     <b>videojuegos</b> y produzco piezas
                     <b>audiovisuales</b>. Edición sonora,
                     montaje, dirección, guión y animación.
                     Tecnología + narrativa = mi stack.
+                    <span class="dialog-corner dialog-corner--br" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><title>play</title><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg>
+                    </span>
                 </div>
 
                 <div class="hero-cta" aria-label="Acciones principales">
@@ -91,7 +82,7 @@ AGREGAR BOTON DE CAMBIAR IDIOMA (ES/EN) EN EL HEADER O EN EL HERO
                         <div class="tc-fields">
                             <div class="tc-field">
                                 <span class="tc-lbl">NAME/</span>
-                                <span class="tc-val">HOLMAN</span>
+                                <span class="tc-val">HOLMAN ALVARADO</span>
                             </div>
                             <div class="tc-field">
                                 <span class="tc-lbl">MONEY/</span>
@@ -107,31 +98,7 @@ AGREGAR BOTON DE CAMBIAR IDIOMA (ES/EN) EN EL HEADER O EN EL HERO
                             </div>
                         </div>
                         <div class="tc-sprite" aria-hidden="true">
-                            <svg width="56" height="80" viewBox="0 0 14 20" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="3" y="0" width="8" height="2" fill="#3a2858"/>
-                                <rect x="2" y="1" width="10" height="2" fill="#3a2858"/>
-                                <rect x="3" y="3" width="8" height="5" fill="#f0c8a0"/>
-                                <rect x="2" y="4" width="1" height="3" fill="#f0c8a0"/>
-                                <rect x="11" y="4" width="1" height="3" fill="#f0c8a0"/>
-                                <rect x="4" y="5" width="2" height="1" fill="#1c1830"/>
-                                <rect x="8" y="5" width="2" height="1" fill="#1c1830"/>
-                                <rect x="2" y="0" width="10" height="1" fill="#8850c0"/>
-                                <rect x="1" y="1" width="12" height="1" fill="#8850c0"/>
-                                <rect x="9" y="2" width="4" height="1" fill="#8850c0"/>
-                                <rect x="3" y="8" width="8" height="5" fill="#8850c0"/>
-                                <rect x="2" y="9" width="10" height="4" fill="#8850c0"/>
-                                <rect x="5" y="8" width="4" height="1" fill="#f0e8f8"/>
-                                <rect x="1" y="9" width="2" height="4" fill="#604890"/>
-                                <rect x="11" y="9" width="2" height="4" fill="#604890"/>
-                                <rect x="1" y="13" width="2" height="2" fill="#f0c8a0"/>
-                                <rect x="11" y="13" width="2" height="2" fill="#f0c8a0"/>
-                                <rect x="3" y="13" width="8" height="1" fill="#1c1830"/>
-                                <rect x="3" y="14" width="3" height="4" fill="#443865"/>
-                                <rect x="8" y="14" width="3" height="4" fill="#443865"/>
-                                <rect x="3" y="14" width="8" height="2" fill="#3a2858"/>
-                                <rect x="2" y="18" width="4" height="2" fill="#1c1830"/>
-                                <rect x="8" y="18" width="4" height="2" fill="#1c1830"/>
-                            </svg>
+                            <img src="img/holman_pixel_crop.png" alt="" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -153,13 +120,15 @@ AGREGAR BOTON DE CAMBIAR IDIOMA (ES/EN) EN EL HEADER O EN EL HERO
 
             </div>
 
+            <div class="mouse-coords" id="mouse-coords" aria-hidden="true">X: 000 Y: 000</div>
+
         </section>
     </header>
 
     <main>
         <section class="section" id="proyectos" aria-label="Proyectos">
             <div class="section-head">
-                <div class="section-label">★ POKÉDEX DE PROYECTOS ★</div>
+                <div class="section-label">POKEDEX DE PROYECTOS</div>
                 <h3 class="section-title">MIS PROYECTOS</h3>
                 <p class="section-subtitle">Separados por áreas y con enlaces directos. No incluyo todo: elijo lo más original, activo y completo.</p>
             </div>
@@ -301,7 +270,7 @@ AGREGAR BOTON DE CAMBIAR IDIOMA (ES/EN) EN EL HEADER O EN EL HERO
 
         <section class="section" id="sobre-mi" aria-label="Sobre mí">
             <div class="section-head">
-                <div class="section-label">★ TRAINER CARD ★</div>
+                <div class="section-label">TRAINER CARD</div>
                 <h3 class="section-title">SOBRE MÍ</h3>
                 <p class="section-subtitle">Por qué soy empleable y qué estoy buscando.</p>
             </div>
@@ -339,7 +308,7 @@ AGREGAR BOTON DE CAMBIAR IDIOMA (ES/EN) EN EL HEADER O EN EL HERO
 
         <section class="section" id="presencia-digital" aria-label="Presencia digital">
             <div class="section-head">
-                <div class="section-label">★ LINK CABLE ★</div>
+                <div class="section-label">LINK CABLE</div>
                 <h3 class="section-title">PRESENCIA DIGITAL</h3>
                 <p class="section-subtitle">GitHub e Itch.io primero. Commits frecuentes y contenido actualizado.</p>
             </div>
@@ -369,7 +338,7 @@ AGREGAR BOTON DE CAMBIAR IDIOMA (ES/EN) EN EL HEADER O EN EL HERO
 
         <section class="section" id="contacto" aria-label="Contacto">
             <div class="section-head">
-                <div class="section-label">★ TRADE REQUEST ★</div>
+                <div class="section-label">TRADE REQUEST</div>
                 <h3 class="section-title">CONTACTO</h3>
                 <p class="section-subtitle">Me puedes escribir y responderé lo antes posible. Mantengo esta sección siempre actualizada.</p>
             </div>
