@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,46 +15,53 @@
         <nav class="navbar" aria-label="Navegación principal">
             <a class="brand" href="#inicio">HOLMAN<span class="brand-dot">.ALV</span></a>
 
-            <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-menu">☰</button>
+            <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-menu" id="menu-toggle-btn">☰</button>
 
             <div class="menu" id="main-menu">
                 <ul>
-                    <li><a href="#inicio"><svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg>inicio</a></li>
-                    <li><a href="#proyectos"><svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg>proyectos</a></li>
-                    <li><a href="#sobre-mi"><svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg>sobre mí</a></li>
-                    <li><a href="#presencia-digital"><svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg>Redes</a></li>
-                    <li><a href="#contacto"><svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg>Contacto</a></li>
+                    <li><a href="#inicio"><svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg><span data-i18n="nav.home">inicio</span></a></li>
+                    <li><a href="#proyectos"><svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg><span data-i18n="nav.projects">proyectos</span></a></li>
+                    <li><a href="#sobre-mi"><svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg><span data-i18n="nav.about">sobre mí</span></a></li>
+                    <li><a href="#presencia-digital"><svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg><span data-i18n="nav.social">Redes</span></a></li>
+                    <li><a href="#contacto"><svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg><span data-i18n="nav.contact">Contacto</span></a></li>
                 </ul>
             </div>
 
-            <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar modo día/noche">
-                <span class="toggle-day"><i class="fa-solid fa-sun"></i></span>
-                <span class="toggle-night"><i class="fa-solid fa-moon"></i></span>
-            </button>
+            <div class="nav-controls">
+                <button class="lang-toggle" id="lang-toggle" aria-label="Cambiar idioma">
+                    <span class="toggle-es">ES</span>
+                    <span class="toggle-en">EN</span>
+                </button>
+
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambiar modo día/noche">
+                    <span class="toggle-day"><i class="fa-solid fa-sun"></i></span>
+                    <span class="toggle-night"><i class="fa-solid fa-moon"></i></span>
+                </button>
+            </div>
         </nav>
 
         <section class="hero" aria-label="Presentación">
 
             <!-- COLUMNA IZQUIERDA -->
             <div class="hero-left">
-                <div class="hero-badge">INTERNET - VIDEOJUEGOS - CINEMATOGRAFÍA</div>
+                <div class="hero-badge" data-i18n="hero.badge">INTERNET - VIDEOJUEGOS - CINEMATOGRAFÍA</div>
                 <h1>
-                    <span class="glitch-line" data-text="Hola, soy">Hola, soy</span>
+                    <span class="glitch-line" data-text="Hola, soy" data-i18n-attr="data-text" data-i18n="hero.greeting">Hola, soy</span>
                     <span class="glitch-name" data-text="Holman">Holman</span><span class="glitch-line glitch-line--dot" data-text=".">.</span>
                 </h1>
-                <h2>Me gusta mezclar el arte y la tecnología</h2>
+                <h2 data-i18n="hero.tagline">Me gusta mezclar el arte y la tecnología</h2>
                 <div class="hero-dialog">
-                    Desarrollador Full Stack, Game Developer y Cineasta.
+                    <span data-i18n="hero.dialog">Desarrollador Full Stack, Game Developer y Cineasta.
                     Combino el desarrollo de software con la narración visual para crear experiencias digitales únicas.
-                    Trabajo con herramientas libres y open source. Me apasiona crear y compartir mi conocimiento con la comunidad.
+                    Trabajo con herramientas libres y open source. Me apasiona crear y compartir mi conocimiento con la comunidad.</span>
                     <span class="dialog-corner dialog-corner--br" aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><title>play</title><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg>
                     </span>
                 </div>
 
                 <div class="hero-cta" aria-label="Acciones principales">
-                    <a class="btn" href="#proyectos">Ver proyectos</a>
-                    <a class="btn btn-ghost" href="docs/CV_Holman.pdf" download>Descargar CV</a>
+                    <a class="btn" href="#proyectos" data-i18n="hero.cta.projects">Ver proyectos</a>
+                    <a class="btn btn-ghost" href="docs/CV_Holman.pdf" download data-i18n="hero.cta.cv">Descargar CV</a>
                 </div>
 
                 
@@ -64,57 +71,62 @@
                     <a href="https://www.linkedin.com/in/holman-alv/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
                     <a href="https://www.youtube.com/@HolmanAlv" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
                 </div>
-                <p class="press-start">—  DESLICE PARA CONTINUAR —</p>
+                <p class="press-start" data-i18n="hero.scroll">—  DESLICE PARA CONTINUAR —</p>
             </div>
 
             <!-- COLUMNA DERECHA — Save File Cards -->
             <div class="hero-right" aria-hidden="true">
 
                 <!-- Tarjeta 1: Datos del trainer -->
-                <div class="trainer-card-hero">
-                    <div class="tc-topbar">
-                        <span>TRAINER DATA</span>
-                        <span>No.00001</span>
+                <div class="trainer-card-wrap">
+                    <div class="tc-outer-title tc-outer-title--center">
+                        <span class="tc-outer-dot">·</span>TRAINER DATA<span class="tc-outer-dot">·</span>
                     </div>
-                    <div class="tc-main">
-                        <div class="tc-fields">
-                            <div class="tc-field">
-                                <span class="tc-lbl">NAME/</span>
-                                <span class="tc-val">HOLMAN ALVARADO</span>
+                    <div class="trainer-card-hero">
+                        <div class="tc-main">
+                            <div class="tc-fields">
+                                <div class="tc-field">
+                                    <span class="tc-lbl">NAME/</span>
+                                    <span class="tc-val">HOLMAN ALVARADO</span>
+                                </div>
+                                <div class="tc-field">
+                                    <span class="tc-lbl">MONEY/</span>
+                                    <span class="tc-val">$0,00 COP</span>
+                                </div>
+                                <div class="tc-field">
+                                    <span class="tc-lbl">TIME/</span>
+                                    <span class="tc-val" id="tc-time">-- -- --</span>
+                                </div>
+                                <div class="tc-field">
+                                    <span class="tc-lbl">LOCATION/</span>
+                                    <span class="tc-val">COLOMBIA</span>
+                                </div>
                             </div>
-                            <div class="tc-field">
-                                <span class="tc-lbl">MONEY/</span>
-                                <span class="tc-val">$0,00 COP</span>
+                            <div class="tc-sprite" aria-hidden="true">
+                                <img src="img/holman_pixel_crop.png" alt="" loading="lazy">
                             </div>
-                            <div class="tc-field">
-                                <span class="tc-lbl">TIME/</span>
-                                <span class="tc-val" id="tc-time">-- -- --</span>
-                            </div>
-                            <div class="tc-field">
-                                <span class="tc-lbl">LOCATION/</span>
-                                <span class="tc-val">COLOMBIA</span>
-                            </div>
-                        </div>
-                        <div class="tc-sprite" aria-hidden="true">
-                            <img src="img/holman_pixel_crop.png" alt="" loading="lazy">
                         </div>
                     </div>
                 </div>
 
                 <!-- Tarjeta 2: Badges -->
-                <div class="trainer-card-badges">
-                    <div class="tc-topbar tc-topbar--center">·BADGES·</div>
-                    <div class="tc-badges-grid">
-                        <div class="tc-badge" title="HTML5"><span class="tc-badge-no">1</span><i class="fa-brands fa-html5"></i><span class="tc-badge-name">HTML5</span></div>
-                        <div class="tc-badge" title="CSS3"><span class="tc-badge-no">2</span><i class="fa-brands fa-css3-alt"></i><span class="tc-badge-name">CSS3</span></div>
-                        <div class="tc-badge" title="JavaScript"><span class="tc-badge-no">3</span><i class="fa-brands fa-js"></i><span class="tc-badge-name">JAVASCRIPT</span></div>
-                        <div class="tc-badge" title="Git"><span class="tc-badge-no">4</span><i class="fa-brands fa-git-alt"></i><span class="tc-badge-name">GIT</span></div>
-                        <div class="tc-badge" title="Unity"><span class="tc-badge-no">5</span><i class="fa-brands fa-unity"></i><span class="tc-badge-name">UNITY</span></div>
-                        <div class="tc-badge" title="GitHub"><span class="tc-badge-no">6</span><i class="fa-brands fa-github"></i><span class="tc-badge-name">GITHUB</span></div>
-                        <div class="tc-badge" title="Cine / Edición"><span class="tc-badge-no">7</span><i class="fa-solid fa-film"></i><span class="tc-badge-name">EDICION</span></div>
-                        <div class="tc-badge" title="Blender"><span class="tc-badge-no">8</span><i class="fa-brands fa-blender"></i><span class="tc-badge-name">BLENDER</span></div>
+                <div class="trainer-card-wrap">
+                    <div class="tc-outer-title tc-outer-title--center">
+                        <span class="tc-outer-dot">·</span>BADGES<span class="tc-outer-dot">·</span>
                     </div>
-                </div>
+                    <div class="trainer-card-badges">
+                    <div class="tc-badges-grid">
+                        <div class="tc-badge" title="Spring Boot"><span class="tc-badge-no">1</span><i class="fa-solid fa-leaf"></i><span class="tc-badge-name">SPRING</span></div>
+                        <div class="tc-badge" title="FastAPI"><span class="tc-badge-no">2</span><i class="fa-solid fa-bolt"></i><span class="tc-badge-name">FASTAPI</span></div>
+                        <div class="tc-badge" title="Angular"><span class="tc-badge-no">3</span><i class="fa-brands fa-angular"></i><span class="tc-badge-name">ANGULAR</span></div>
+                        <div class="tc-badge" title="Docker"><span class="tc-badge-no">4</span><i class="fa-brands fa-docker"></i><span class="tc-badge-name">DOCKER</span></div>
+                        <div class="tc-badge" title="Unity"><span class="tc-badge-no">5</span><i class="fa-brands fa-unity"></i><span class="tc-badge-name">UNITY</span></div>
+                        <div class="tc-badge" title="Blender"><span class="tc-badge-no">6</span><i class="fa-solid fa-cubes"></i><span class="tc-badge-name">BLENDER</span></div>
+                        <div class="tc-badge" title="Sonido"><span class="tc-badge-no">7</span><i class="fa-solid fa-volume-high"></i><span class="tc-badge-name">SONIDO</span></div>
+                        <div class="tc-badge" title="Edición"><span class="tc-badge-no">8</span><i class="fa-solid fa-film"></i><span class="tc-badge-name">EDICION</span></div>
+                    </div>
+                    </div><!-- /trainer-card-badges -->
+                </div><!-- /trainer-card-wrap badges -->
 
             </div>
 
@@ -126,15 +138,15 @@
     <main>
         <section class="section" id="proyectos" aria-label="Proyectos">
             <div class="section-head">
-                <div class="section-label">POKEDEX DE PROYECTOS</div>
-                <h3 class="section-title">MIS PROYECTOS</h3>
-                <p class="section-subtitle">Separados por áreas y con enlaces directos. No incluyo todo: elijo lo más original, activo y completo.</p>
+                <div class="section-label" data-i18n="projects.label">POKEDEX DE PROYECTOS</div>
+                <h3 class="section-title" data-i18n="projects.title">MIS PROYECTOS</h3>
+                <p class="section-subtitle" data-i18n="projects.subtitle">Separados por áreas y con enlaces directos. No incluyo todo: elijo lo más original, activo y completo.</p>
             </div>
 
             <div class="area">
                 <div class="area-head">
-                    <h4>Videojuegos</h4>
-                    <p class="muted">Aquí muestro mis juegos: demo jugable, repositorio, video corto y mi aporte específico.</p>
+                    <h4 data-i18n="area.games.title">Videojuegos</h4>
+                    <p class="muted" data-i18n="area.games.desc">Aquí muestro mis juegos: demo jugable, repositorio, video corto y mi aporte específico.</p>
                 </div>
 
                 <div class="grid">
@@ -181,8 +193,8 @@
 
             <div class="area">
                 <div class="area-head">
-                    <h4>Desarrollo Web</h4>
-                    <p class="muted">Productos, landing pages, herramientas internas, dashboards o experiencias interactivas.</p>
+                    <h4 data-i18n="area.web.title">Desarrollo Web</h4>
+                    <p class="muted" data-i18n="area.web.desc">Productos, landing pages, herramientas internas, dashboards o experiencias interactivas.</p>
                 </div>
 
                 <div class="grid">
@@ -225,8 +237,8 @@
 
             <div class="area">
                 <div class="area-head">
-                    <h4>Cine, Animación y Postproducción</h4>
-                    <p class="muted">Montaje, dirección, guión, animación y edición sonora. También incluyo piezas cortas con proceso.</p>
+                    <h4 data-i18n="area.film.title">Cine, Animación y Postproducción</h4>
+                    <p class="muted" data-i18n="area.film.desc">Montaje, dirección, guión, animación y edición sonora. También incluyo piezas cortas con proceso.</p>
                 </div>
 
                 <div class="grid">
@@ -268,37 +280,37 @@
 
         <section class="section" id="sobre-mi" aria-label="Sobre mí">
             <div class="section-head">
-                <div class="section-label">TRAINER CARD</div>
-                <h3 class="section-title">SOBRE MÍ</h3>
-                <p class="section-subtitle">Por qué soy empleable y qué estoy buscando.</p>
+                <div class="section-label" data-i18n="about.label">TRAINER CARD</div>
+                <h3 class="section-title" data-i18n="about.title">SOBRE MÍ</h3>
+                <p class="section-subtitle" data-i18n="about.subtitle">Por qué soy empleable y qué estoy buscando.</p>
             </div>
 
             <div class="two-col">
                 <div class="card">
                     <div class="trainer-no">TRAINER ID: 001 (placeholder)</div>
-                    <h4>Qué me hace empleable</h4>
-                    <p>
+                    <h4 data-i18n="about.card1.title">Qué me hace empleable</h4>
+                    <p data-i18n="about.card1.p1">
                         Soy un perfil híbrido: puedo construir una interfaz web, programar mecánicas de juego y terminar una pieza audiovisual con intención.
                         Eso me permite comunicarme con equipos diferentes, aterrizar ideas y entregar resultados de principio a fin.
                     </p>
-                    <p class="muted">
+                    <p class="muted" data-i18n="about.card1.p2">
                         Busco oportunidades como <b>desarrollador web</b>, <b>game dev</b> o perfiles híbridos orientados a experiencias interactivas.
                         (Placeholder: aquí describo mi objetivo actual con 1–2 frases.)
                     </p>
                 </div>
 
                 <div class="card">
-                    <h4>Mi historia (y mi crecimiento)</h4>
-                    <p>
+                    <h4 data-i18n="about.card2.title">Mi historia (y mi crecimiento)</h4>
+                    <p data-i18n="about.card2.p1">
                         Mi camino mezcla aprendizaje constante y proyectos personales: cada juego y cada web me deja una lección nueva.
                         Me gusta mostrar el viaje: qué reto enfrenté, cómo lo medí y qué cambié hasta lograrlo.
                     </p>
                     <div class="pill-row" aria-label="Áreas">
-                        <span class="pill">Desarrollo Web</span>
-                        <span class="pill">Videojuegos</span>
-                        <span class="pill">Cine / Animación</span>
-                        <span class="pill">Narrativa</span>
-                        <span class="pill">Optimización</span>
+                        <span class="pill" data-i18n="about.pill.web">Desarrollo Web</span>
+                        <span class="pill" data-i18n="about.pill.games">Videojuegos</span>
+                        <span class="pill" data-i18n="about.pill.film">Cine / Animación</span>
+                        <span class="pill" data-i18n="about.pill.narrative">Narrativa</span>
+                        <span class="pill" data-i18n="about.pill.optimization">Optimización</span>
                     </div>
                 </div>
             </div>
@@ -306,15 +318,15 @@
 
         <section class="section" id="presencia-digital" aria-label="Presencia digital">
             <div class="section-head">
-                <div class="section-label">LINK CABLE</div>
-                <h3 class="section-title">PRESENCIA DIGITAL</h3>
-                <p class="section-subtitle">GitHub e Itch.io primero. Commits frecuentes y contenido actualizado.</p>
+                <div class="section-label" data-i18n="social.label">LINK CABLE</div>
+                <h3 class="section-title" data-i18n="social.title">PRESENCIA DIGITAL</h3>
+                <p class="section-subtitle" data-i18n="social.subtitle">GitHub e Itch.io primero. Commits frecuentes y contenido actualizado.</p>
             </div>
 
             <div class="two-col">
                 <div class="card">
-                    <h4>GitHub + Itch.io (prioridad)</h4>
-                    <p class="muted">Aquí centralizo repositorios, builds y actualizaciones de mis proyectos.</p>
+                    <h4 data-i18n="social.card1.title">GitHub + Itch.io (prioridad)</h4>
+                    <p class="muted" data-i18n="social.card1.desc">Aquí centralizo repositorios, builds y actualizaciones de mis proyectos.</p>
                     <div class="links big">
                         <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub (actualizar)</a>
                         <a href="https://itch.io/" target="_blank" rel="noopener noreferrer">Itch.io (actualizar)</a>
@@ -322,13 +334,13 @@
                 </div>
 
                 <div class="card">
-                    <h4>Otras plataformas</h4>
-                    <p class="muted">Uso estos espacios para mostrar proceso, videos cortos y evolución de mis proyectos.</p>
+                    <h4 data-i18n="social.card2.title">Otras plataformas</h4>
+                    <p class="muted" data-i18n="social.card2.desc">Uso estos espacios para mostrar proceso, videos cortos y evolución de mis proyectos.</p>
                     <div class="links big">
                         <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                         <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube</a>
-                        <a href="https://www.twitch.tv/" target="_blank" rel="noopener noreferrer">Twitch (opcional)</a>
-                        <a href="https://www.hackerrank.com/" target="_blank" rel="noopener noreferrer">HackerRank (opcional)</a>
+                        <a href="https://www.twitch.tv/" target="_blank" rel="noopener noreferrer" data-i18n="social.twitch">Twitch (opcional)</a>
+                        <a href="https://www.hackerrank.com/" target="_blank" rel="noopener noreferrer" data-i18n="social.hackerrank">HackerRank (opcional)</a>
                     </div>
                 </div>
             </div>
@@ -336,18 +348,18 @@
 
         <section class="section" id="contacto" aria-label="Contacto">
             <div class="section-head">
-                <div class="section-label">TRADE REQUEST</div>
-                <h3 class="section-title">CONTACTO</h3>
-                <p class="section-subtitle">Me puedes escribir y responderé lo antes posible. Mantengo esta sección siempre actualizada.</p>
+                <div class="section-label" data-i18n="contact.label">TRADE REQUEST</div>
+                <h3 class="section-title" data-i18n="contact.title">CONTACTO</h3>
+                <p class="section-subtitle" data-i18n="contact.subtitle">Me puedes escribir y responderé lo antes posible. Mantengo esta sección siempre actualizada.</p>
             </div>
 
             <div class="card">
-                <h4>Datos</h4>
+                <h4 data-i18n="contact.card.title">Datos</h4>
                 <ul class="contact-list">
-                    <li><b>Email:</b> <a href="mailto:alvholman@gmail.com">alvholman@gmail.com</a></li>
-                    <li><b>Ubicación:</b> Bogotá, Colombia </li>
-                    <li><b>Disponibilidad:</b> Freelance / Tiempo completo / Remoto</li>
-                    <li><b>Última actualización:</b> 18-03-2026 (dd-mm-yyyy)</li>
+                    <li><b data-i18n="contact.email.label">Email:</b> <a href="mailto:alvholman@gmail.com">alvholman@gmail.com</a></li>
+                    <li><b data-i18n="contact.location.label">Ubicación:</b> <span data-i18n="contact.location.value">Bogotá, Colombia</span> </li>
+                    <li><b data-i18n="contact.availability.label">Disponibilidad:</b> <span data-i18n="contact.availability.value">Freelance / Tiempo completo / Remoto</span></li>
+                    <li><b data-i18n="contact.updated.label">Última actualización:</b> 18-03-2026 (dd-mm-yyyy)</li>
                 </ul>
             </div>
         </section>
@@ -355,8 +367,8 @@
 
     <footer class="footer" aria-label="Pie de página">
         <div class="footer-inner">
-            <p>© <span id="year">2026</span> HOLMAN · PORTAFOLIO v1.0 · HECHO CON </p>
-            <a class="to-top" href="#inicio"><svg class="to-top-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg>Volver arriba</a>
+            <p>© <span id="year">2026</span> HOLMAN · PORTAFOLIO v1.0 · <span data-i18n="footer.made">HECHO CON</span> </p>
+            <a class="to-top" href="#inicio"><svg class="to-top-icon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20H8V4h2v2h2v3h2v2h2v2h-2v2h-2v3h-2z"/></svg><span data-i18n="footer.totop">Volver arriba</span></a>
         </div>
     </footer>
 

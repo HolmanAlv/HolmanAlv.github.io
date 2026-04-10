@@ -1,4 +1,4 @@
-﻿/* ====================================================
+/* ====================================================
    POKÉMON GB / GBC THEME — Press Start 2P
    Paleta: Lavender Town — Modo Día / Noche
    ==================================================== */
@@ -31,6 +31,7 @@ Morado Gengar Crystal,var(--color-09-purple-xd)
     --fs-sm:         9px;
     --fs-md:         10px;
     --fs-lg:         11px;
+    --fs-xl:         16px;
 
     --lh-body:       2.2;
 
@@ -253,6 +254,79 @@ a{ color:inherit; text-decoration:none; }
 .menu ul li a:hover .nav-icon {
     display: block;
 }
+
+/* Grupo de controles (lang + tema) */
+.nav-controls{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+/* Botón idioma — pixel square, mismo estilo que theme-toggle */
+.lang-toggle{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto;
+    width: 88px;
+    border: 3px solid var(--color-11-black);
+    box-shadow: 3px 3px 0 var(--color-11-black);
+    overflow: hidden;
+    cursor: pointer;
+    padding: 0;
+    background: none;
+    font-family: inherit;
+    flex-shrink: 0;
+    transition: box-shadow 0.1s, transform 0.1s;
+}
+.lang-toggle:hover{
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--color-11-black);
+}
+/* Label row — muestra el idioma activo */
+.lang-toggle::after{
+    content: 'ES';
+    grid-column: 1 / -1;
+    background: var(--color-09-purple-xd);
+    color: var(--color-04-mauve);
+    font-family: 'Press Start 2P', monospace;
+    font-size: var(--fs-2xs);
+    letter-spacing: 2px;
+    padding: 4px 0;
+    text-align: center;
+    border-top: 2px solid var(--color-11-black);
+    transition: color 0.2s;
+}
+body.lang-en .lang-toggle::after{
+    content: 'EN';
+}
+.toggle-es,
+.toggle-en{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    font-size: var(--fs-md);
+    font-family: 'Press Start 2P', monospace;
+    letter-spacing: 1px;
+    line-height: 1;
+    transition: opacity 0.2s, filter 0.2s;
+}
+.toggle-es{
+    background: var(--color-06-violet);
+    color: var(--color-09-purple-xd);
+    border-right: 2px solid var(--color-11-black);
+}
+.toggle-en{
+    background: var(--color-09-purple-xd);
+    color: var(--color-04-mauve);
+}
+/* ES activo por defecto */
+.toggle-es  { opacity: 1; }
+.toggle-en  { opacity: 0.35; filter: grayscale(40%); }
+/* EN activo */
+body.lang-en .toggle-es  { opacity: 0.35; filter: grayscale(40%); }
+body.lang-en .toggle-en  { opacity: 1;   filter: none; }
 
 /* Botón tema */
 /* Toggle Día / Noche — pixel square */
@@ -498,7 +572,7 @@ body.dark .toggle-night{ opacity: 1;   filter: none; }
 .hero-cta{ gap:14px; margin-top:20px; }
 
 .press-start{
-    font-size:var(--fs-md);
+    font-size:var(--fs-xl);
     color:var(--color-06-violet);
     letter-spacing:2px;
     margin-top:56px;
@@ -789,55 +863,117 @@ main{ background:var(--bg); padding-top: 0; transition: background 0.3s ease; }
    HERO — SAVE FILE CARDS (GB estilo)
 ════════════════════════════════════════════════════ */
 
+/* Wrapper externo: contiene el título flotante + la tarjeta */
+/* (Estilos movidos junto a .trainer-card-hero para mejor agrupación) */
+
+/* Título flotante FUERA del recuadro — como en la referencia */
+.tc-outer-title{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: space-between;
+    font-family: 'Press Start 2P', monospace;
+    font-size: var(--fs-sm);
+    color: var(--text);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0 4px 8px;
+    line-height: 1;
+    position: relative;
+    z-index: 2;
+    /* Fondo de página para que el texto no quede sobre el checkerboard */
+    background: transparent;
+}
+.tc-outer-title--center{
+    justify-content: center;
+    gap: 4px;
+}
+.tc-outer-dot{
+    color: var(--color-06-violet);
+    font-size: 1.3em;
+    line-height: 1;
+}
+.tc-outer-side{
+    color: var(--color-06-violet);
+    font-size: var(--fs-xs);
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
 /* Base compartida: ambas tarjetas */
 .trainer-card-hero,
 .trainer-card-badges{
     background: var(--t-tc);
-    border: 4px solid var(--color-11-black);
-    box-shadow: 4px 4px 0 var(--color-11-black);
     color: var(--text);
     position: relative;
     overflow: hidden;
     transition: background 0.3s ease, color 0.3s ease;
-    outline: 2px solid var(--color-06-violet);
-    outline-offset: -8px;
     display: flex;
     flex-direction: column;
     flex: 0 0 auto;
-}
-/* Stripe superior — ambas tarjetas */
-.trainer-card-hero::before,
-.trainer-card-badges::before{
-    content:'';
-    display:block;
-    height:8px;
-    background: repeating-linear-gradient(
-        90deg,
-        var(--color-11-black) 0px, var(--color-11-black) 4px,
-        var(--color-06-violet)   4px, var(--color-06-violet)  12px
-    );
+
+    /* Marco doble: borde negro exterior + línea blanca interior */
+    border: 4px solid var(--color-11-black);
+    outline: 3px solid var(--color-01-white);
+    outline-offset: -7px;
 }
 
-/* Top bar */
-.tc-topbar{
+/* Marco checkerboard exterior — patrón punteado estilo Game Boy */
+.trainer-card-wrap{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--color-09-purple-xd);
-    color: var(--color-03-fog);
-    font-size: var(--fs-sm);
-    letter-spacing: 2px;
-    padding: 8px 14px;
-    border-bottom: 3px solid var(--color-11-black);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    flex: 0 0 auto;
+    position: relative;
+    /* El padding lateral + inferior crea el anillo visual;
+       el título encima NO tiene padding para quedar sobre el fondo de página */
+    padding: 0 10px 10px;
+    margin-bottom: 4px;
 }
-.tc-topbar--center{
-    justify-content: center;
-    letter-spacing: 4px;
+
+/* Anillo checkerboard exterior — cubre solo la zona con padding */
+.trainer-card-wrap::before{
+    content: '';
+    position: absolute;
+    /* Empieza justo donde termina el título (top auto = sigue el flujo) */
+    top: 26px;   /* altura aproximada del tc-outer-title */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    background-image: repeating-conic-gradient(
+        var(--color-11-black) 0% 25%,
+        var(--color-06-violet) 0% 50%
+    );
+    background-size: 6px 6px;
+    pointer-events: none;
 }
-body:not(.dark) .tc-topbar{
-    background: var(--color-08-purple-d);
-    color: var(--color-03-fog);
+
+/* Las tarjetas se elevan sobre el anillo del wrapper */
+.trainer-card-hero,
+.trainer-card-badges{
+    position: relative;
+    z-index: 1;
 }
+
+/* El título exterior también sobre el anillo */
+.tc-outer-title{
+    position: relative;
+    z-index: 1;
+    /* Compensar el padding lateral del wrap */
+    margin: 0 0 0 0;
+}
+
+/* Eliminar ::after checkerboard de las tarjetas (ya no se usa) */
+.trainer-card-hero::after,
+.trainer-card-badges::after{
+    display: none;
+}
+
+/* Top bar — YA NO SE USA (título ahora es .tc-outer-title fuera del recuadro) */
+/* Se mantiene la clase por compatibilidad pero queda oculta */
+.tc-topbar{ display: none; }
 
 /* Main row: fields + sprite */
 .tc-main{
@@ -931,15 +1067,24 @@ body.dark .tc-sprite{
 }
 .tc-badge-no{
     position: absolute;
-    top: clamp(25px, 3.5cqi, 8px);
-    left: clamp(30px, 3.5cqi, 8px);
+    top: clamp(4px, 3.5cqi, 10px);
+    left: clamp(4px, 3.5cqi, 10px);
     z-index: 2;
-    font-size: clamp(8px, 10cqi, 13px);
+    font-size: clamp(7px, 9cqi, 12px);
     line-height: 1;
     color: var(--color-03-fog);
-    background: var(--color-11-black);
-    border: 1px solid var(--color-03-fog);
-    padding: clamp(1px, 1.5cqi, 3px) clamp(2px, 2.2cqi, 4px);
+    /* Cuadrado sólido estilo GB — igual que los números de la referencia */
+    background: var(--color-10-shadow);
+    border: 2px solid var(--color-04-mauve);
+    padding: clamp(2px, 2cqi, 5px) clamp(3px, 2.5cqi, 6px);
+    min-width: clamp(14px, 16cqi, 26px);
+    text-align: center;
+    image-rendering: pixelated;
+}
+body.dark .tc-badge-no{
+    background: var(--color-09-purple-xd);
+    border-color: var(--color-06-violet);
+    color: var(--color-04-mauve);
 }
 .tc-badge i{
     display: flex;
@@ -947,7 +1092,8 @@ body.dark .tc-sprite{
     height: auto;
     align-items: center;
     justify-content: center;
-    font-size: clamp(38px, 44cqi, 92px);
+    /* Increased size from 38px/44cqi up to 48px/60cqi */
+    font-size: clamp(48px, 60cqi, 120px);
     line-height: 1;
 }
 .tc-badge-name{
@@ -1072,6 +1218,12 @@ body, body *{
     box-shadow: none !important;
     text-shadow: none !important;
 }
+/* Excepción: anillo checkerboard de las tarjetas trainer
+   (se re-declara después del !important global para sobrescribirlo) */
+.trainer-card-hero,
+.trainer-card-badges{
+    box-shadow: none !important; /* anillo manejado por ::after, no por box-shadow */
+}
 
 /* ════════════════════════════════════════════════════
    CLICKABLE EMPHASIS — sombra proyectada fuera navbar
@@ -1109,6 +1261,9 @@ footer button:active{
     .header{ height:auto; min-height:100vh; }
     .navbar{ padding:14px 18px; }
     .menu-toggle{ display:block; }
+    .nav-controls{ gap: 6px; }
+    .lang-toggle,
+    .theme-toggle{ width: 72px; }
     .menu{
         display:none;
         position:absolute; top:100%; left:0; right:0;
