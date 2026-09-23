@@ -1,23 +1,62 @@
+---
+import { Header } from "../components/Header.astro";
+import { Footer } from "../components/Footer.astro";
+import { languages, type Lang } from "../i18n/ui";
+import { useTranslations, stripLang } from "../i18n/utils";
+import "../styles/global.css";
+
+interface Props {
+	lang: Lang;
+	title: string;
+	description: string;
+}
+
+const { lang, title, description } = Astro.props;
+const t = useTranslations(lang);
+const rest = stripLang(Astro.url.pathname);
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
+---
+
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="description" content={description} />
+		<title>{title}</title>
+
+		<!-- TODO: revisar, quita el en|es de la URL, no tan necesario -->
+		{canonical && <link rel="canonical" href={canonical.href} />}
+		{
+			Astro.site &&
+				Object.keys(languages).map((l) => (
+					<link
+						rel="alternate"
+						hreflang={l}
+						href={new URL(`/${l}${rest}`, Astro.site).href}
+					/>
+				))
+		}
+		{
+			Astro.site && (
+				<link
+					rel="alternate"
+					hreflang="x-default"
+					href={new URL(`/en${rest}`, Astro.site).href}
+				/>
+			)
+		}
+
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		{canonical && <meta property="og:url" content={canonical.href} />}
+
+		<!-- ------------ Hasta aqui se termina la revision ----------- -->
 	</head>
 	<body>
 		<slot />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
