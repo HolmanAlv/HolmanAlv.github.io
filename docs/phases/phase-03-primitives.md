@@ -17,7 +17,7 @@
 - `src/components/TagList.astro` (new)
 - `src/components/SkillGrid.astro` (new)
 - `src/styles/global.css`
-- `src/pages/developer.astro` (as a test bench)
+- `src/pages/dev.astro` (as a test bench)
 
 **Out of scope:** real data (Phase 4) and page layouts (Phases 5–8).
 
@@ -87,7 +87,7 @@ It sets the **vertical rhythm** of the whole site: the same padding, the same he
    - the title in `--text-2xl`
 
 ### Check
-Use it twice on `developer.astro` (inside the Layout), once with a label and once without. The labelled one shows the label, and the other renders no empty element (check in Inspect).
+Use it twice on `dev.astro` (inside the Layout), once with a label and once without. The labelled one shows the label, and the other renders no empty element (check in Inspect).
 
 ---
 
@@ -159,7 +159,7 @@ A grid of category cards, each with a title and a list of items. You'll use it f
 
 ## Step 5: Clean up the test bench
 
-After checking everything, **leave `developer.astro` with only its `<h1>`**, or keep the Section and SkillGrid usage if you like it as a head start for Phase 5. Don't leave a separate test page in `src/pages/`: it would be published.
+After checking everything, **leave `dev.astro` with only its `<h1>`**, or keep the Section and SkillGrid usage if you like it as a head start for Phase 5. Don't leave a separate test page in `src/pages/`: it would be published.
 
 ---
 

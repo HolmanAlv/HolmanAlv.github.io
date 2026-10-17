@@ -169,7 +169,7 @@ Against `npm run build && npm run preview`:
    ```
    There's a JS file containing GSAP, and GSAP is **not** inlined in `gamedev/index.html`.
 2. **It loads late:** on `/gamedev/`, open DevTools → Network → JS and reload. The GSAP chunk appears **after** the document and images. Its *Initiator* is the small loader script.
-3. **It loads only here:** on `/`, `/developer/` and `/filmmaker/`, no GSAP chunk is requested.
+3. **It loads only here:** on `/`, `/dev/` and `/art/`, no GSAP chunk is requested.
 4. **Reduced motion:**
    1. DevTools → command menu (`Ctrl+Shift+P`) → "Show Rendering" → set **Emulate CSS media feature prefers-reduced-motion** to `reduce`
    2. reload: no GSAP request, and the static image is shown

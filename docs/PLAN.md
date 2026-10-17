@@ -13,7 +13,7 @@ How we work: one phase at a time. For each phase we go over the concepts first, 
 | Topic | Decision | Consequence |
 |---|---|---|
 | Language | English only | No i18n routing. Pages live directly under `src/pages/`. |
-| Hosting | GitHub Pages user site | `site: 'https://holmanalv.github.io'`, no `base`, so links stay plain (`/developer`). |
+| Hosting | GitHub Pages user site | `site: 'https://holmanalv.github.io'`, no `base`, so links stay plain (`/dev`). |
 | Videos | All on YouTube | No video files in the repo. Embeds load behind a click-to-play facade. |
 | GameDev demo | GSAP animation | The second (and smaller) piece of JS on the site, used only on `/gamedev`. |
 | Navigation | The header is the way into the subpages | Recruiters get the direct link to their section, so every subpage has to stand on its own. |
@@ -40,11 +40,11 @@ The mockup gives the section order and hierarchy. Its colors, fonts, copy and sc
 ### Home `/`
 
 1. **Hero:** name and roles over the 3D canvas, with a static poster underneath.
-2. **Selected projects:** 3 cards, one per discipline. Each card has a single link to its project on the matching subpage (`/developer#project-slug`).
+2. **Selected projects:** 3 cards, one per discipline. Each card has a single link to its project on the matching subpage (`/dev#project-slug`).
 3. **About:** portrait + text.
 4. **Timeline:** career and education milestones.
 
-### Developer `/developer`
+### Developer `/dev`
 
 1. **Hero:**
    - label, title
@@ -71,7 +71,7 @@ The mockup gives the section order and hierarchy. Its colors, fonts, copy and sc
 3. **Games & breakdowns:** the same project row as Developer. Images only, no toggles. These could become 3D canvases later.
 4. **Shader & Tech Art Lab:** a bento grid of experiments (images).
 
-### Film `/filmmaker`
+### Film `/art`
 
 1. **Hero (split):**
    - reel (YouTube facade)
@@ -90,7 +90,7 @@ All three subpages share the same building blocks (hero, skill grid, project row
 
 ```
 src/
-├── pages/            index, developer, gamedev, filmmaker, 404 (each file is a URL)
+├── pages/            index, dev, gamedev, art, 404 (each file is a URL)
 ├── layouts/          Layout.astro (<head>, header, footer)
 ├── components/       Header, Footer, Section, TagList, SkillGrid, ProjectRow,
 │                     ExperienceList, ProjectCard, Timeline, YouTubeFacade,
@@ -103,7 +103,7 @@ src/
 └── styles/global.css reset + design tokens
 public/
 ├── favicon.*
-├── cv/               developer.pdf, gamedev.pdf, filmmaker.pdf
+├── cv/               dev.pdf, gamedev.pdf, art.pdf
 └── og/               one social preview image per page
 ```
 
@@ -126,9 +126,9 @@ public/
 | 2. Deploy early | [phase-02-deploy.md](phases/phase-02-deploy.md) |
 | 3. Primitives | [phase-03-primitives.md](phases/phase-03-primitives.md) |
 | 4. Content layer | [phase-04-content.md](phases/phase-04-content.md) |
-| 5. Developer page | [phase-05-developer.md](phases/phase-05-developer.md) |
+| 5. Developer page | [phase-05-dev.md](phases/phase-05-dev.md) |
 | 6. GameDev page | [phase-06-gamedev.md](phases/phase-06-gamedev.md) |
-| 7. Film page | [phase-07-film.md](phases/phase-07-film.md) |
+| 7. Film page | [phase-07-art.md](phases/phase-07-art.md) |
 | 8. Home without 3D | [phase-08-home.md](phases/phase-08-home.md) |
 | 9. GSAP demo | [phase-09-gsap.md](phases/phase-09-gsap.md) |
 | 10. Three.js hero | [phase-10-threejs.md](phases/phase-10-threejs.md) |
@@ -138,14 +138,14 @@ public/
 
 Concepts: file-based routing, and build-time config versus code that ships to the browser.
 
-- [ ] Delete `src/i18n/`, `src/pages/en/` and `src/pages/es/`.
-- [ ] Turn `src/pages/index.astro` (now a meta-refresh redirect) into the Home page with placeholder content.
-- [ ] Create `developer.astro`, `gamedev.astro` and `filmmaker.astro` in `src/pages/` with placeholder content.
-- [ ] In `astro.config.mjs`, remove the `i18n` block and set `site: 'https://holmanalv.github.io'`.
-- [ ] Remove the i18n code from `Layout.astro`: the imports, hreflang and `stripLang`.
-- [ ] Rewrite `README.md`: what the project is, plus the commands.
+- [x] Delete `src/i18n/`, `src/pages/en/` and `src/pages/es/`.
+- [x] Turn `src/pages/index.astro` (now a meta-refresh redirect) into the Home page with placeholder content.
+- [x] Create `dev.astro`, `gamedev.astro` and `art.astro` in `src/pages/` with placeholder content.
+- [x] In `astro.config.mjs`, remove the `i18n` block and set `site: 'https://holmanalv.github.io'`.
+- [x] Remove the i18n code from `Layout.astro`: the imports, hreflang and `stripLang`.
+- [x] Rewrite `README.md`: what the project is, plus the commands.
 
-**Verify:** `npm run build` outputs exactly 4 HTML files (`index`, `developer`, `gamedev`, `filmmaker`) and no `/en/` or `/es/`.
+**Verify:** `npm run build` outputs exactly 4 HTML files (`index`, `dev`, `gamedev`, `art`) and no `/en/` or `/es/`.
 
 ### Phase 1: Shell (Layout, Header, Footer)
 
@@ -198,7 +198,7 @@ Concepts: when something deserves a component and when a CSS class is enough.
 Concepts: content collections, and schema validation at build time.
 
 - [ ] `src/content.config.ts`: a `projects` collection (glob loader).
-  - Fields: `title, discipline (developer | gamedev | filmmaker), summary, description, tags, role, result?, links { source?, demo?, play? }, media, featured, order`.
+  - Fields: `title, discipline (dev | gamedev | art), summary, description, tags, role, result?, links { source?, demo?, play? }, media, featured, order`.
   - Film-only optional fields: `format, client, year, duration, mix`.
 - [ ] `src/data/`: profile (name, email, socials), stacks per page, experience + education, timeline.
 - [ ] 1–2 real projects per discipline, so the schema gets tested against real content.
@@ -211,7 +211,7 @@ It comes first because it has no video or animation, just the bare structure. Th
 
 Concepts: `astro:assets` (`<Image>`), and why the CV lives in `public/`.
 
-- [ ] Hero with the lead paragraph and GitHub + Download CV (`/cv/developer.pdf`).
+- [ ] Hero with the lead paragraph and GitHub + Download CV (`/cv/dev.pdf`).
 - [ ] Technical stack (`SkillGrid`).
 - [ ] `ProjectRow.astro`:
   - media slot (image or diagram)
@@ -250,7 +250,7 @@ Concepts: Astro `<script>` tags, which get bundled and deduplicated and run on p
 - [ ] Selected works: `ProjectRow` with the facade plus production metadata.
 - [ ] Short About as the last section.
 
-**Verify:** loading `/filmmaker` makes no request to `youtube.com` or `youtube-nocookie.com` until you click play.
+**Verify:** loading `/art` makes no request to `youtube.com` or `youtube-nocookie.com` until you click play.
 
 ### Phase 8: Home without 3D
 

@@ -116,7 +116,7 @@ Inspect the link's `href` on each card: it ends in `/<discipline>/#<id>`.
 
 ### Do it
 1. In `index.astro`'s frontmatter, get the projects with `featured === true`.
-2. **Sort them by discipline** in a fixed order: developer, gamedev, filmmaker. An array of the three names and `indexOf` does it.
+2. **Sort them by discipline** in a fixed order: dev, gamedev, art. An array of the three names and `indexOf` does it.
 3. `Section` ("Selected Projects", label "INDEX // 01 — 03"), containing a `<ul>` grid of three `<li>`s, each with a `<ProjectCard>`. Use 3 columns on desktop and 1 on mobile. auto-fit works.
 
 ### Check

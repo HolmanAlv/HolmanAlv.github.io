@@ -44,11 +44,11 @@ Astro has no route table. **The path of a file inside `src/pages/` is its URL:**
 | File | Built to | Served at |
 |---|---|---|
 | `src/pages/index.astro` | `dist/index.html` | `/` |
-| `src/pages/developer.astro` | `dist/developer/index.html` | `/developer/` |
+| `src/pages/dev.astro` | `dist/dev/index.html` | `/dev/` |
 | `src/pages/gamedev.astro` | `dist/gamedev/index.html` | `/gamedev/` |
-| `src/pages/filmmaker.astro` | `dist/filmmaker/index.html` | `/filmmaker/` |
+| `src/pages/art.astro` | `dist/art/index.html` | `/art/` |
 
-Notice the **folder per page** (`developer/index.html`). It's Astro's default `build.format: 'directory'`. With it, the URL works with and without the trailing slash: GitHub Pages redirects `/developer` to `/developer/`.
+Notice the **folder per page** (`dev/index.html`). It's Astro's default `build.format: 'directory'`. With it, the URL works with and without the trailing slash: GitHub Pages redirects `/dev` to `/dev/`.
 
 Two consequences:
 - **Every file in `src/pages/` is public.** If you save `src/pages/test.astro` to try something, the next deploy publishes `holmanalv.github.io/test/`. Files or folders whose name starts with `_` are excluded from routing, but they also can't be viewed in the dev server.
@@ -56,7 +56,7 @@ Two consequences:
 
 ### 3. A URL is a contract
 
-Recruiters will receive `holmanalv.github.io/developer/` directly. If you later rename `developer.astro` to `dev.astro`, every link you already sent breaks. **Decide the names now:** `developer`, `gamedev`, `filmmaker`. If you'd rather use something else, like `film` instead of `filmmaker`, this is the moment to change it.
+Recruiters will receive `holmanalv.github.io/dev/` directly. If you later rename `dev.astro` to `developer.astro`, every link you already sent breaks. **Decide the names now.** The final ones are `dev`, `gamedev` and `art`.
 
 ---
 
@@ -98,7 +98,7 @@ Remove the i18n configuration, set the site URL and drop `base`.
 Replace `pages/en/` and `pages/es/` with four files directly in `src/pages/`.
 
 ### Why
-With one language there's nothing to prefix. Flat routes give short URLs (`/developer/`) and one file per page.
+With one language there's nothing to prefix. Flat routes give short URLs (`/dev/`) and one file per page.
 
 The current `src/pages/index.astro` is a `<meta http-equiv="refresh">` redirect. It existed only to send `/` to `/en/`. Now `/` is the Home page itself.
 
@@ -110,11 +110,11 @@ The current `src/pages/index.astro` is a `<meta http-equiv="refresh">` redirect.
    Nothing is lost: git keeps the history.
 2. Open `src/pages/index.astro` and delete everything in it: the frontmatter with the TODO comment and the meta refresh tag.
 3. Write a single `<h1>` with the text `Home` in `index.astro`. You don't need a frontmatter fence: a `.astro` file can be plain HTML.
-4. Create three new files in `src/pages/`: `developer.astro`, `gamedev.astro` and `filmmaker.astro`. Give each a single `<h1>` with its name.
+4. Create three new files in `src/pages/`: `dev.astro`, `gamedev.astro` and `art.astro`. Give each a single `<h1>` with its name.
 
 ### Check
 1. Start the dev server with `npm run dev` and open `http://localhost:4321/`.
-2. Visit `/`, `/developer`, `/gamedev` and `/filmmaker`. Each shows its heading.
+2. Visit `/`, `/dev`, `/gamedev` and `/art`. Each shows its heading.
 3. Visit `/en/`: it's a 404 now. That's correct.
 4. Right-click → *View page source* on any page. The output has no `<html>` or `<head>`, nothing beyond what you wrote and what the dev server adds for itself. **Astro doesn't wrap your page in a document for you.** That's the Layout's job, and you build it in Phase 1.
 
@@ -191,12 +191,12 @@ Open the preview with `Ctrl+Shift+V` in VS Code. It reads well and has no starte
 
 ## Done when
 
-- [ ] `astro.config.mjs` contains only `site: 'https://holmanalv.github.io'`.
-- [ ] `src/pages/` contains exactly `index.astro`, `developer.astro`, `gamedev.astro` and `filmmaker.astro`.
-- [ ] `src/i18n/` no longer exists, and the grep in Step 3 prints nothing.
-- [ ] `npm run build` passes, and `find dist -name "*.html" | sort` lists exactly 4 files.
-- [ ] The README describes the project.
-- [ ] Phase 0 is checked off in `docs/PLAN.md`.
+- [x] `astro.config.mjs` contains only `site: 'https://holmanalv.github.io'`.
+- [x] `src/pages/` contains exactly `index.astro`, `dev.astro`, `gamedev.astro` and `art.astro`.
+- [x] `src/i18n/` no longer exists, and the grep in Step 3 prints nothing.
+- [x] `npm run build` passes, and `find dist -name "*.html" | sort` lists exactly 4 files.
+- [x] The README describes the project.
+- [x] Phase 0 is checked off in `docs/PLAN.md`.
 
 ---
 

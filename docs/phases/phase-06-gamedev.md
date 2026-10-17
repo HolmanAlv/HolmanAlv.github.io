@@ -130,7 +130,7 @@ Use `Section` ("Technical Stack", label "SPECIFICATIONS") with `SkillGrid` fed t
 
 ### Check
 - The rows render with the wider media column.
-- **`/developer/` looks exactly as before**, so the variant didn't leak.
+- **`/dev/` looks exactly as before**, so the variant didn't leak.
 
 ---
 
@@ -157,7 +157,7 @@ Against `npm run build && npm run preview`:
 2. **LCP:** run Lighthouse (Mobile). Expand "Largest Contentful Paint element": it should be the demo image or the `h1`, and it should be fast.
 3. **Only one** image on the page has `fetchpriority="high"`.
 4. Heading outline, keyboard pass and 360px width, same checks as Phase 5.
-5. `/developer/` is unchanged (regression check).
+5. `/dev/` is unchanged (regression check).
 6. Push, and check the live page.
 
 ---
@@ -176,7 +176,7 @@ Against `npm run build && npm run preview`:
 
 - [ ] `/gamedev/` has: Hero (text + demo image) → Stack (4 groups, including Game Audio) → Games → Lab.
 - [ ] `GameDevDemo.astro` holds the static image in a fixed-ratio box.
-- [ ] `ProjectRow` has a `wide` variant, and `/developer/` is unchanged.
+- [ ] `ProjectRow` has a `wide` variant, and `/dev/` is unchanged.
 - [ ] The page ships 0 JS, Lighthouse is green, and it works at 360px.
 - [ ] The CV link works.
 - [ ] Phase 6 is checked off in `docs/PLAN.md`.

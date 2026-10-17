@@ -75,7 +75,7 @@ A `.ts` file can also **import images** from `src/assets/`. The import gives the
 
 ### 6. Ids become anchors, and anchors are URLs
 
-With the `glob` loader, an entry's `id` comes from its file name: `project-alpha.md` → `project-alpha`. In Phase 5 that id becomes the HTML id on the page (`/developer/#project-alpha`), and Home links to it. **Renaming a project file changes its URL.** Choose file names like you chose route names in Phase 0.
+With the `glob` loader, an entry's `id` comes from its file name: `project-alpha.md` → `project-alpha`. In Phase 5 that id becomes the HTML id on the page (`/dev/#project-alpha`), and Home links to it. **Renaming a project file changes its URL.** Choose file names like you chose route names in Phase 0.
 
 ---
 
@@ -106,7 +106,7 @@ Declare the `projects` collection with its schema.
    | Field | Type | Required? | Used for |
    |---|---|---|---|
    | `title` | string | yes | Card and row heading |
-   | `discipline` | enum: `developer`, `gamedev`, `filmmaker` | yes | Which page shows it. **The values equal the route names**, so links can be built from it. |
+   | `discipline` | enum: `dev`, `gamedev`, `art` | yes | Which page shows it. **The values equal the route names**, so links can be built from it. |
    | `subtitle` | string | no | The one-line pitch under the title (Dev/GameDev rows) |
    | `summary` | string | yes | The short text on the Home card |
    | `tags` | array of strings | no, default `[]` | `TagList` |
@@ -153,11 +153,11 @@ Declare the `projects` collection with its schema.
 ## Step 4: Prove the data flows
 
 ### What
-Read the collection from `developer.astro` and list the titles. This is temporary; Phase 5 does it properly.
+Read the collection from `dev.astro` and list the titles. This is temporary; Phase 5 does it properly.
 
 ### Do it
 1. In the frontmatter, import `getCollection` from `astro:content`.
-2. Call it with the name `projects` and a filter function that keeps entries whose `data.discipline` is `developer`. The call is `await`ed: frontmatter supports top-level await.
+2. Call it with the name `projects` and a filter function that keeps entries whose `data.discipline` is `dev`. The call is `await`ed: frontmatter supports top-level await.
 3. **Sort** the result by `data.order`. Don't rely on file order.
 4. In the template, render a list of the titles.
 
@@ -191,12 +191,12 @@ Write a `type` (or `interface`) for each shape and annotate the export with it, 
    - `roles`: the line under your name on Home
    - `email`
    - `socials`: GitHub, itch.io, LinkedIn and YouTube URLs
-   - `cv`: three public paths, `/cv/developer.pdf`, `/cv/gamedev.pdf` and `/cv/filmmaker.pdf`
+   - `cv`: three public paths, `/cv/dev.pdf`, `/cv/gamedev.pdf` and `/cv/art.pdf`
    - the texts for the Home about and the Film about (the Dev and GameDev "about" is their hero lead, which you write in the page)
 2. **`stacks.ts`**: three exports (or one object with three keys), each an array of `{ category, items[] }`, the exact shape `SkillGrid` expects.
-   - **developer:** your real categories. The mockup has 6.
+   - **dev:** your real categories. The mockup has 6.
    - **gamedev:** Engine & Scripting, Rendering & Optimization, Tools & Pipeline, and **Game Audio with placeholder items** (FMOD / Wwise, Unity Audio Mixer, Reaper / DAW) until you confirm the real tools.
-   - **filmmaker:** Editing, Sound Design, Animation.
+   - **art:** Editing, Sound Design, Animation.
 3. **`experience.ts`**: two arrays with the same item shape, `{ org, role, period }`:
    - `experience`
    - `education` (here `org` is the institution and `role` the degree or course)
@@ -252,7 +252,7 @@ A schema designed against invented data always misses something real: a project 
 - [ ] The `.ts` data files exist, are typed, and a typo fails `npm run check`.
 - [ ] The footer reads from `profile.ts`.
 - [ ] There are 1–2 real projects per discipline, one `featured` each.
-- [ ] The temporary title list in `developer.astro` works (replaced in Phase 5).
+- [ ] The temporary title list in `dev.astro` works (replaced in Phase 5).
 - [ ] Phase 4 is checked off in `docs/PLAN.md`.
 
 ---

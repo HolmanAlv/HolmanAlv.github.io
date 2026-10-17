@@ -128,7 +128,7 @@ Emulate reduced motion: hover effects, the canvas fade and anchor scrolling are 
 
 ### Do it
 1. Design 4 images at 1200×630: Home, Developer, GameDev and Film. The text on them must be large; previews are shown small.
-2. Export them as PNG or JPG, under ~300 KB each. Save them in `public/og/` with stable names (`home.png`, `developer.png`…).
+2. Export them as PNG or JPG, under ~300 KB each. Save them in `public/og/` with stable names (`home.png`, `dev.png`…).
 3. **In the Layout:**
    1. add an optional `ogImage` prop (a path), defaulting to the Home image
    2. build its absolute URL from `Astro.site`

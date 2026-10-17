@@ -1,6 +1,6 @@
 # Phase 5: Developer page (reference implementation)
 
-**Goal:** `/developer/` is complete: hero, technical stack, featured projects, experience and education. It ships zero JavaScript and has optimized images. The other two subpages will reuse its components.
+**Goal:** `/dev/` is complete: hero, technical stack, featured projects, experience and education. It ships zero JavaScript and has optimized images. The other two subpages will reuse its components.
 
 **You will learn:**
 - `astro:assets` (`<Image>` and `<Picture>`)
@@ -15,8 +15,8 @@
 **Files you will touch:**
 - `src/components/ProjectRow.astro` (new)
 - `src/components/ExperienceList.astro` (new)
-- `src/pages/developer.astro`
-- `public/cv/developer.pdf` (new)
+- `src/pages/dev.astro`
+- `public/cv/dev.pdf` (new)
 
 **Out of scope:** the YouTube facade (Phase 7) and animation (Phases 9–10).
 
@@ -47,7 +47,7 @@ A slot can also hold **fallback content**: whatever you put between `<slot name=
 - by default it shows the project's cover image (Developer, GameDev)
 - the Film page fills the slot with a video facade instead (Phase 7)
 
-One component, no `if (discipline === 'filmmaker')` inside it.
+One component, no `if (discipline === 'art')` inside it.
 
 ### 3. Rendering the Markdown body
 
@@ -55,11 +55,11 @@ The project's long description is the `.md` body. `render(entry)` (from `astro:c
 
 ### 4. Why the CV goes in `public/`
 
-`src/assets/` gives files hashed names, which is perfect for images but wrong for a CV. You want a **stable, readable URL**, `/cv/developer.pdf`, that you can also paste in an email. `public/` files keep their exact path. This is the rule from the plan: **`public/` is for files whose exact URL matters.**
+`src/assets/` gives files hashed names, which is perfect for images but wrong for a CV. You want a **stable, readable URL**, `/cv/dev.pdf`, that you can also paste in an email. `public/` files keep their exact path. This is the rule from the plan: **`public/` is for files whose exact URL matters.**
 
 ### 5. Anchors and the sticky header
 
-Each project's `<article>` gets `id={entry.id}`, so `/developer/#project-alpha` scrolls straight to it. That's how the Home cards will link here (Phase 8). If your header is sticky, give the articles a `scroll-margin-top` so the target doesn't land under the header.
+Each project's `<article>` gets `id={entry.id}`, so `/dev/#project-alpha` scrolls straight to it. That's how the Home cards will link here (Phase 8). If your header is sticky, give the articles a `scroll-margin-top` so the target doesn't land under the header.
 
 ---
 
@@ -81,7 +81,7 @@ The top of the page:
    4. The lead `<p>`, 2–3 sentences: what you build and for whom. This is the "about" for recruiters, so it's worth writing carefully.
    5. A container with the two `<a>`s:
       - **GitHub** points to `profile.socials.github` and uses the primary button classes
-      - **CV** points to `profile.cv.developer` and uses the outline classes
+      - **CV** points to `profile.cv.dev` and uses the outline classes
 3. **External links:** pick one convention for the whole site and keep it. Either open external links in the same tab, which is the default and the simplest, or in a new tab with `target="_blank"`. Never open the CV and GitHub inconsistently.
 4. **The CV link:** a plain link opens the PDF in the browser's viewer. Adding the `download` attribute forces a download instead. Choose one; most recruiters are fine with the viewer.
 5. Styles: generous padding, the lead constrained to `--measure`, and the buttons in a wrapping flex row.
@@ -143,12 +143,12 @@ Use it on the page in the next step.
 ## Step 4: Featured projects section
 
 ### Do it
-1. In the page frontmatter, get the `developer` projects with `getCollection` and **sort them by `order`**. This replaces the temporary title list from Phase 4.
+1. In the page frontmatter, get the `dev` projects with `getCollection` and **sort them by `order`**. This replaces the temporary title list from Phase 4.
 2. Use `Section` with the title "Featured Engineering Projects" and the label "PRODUCTION SYSTEMS". Inside it, loop over the projects and render one `<ProjectRow>` each.
 
 ### Check
 - Each project shows its cover, description, tags, role, result and links.
-- Open `/developer/#<project-id>` in a fresh tab: the page scrolls straight to that project, and it isn't hidden under the header.
+- Open `/dev/#<project-id>` in a fresh tab: the page scrolls straight to that project, and it isn't hidden under the header.
 
 ---
 
@@ -167,7 +167,7 @@ One small component, rendered twice with different data.
 4. **On the page**, add these two sections after the projects:
    - `Section` "Experience" (label "CAREER LOG") with `ExperienceList` fed `experience`
    - `Section` "Education" (label "ACADEMIC LOG") with `ExperienceList` fed `education`
-5. Put your CV PDF at `public/cv/developer.pdf`. A placeholder PDF is fine until the real one is ready.
+5. Put your CV PDF at `public/cv/dev.pdf`. A placeholder PDF is fine until the real one is ready.
 
 ### Check
 - Both lists render.
@@ -210,7 +210,7 @@ Run these checks against the **production build**, `npm run build && npm run pre
 
 ## Done when
 
-- [ ] `/developer/` has all sections: Hero → Stack → Projects → Experience → Education.
+- [ ] `/dev/` has all sections: Hero → Stack → Projects → Experience → Education.
 - [ ] `ProjectRow` has a named `media` slot whose fallback is the cover image.
 - [ ] Project anchors work and aren't hidden under the header.
 - [ ] The production build ships **0 JS** on this page.

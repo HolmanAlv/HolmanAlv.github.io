@@ -1,6 +1,6 @@
 # Phase 7: Film page
 
-**Goal:** `/filmmaker/` is complete:
+**Goal:** `/art/` is complete:
 - a hero with the reel
 - tools
 - selected works, with their videos and production metadata
@@ -20,8 +20,8 @@ The YouTube videos load **only when clicked**. This is the first page that ships
 
 **Files you will touch:**
 - `src/components/YouTubeFacade.astro` (new)
-- `src/pages/filmmaker.astro`
-- `public/cv/filmmaker.pdf` (new)
+- `src/pages/art.astro`
+- `public/cv/art.pdf` (new)
 
 ---
 
@@ -134,14 +134,14 @@ Use it once on the page with a real video id before building the rest. Then:
 2. **Right column:**
    - the `<h1>` ("Animator & Sound Designer")
    - the roles line: `Direction • Sound Design • Foley • 3D/2D Animation`
-   - the **Download CV** button (`profile.cv.filmmaker`)
+   - the **Download CV** button (`profile.cv.art`)
 3. The same split-grid technique as GameDev's hero, with the media on the left.
 4. **DOM order:** the mockup puts the video first visually. You can either:
    - keep the video first in the HTML too (the page *is* about the reel), or
    - put the text first in the HTML and move the video left with CSS
 
    Either way, check how it stacks on a phone.
-5. Put `public/cv/filmmaker.pdf` in place.
+5. Put `public/cv/art.pdf` in place.
 
 ### Check
 The reel poster is the only eager, high-priority image on the page.
@@ -158,7 +158,7 @@ Use `Section` ("Tools", label "SPECIFICATIONS") with `SkillGrid` fed the Film gr
 ## Step 4: Selected works
 
 ### Do it
-1. Get the `filmmaker` projects, sorted by `order`.
+1. Get the `art` projects, sorted by `order`.
 2. Use `Section` ("Selected Audiovisual Works", label "PRODUCTION LOG").
 3. For each project, a `<ProjectRow>` whose **`media` slot is filled** with a `<YouTubeFacade>`:
    - `id` comes from `youtubeId`
@@ -214,7 +214,7 @@ Against `npm run build && npm run preview`:
 
 ## Done when
 
-- [ ] `/filmmaker/` has: Hero (reel + roles + CV) → Tools → Works → About.
+- [ ] `/art/` has: Hero (reel + roles + CV) → Tools → Works → About.
 - [ ] Videos load only on click, using `youtube-nocookie.com`.
 - [ ] Without JS, the facades link to YouTube.
 - [ ] The page ships about 1 KB of JS. Developer and GameDev still ship 0.

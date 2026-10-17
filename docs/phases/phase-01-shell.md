@@ -66,7 +66,7 @@ A `<style>` inside a component applies **only to that component's markup**. At b
 | `<meta name="viewport" content="width=device-width, initial-scale=1">` | Without it, phones pretend to be a desktop and shrink your page. Never add `user-scalable=no`: it blocks zoom. |
 | `<title>` | The tab text, the bookmark name and the headline of a search result. One per page, all different. |
 | `<meta name="description">` | The text under the title in search results and in many link previews. Around 150 characters. |
-| `<link rel="canonical">` | The official URL of this page, so `/developer` and `/developer/?ref=x` aren't treated as different pages. |
+| `<link rel="canonical">` | The official URL of this page, so `/dev` and `/dev/?ref=x` aren't treated as different pages. |
 | `<link rel="icon">` | The favicon. Your `public/` already has `.svg` and `.ico` versions. |
 | `og:title`, `og:description`, `og:url`, `og:type` | The card LinkedIn, WhatsApp or Slack shows when someone pastes your link. Recruiters receive direct links, so this is a first impression. `og:image` comes in Phase 11. |
 
@@ -135,9 +135,9 @@ Write `src/components/Header.astro`:
 
 ### Do it
 1. **Frontmatter:**
-   1. Define an array of links, each with a `label` and an `href`: `Developer` → `/developer/`, `GameDev` → `/gamedev/`, `Film` → `/filmmaker/`.
+   1. Define an array of links, each with a `label` and an `href`: `Developer` → `/dev/`, `GameDev` → `/gamedev/`, `Film` → `/art/`.
    2. Read the current path from `Astro.url.pathname`.
-   3. Write a tiny helper that removes a trailing slash, so `/developer` and `/developer/` compare as equal. The current path can arrive with or without the slash depending on dev or build.
+   3. Write a tiny helper that removes a trailing slash, so `/dev` and `/dev/` compare as equal. The current path can arrive with or without the slash depending on dev or build.
 2. **Template:**
    1. A `<header>` containing an `<a>` with the text `HOLMAN_ALV` and `href="/"`.
    2. A `<nav>` with an `aria-label` of "Main", containing a `<ul>` with one `<li><a>` per link from the array.

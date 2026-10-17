@@ -38,7 +38,7 @@ Nothing is set up for tests, linting or type checking. `astro build` strips Type
 The repo comes from an earlier version of the project, which was bilingual (EN/ES) and hadn't picked a host. The brief has since changed to English only, hosted on GitHub Pages. These leftovers need removing or reworking:
 - **i18n:** the `i18n` block in `astro.config.mjs`, `src/i18n/`, `src/pages/{en,es}/`, the meta-refresh redirect in `src/pages/index.astro`, and the hreflang/`stripLang` logic in `Layout.astro`. Pages should live directly under `src/pages/`.
 - **Broken imports in `src/layouts/Layout.astro`:** it imports `{ Header }` and `{ Footer }` as named imports. `.astro` components only have a default export, so this breaks as soon as a page uses the Layout. The build passes today only because no page imports it.
-- **Empty files:** `Header.astro`, `Footer.astro` and the developer/gamedev/filmmaker pages.
+- **Empty files:** `Header.astro`, `Footer.astro` and the dev/gamedev/art pages.
 - **README.md** is still the Astro starter.
 
 Keep `src/styles/global.css`: a reset plus design tokens on an 8px spacing scale. Its colors are neutral placeholders on purpose until there is a visual identity.
