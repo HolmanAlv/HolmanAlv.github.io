@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<!-- Corrected copy of ../plantilla/index.html. Structure follows docs/PLAN.md; visuals are unchanged on purpose. -->
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Holman Alvarado — Portfolio Wireframe (corrected structure)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet">
+
+  <style>:root { --bg-base: #0C0C0E; --bg-surface: #121216; --bg-elevated: #18181E; --text-main: #EAE8E3; --text-muted: #8E8E98; --text-dim: #5A5A66; --border: rgba(234, 232, 227, 0.14); --border-strong: rgba(234, 232, 227, 0.32); --accent: #B8A9FF; --accent-dim: rgba(184, 169, 255, 0.12); --accent-sec: #FF5500; --success: #34D399; --font-display: 'Space Grotesk', sans-serif; --font-sans: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace; }
+* { box-sizing: border-box; margin: 0px; padding: 0px; }
+body { background-color: var(--bg-base); color: var(--text-main); font-family: var(--font-sans); line-height: 1.5; overflow-x: hidden; background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0px); background-size: 24px 24px; }
+a, button { color: inherit; text-decoration: none; font-family: inherit; cursor: pointer; }
+.container { max-width: 1200px; margin: 0px auto; border-left: 1px solid var(--border); border-right: 1px solid var(--border); background-color: rgba(12, 12, 14, 0.85); backdrop-filter: blur(6px); min-height: 100vh; }
+.navbar { position: sticky; top: 0px; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: rgba(12, 12, 14, 0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+.brand { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.5rem; }
+.brand-dot { width: 8px; height: 8px; background-color: var(--accent); display: inline-block; }
+.nav-links { display: flex; gap: 0.5rem; }
+.nav-tab { background: transparent; border: 1px solid transparent; padding: 0.45rem 0.9rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); transition: 0.2s; }
+.nav-tab:hover { color: var(--text-main); border-color: var(--border); }
+.nav-tab.active { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+.nav-actions { display: flex; align-items: center; gap: 0.75rem; font-family: var(--font-mono); font-size: 0.75rem; }
+.btn-primary { background: var(--text-main); color: var(--bg-base); border: 1px solid var(--text-main); padding: 0.5rem 1.1rem; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 600; transition: 0.2s; }
+.btn-primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bg-base); }
+.btn-outline { background: transparent; color: var(--text-main); border: 1px solid var(--border-strong); padding: 0.5rem 1.1rem; font-family: var(--font-mono); font-size: 0.78rem; transition: 0.2s; }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+.page-view { display: none; animation: 0.25s ease-out 0s 1 normal none running fadeIn; }
+.page-view.active { display: block; }
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0px); }
+}
+.section { padding: 2.5rem; border-bottom: 1px solid var(--border); }
+.section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
+.section-title { font-family: var(--font-display); font-size: 2rem; letter-spacing: -0.02em; position: relative; display: inline-block; padding-bottom: 0.4rem; border-bottom: 2px solid var(--accent); }
+.sys-label { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.tags-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tag { font-family: var(--font-mono); font-size: 0.73rem; padding: 0.25rem 0.6rem; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-main); }
+.hero-home { position: relative; border: 1px solid var(--border-strong); background: var(--bg-surface); min-height: 550px; display: flex; flex-direction: column; justify-content: space-between; padding: 2rem; overflow: hidden; }
+#three-canvas { position: absolute; inset: 0px; width: 100%; height: 100%; z-index: 1; opacity: 0.55; pointer-events: none; }
+.hero-home-top, .hero-home-center, .hero-home-bottom { position: relative; z-index: 2; }
+.hero-home-top { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); }
+.hero-home-center { text-align: left; max-width: 100rem; margin: 0px; }
+.hero-home-center h1 { font-family: var(--font-display); font-size: 3rem; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
+.hero-home-center h2 { font-family: var(--font-mono); font-size: 1rem; color: var(--accent); font-weight: 500; margin-bottom: 1.25rem; }
+.hero-home-center p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.75rem; }
+.home-projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.card-vertical { border: 1px solid var(--border); background: var(--bg-surface); display: flex; flex-direction: column; transition: border-color 0.2s; }
+.card-vertical:hover { border-color: var(--border-strong); }
+.card-branch-header { padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent); display: flex; justify-content: space-between; }
+.media-placeholder { position: relative; aspect-ratio: 4 / 3; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; background-image: linear-gradient(to top right, transparent calc(50% - 1px), var(--border) calc(50% - 1px), var(--border) calc(50% + 1px), transparent calc(50% + 1px)), linear-gradient(to bottom right, transparent calc(50% - 1px), var(--border) calc(50% - 1px), var(--border) calc(50% + 1px), transparent calc(50% + 1px)); }
+.media-badge { background: rgba(12, 12, 14, 0.85); border: 1px solid var(--border-strong); padding: 0.35rem 0.75rem; font-family: var(--font-mono); font-size: 0.72rem; z-index: 2; }
+.card-body { padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; gap: 1rem; }
+.card-body h3 { font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 0.4rem; }
+.card-body p { color: var(--text-muted); font-size: 0.86rem; }
+.card-footer-links { display: flex; justify-content: space-between; align-items: center; padding-top: 0.75rem; border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.75rem; }
+.link-underline { text-decoration: underline; text-underline-offset: 4px; }
+.link-underline:hover { color: var(--accent); }
+.about-grid { display: grid; grid-template-columns: 320px 1fr; gap: 2.5rem; align-items: center; }
+.subpage-hero { padding: 3rem 2.5rem; border-bottom: 1px solid var(--border); }
+.subpage-hero-split { display: grid; grid-template-columns: 1.15fr 1fr; gap: 2.5rem; align-items: center; }
+.subpage-hero h1 { font-family: var(--font-display); font-size: 2.4rem; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+.subpage-lead { color: var(--text-muted); max-width: 680px; font-size: 0.95rem; margin-bottom: 1.25rem; }
+.projects-stack { display: flex; flex-direction: column; gap: 1.75rem; }
+.project-row { border: 1px solid var(--border); background: var(--bg-surface); display: grid; grid-template-columns: 380px 1fr; gap: 2rem; padding: 1.5rem; transition: border-color 0.2s; scroll-margin-top: 5rem; }
+.project-row.gamedev-row { grid-template-columns: 460px 1fr; }
+.project-row:hover { border-color: var(--border-strong); }
+.project-info { display: flex; flex-direction: column; justify-content: space-between; gap: 0.85rem; }
+.project-info h3 { font-family: var(--font-display); font-size: 1.35rem; }
+.project-subtitle { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-top: -0.4rem; }
+.project-desc { font-size: 0.9rem; color: var(--text-muted); }
+.result-box { border: 1px dashed var(--border-strong); background: var(--bg-elevated); padding: 0.65rem 0.9rem; font-family: var(--font-mono); font-size: 0.78rem; }
+.result-box strong { color: var(--success); }
+.stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.stack-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+.stack-card { border: 1px solid var(--border); background: var(--bg-surface); padding: 1.25rem; }
+.stack-card h4 { font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); padding-bottom: 0.6rem; margin-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+.stack-card ul { list-style: none; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); }
+.stack-card li { padding: 0.25rem 0px; }
+.stack-card li::before { content: "▪ "; color: var(--text-dim); }
+.exp-row { display: flex; justify-content: space-between; padding: 1rem 0px; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.85rem; }
+.bento-lab { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 1.25rem; }
+.bento-item { border: 1px solid var(--border); background: var(--bg-surface); padding: 1rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 210px; }
+.clapboard-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem 1rem; padding: 0.65rem 0px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); }
+.footer { padding: 3rem 2.5rem 2rem; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 2.5rem; font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); scroll-margin-top: 4rem; }
+.footer-cta { border: 1px solid var(--border-strong); background: var(--bg-surface); padding: 2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
+.footer-cta h3 { font-family: var(--font-display); font-size: 1.5rem; color: var(--text-main); margin-bottom: 0.25rem; }
+.footer-cta p { font-size: 0.85rem; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+.footer-links { display: flex; gap: 1.5rem; }
+@media (max-width: 960px) {
+  .home-projects-grid, .stack-grid, .stack-grid.cols-4, .bento-lab { grid-template-columns: 1fr; }
+  .about-grid, .project-row, .project-row.gamedev-row, .subpage-hero-split { grid-template-columns: 1fr; }
+  .footer-cta, .footer-bottom { flex-direction: column; align-items: flex-start; }
+}</style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- HEADER: brand = Home link, 3 subpage links, Contact jumps to the footer -->
+    <header class="navbar">
+      <a href="#home" class="brand" onclick="switchPage('home')">
+        <span class="brand-dot"></span> HOLMAN_ALV
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <button class="nav-tab" data-target="dev" onclick="switchPage('dev')">[01. Dev]</button>
+        <button class="nav-tab" data-target="gamedev" onclick="switchPage('gamedev')">[02. GameDev]</button>
+        <button class="nav-tab" data-target="film" onclick="switchPage('film')">[03. Film &amp; Sound]</button>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#contact" class="btn-primary">Contact</a>
+      </div>
+    </header>
+
+    <!-- ================================================================= -->
+    <!-- HOME                                                              -->
+    <!-- ================================================================= -->
+    <main id="view-home" class="page-view active">
+      <section class="hero-home">
+        <canvas id="three-canvas" width="1196" height="548"></canvas>
+        <div class="hero-home-top">
+          <span>SYS_STATUS: ONLINE // ASTRO + THREE.JS</span>
+          <div class="hero-home-center">
+            <span>HOLMAN ALVARADO</span>
+            <p>Full-Stack Developer • Technical Artist • Sound Designer</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="selected-works" class="section">
+        <div class="section-header">
+          <h2 class="section-title">Selected Projects</h2>
+          <span class="sys-label">INDEX // 01 — 03 CROSS-DISCIPLINARY</span>
+        </div>
+
+        <!-- One card per discipline; each has a single link to its project on the subpage -->
+        <div class="home-projects-grid">
+          <article class="card-vertical">
+            <div class="card-branch-header">
+              <span>01 // FULL-STACK DEV</span>
+              <span>NODE • REACT</span>
+            </div>
+            <div class="media-placeholder">
+              <span class="media-badge">INTERACTIVE ARCHITECTURE PREVIEW</span>
+            </div>
+            <div class="card-body">
+              <div>
+                <h3>Project Alpha — Distributed Core</h3>
+                <p>Arquitectura de microservicios de alto rendimiento con sincronización en tiempo real y paneles de telemetría.</p>
+              </div>
+              <div class="card-footer-links">
+                <a href="#project-alpha" class="link-underline" onclick="switchPage('dev', 'project-alpha')">View on Dev page →</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card-vertical">
+            <div class="card-branch-header">
+              <span>02 // GAMEDEV &amp; TECH ART</span>
+              <span>UNREAL • HLSL</span>
+            </div>
+            <div class="media-placeholder">
+              <span class="media-badge">CUSTOM SHADER LOOP (60 FPS)</span>
+            </div>
+            <div class="card-body">
+              <div>
+                <h3>Neon Drift — Stylized Shader Pipeline</h3>
+                <p>Físicas personalizadas, iluminación estilizada no-fotorrealista (NPR) y sistemas de partículas optimizados en GPU.</p>
+              </div>
+              <div class="card-footer-links">
+                <a href="#neon-drift" class="link-underline" onclick="switchPage('gamedev', 'neon-drift')">View on GameDev page →</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card-vertical">
+            <div class="card-branch-header">
+              <span>03 // ANIMATION &amp; SOUND</span>
+              <span>BLENDER • PRO TOOLS</span>
+            </div>
+            <div class="media-placeholder">
+              <span class="media-badge">▶ PLAY AUDIOVISUAL REEL</span>
+            </div>
+            <div class="card-body">
+              <div>
+                <h3>Echoes of the Valley</h3>
+                <p>Dirección de animación y diseño sonoro envolvente 5.1 con síntesis modular y grabación de foley orgánico.</p>
+              </div>
+              <div class="card-footer-links">
+                <a href="#echoes-of-the-valley" class="link-underline" onclick="switchPage('film', 'echoes-of-the-valley')">View on Film page →</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">About Me</h2>
+          <span class="sys-label">PROFILE // HYBRID CREATOR</span>
+        </div>
+
+        <div class="about-grid">
+          <div class="media-placeholder" style="aspect-ratio: 1 / 1;">
+            <span class="media-badge">PORTRAIT / DITHERSHADER.GLSL</span>
+          </div>
+          <div>
+            <p style="margin-bottom: 1rem; color: var(--text-main); font-size: 1.05rem;">
+              Soy desarrollador e investigador visual y sonoro. Mi trabajo habita en la intersección entre la ingeniería de software rigurosa y la dirección artística multimedia.
+            </p>
+            <p style="margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.92rem;">
+              Como Full-Stack construyo la infraestructura; como Technical Artist diseño las herramientas visuales y shaders que le dan vida; y como Diseñador Sonoro y Animador construyo el ritmo y la atmósfera que conectan con el usuario.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Timeline // Career & Education</h2>
+          <span class="sys-label">CHRONOLOGICAL LOG</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 2rem; position: relative; padding-left: 1.5rem; border-left: 1px dashed var(--border-strong);">
+
+          <div style="position: relative;">
+            <span style="position: absolute; left: -1.82rem; top: 0.2rem; width: 10px; height: 10px; background: var(--accent); border-radius: 50%;"></span>
+            <span class="sys-label">2023 — PRESENT // SENIOR STACK</span>
+            <h3 style="font-family: var(--font-display); font-size: 1.2rem; margin: 0.2rem 0;">Senior Full-Stack & Technical Artist</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 0.75rem;">Liderazgo en arquitectura de sistemas web de alto rendimiento y pipelines de gráficos interactivos en tiempo real.</p>
+            <div class="media-placeholder" style="aspect-ratio: 16 / 6; max-width: 500px;">
+              <span class="media-badge">TIMELINE_ASSET_01.PNG</span>
+            </div>
+          </div>
+
+          <div style="position: relative;">
+            <span style="position: absolute; left: -1.82rem; top: 0.2rem; width: 10px; height: 10px; background: var(--border-strong); border-radius: 50%;"></span>
+            <span class="sys-label">2020 — 2023 // CREATIVE TECHNOLOGIST</span>
+            <h3 style="font-family: var(--font-display); font-size: 1.2rem; margin: 0.2rem 0;">Game Dev & Multimedia Producer</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 0.75rem;">Desarrollo de videojuegos independientes, programación de shaders personalizados y postproducción de audio/video.</p>
+            <div class="media-placeholder" style="aspect-ratio: 16 / 6; max-width: 500px;">
+              <span class="media-badge">TIMELINE_ASSET_02.PNG</span>
+            </div>
+          </div>
+
+          <div style="position: relative;">
+            <span style="position: absolute; left: -1.82rem; top: 0.2rem; width: 10px; height: 10px; background: var(--border-strong); border-radius: 50%;"></span>
+            <span class="sys-label">2017 — 2020 // FORMACIÓN ACADÉMICA</span>
+            <h3 style="font-family: var(--font-display); font-size: 1.2rem; margin: 0.2rem 0;">Ingeniería de Sistemas & Medios Digitales</h3>
+            <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 0.75rem;">Bases sólidas en ciencias de la computación, matemáticas aplicadas para gráficos y composición sonora.</p>
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <!-- ================================================================= -->
+    <!-- DEV: Hero (lead = short about) → Stack → Projects → Experience → Education -->
+    <!-- ================================================================= -->
+    <main id="view-dev" class="page-view">
+      <section class="subpage-hero">
+        <span class="sys-label">[01 // SOFTWARE ENGINEERING ARCHITECTURE]</span>
+        <h1>Senior Full-Stack Developer</h1>
+        <p class="subpage-lead">
+          Diseño y desarrollo de aplicaciones web escalables, arquitecturas distribuidas y experiencias frontend de baja latencia orientadas a resultados medibles.
+        </p>
+        <div style="display: flex; gap: 0.75rem;">
+          <a href="#github" class="btn-primary">View GitHub</a>
+          <a href="#cv-developer" class="btn-outline">Download CV</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Technical Stack</h2>
+          <span class="sys-label">SPECIFICATIONS</span>
+        </div>
+        <div class="stack-grid">
+          <div class="stack-card">
+            <h4>01 // FRONTEND</h4>
+            <ul>
+              <li>Astro / React / Next.js</li>
+              <li>TypeScript / Three.js</li>
+              <li>Tailwind CSS / CSS Architecture</li>
+            </ul>
+          </div>
+          <div class="stack-card">
+            <h4>02 // BACKEND</h4>
+            <ul>
+              <li>Node.js / Express / NestJS</li>
+              <li>Python / Django / FastAPI</li>
+              <li>RESTful APIs &amp; WebSockets</li>
+            </ul>
+          </div>
+          <div class="stack-card">
+            <h4>03 // DATABASE</h4>
+            <ul>
+              <li>PostgreSQL / SQL</li>
+              <li>MongoDB</li>
+              <li>Redis (Caching &amp; Queues)</li>
+            </ul>
+          </div>
+          <div class="stack-card">
+            <h4>04 // DEVOPS &amp; CLOUD</h4>
+            <ul>
+              <li>AWS (EC2, S3, RDS)</li>
+              <li>Docker &amp; Containers</li>
+              <li>CI/CD Automated Pipelines</li>
+            </ul>
+          </div>
+          <div class="stack-card">
+            <h4>05 // TOOLS</h4>
+            <ul>
+              <li>Git / GitHub Actions</li>
+              <li>Linux / Bash Scripting</li>
+              <li>Figma / Stitch</li>
+            </ul>
+          </div>
+          <div class="stack-card">
+            <h4>06 // TESTING &amp; QA</h4>
+            <ul>
+              <li>Jest / Vitest</li>
+              <li>Cypress E2E</li>
+              <li>PyTest</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Featured Engineering Projects</h2>
+          <span class="sys-label">PRODUCTION SYSTEMS</span>
+        </div>
+
+        <div class="projects-stack">
+          <article id="project-alpha" class="project-row">
+            <div class="media-placeholder">
+              <span class="media-badge">SYSTEM DIAGRAM / UI PREVIEW</span>
+            </div>
+            <div class="project-info">
+              <div>
+                <h3>Project Alpha</h3>
+                <p class="project-subtitle">Scalable e-commerce microservices architecture.</p>
+              </div>
+              <p class="project-desc">
+                Sistema distribuido para transacciones de alto caudal. Patrones orientados a eventos para desacoplar servicios y paneles de monitoreo en tiempo real.
+              </p>
+              <div class="tags-row">
+                <span class="tag">Node.js</span>
+                <span class="tag">Kafka</span>
+                <span class="tag">Docker</span>
+              </div>
+              <div class="sys-label"><strong>Role:</strong> Lead Full-Stack Developer</div>
+              <div class="result-box">
+                <strong>Result:</strong> 40% performance increase &amp; 99.9% uptime under peak load.
+              </div>
+              <div style="display: flex; gap: 1.25rem; font-family: var(--font-mono); font-size: 0.78rem;">
+                <a href="#code" class="link-underline">Source Code ↗</a>
+                <a href="#demo" class="link-underline">Live Demo ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article id="project-beta" class="project-row">
+            <div class="media-placeholder">
+              <span class="media-badge">60FPS DATA VISUALIZATION</span>
+            </div>
+            <div class="project-info">
+              <div>
+                <h3>Project Beta</h3>
+                <p class="project-subtitle">Real-time collaborative analytics dashboard.</p>
+              </div>
+              <p class="project-desc">
+                Aplicación reactiva que mapea datasets complejos en visualizaciones interactivas mediante WebSockets y ciclos de renderizado optimizados.
+              </p>
+              <div class="tags-row">
+                <span class="tag">React</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">WebSockets</span>
+              </div>
+              <div class="sys-label"><strong>Role:</strong> Frontend Architect</div>
+              <div class="result-box">
+                <strong>Result:</strong> Reduced initial load times by 2.5s.
+              </div>
+              <div style="display: flex; gap: 1.25rem; font-family: var(--font-mono); font-size: 0.78rem;">
+                <a href="#code" class="link-underline">Source Code ↗</a>
+                <a href="#demo" class="link-underline">Live Demo ↗</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Experience</h2>
+          <span class="sys-label">CAREER LOG</span>
+        </div>
+        <div class="exp-row">
+          <span><strong>TechCorp</strong> | Senior Full-Stack Engineer</span>
+          <span>2023 — Present</span>
+        </div>
+        <div class="exp-row">
+          <span><strong>InnovateInc</strong> | Software Developer &amp; Creative Technologist</span>
+          <span>2020 — 2023</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Education</h2>
+          <span class="sys-label">ACADEMIC LOG</span>
+        </div>
+        <div class="exp-row">
+          <span><strong>University</strong> | Systems Engineering</span>
+          <span>2017 — 2020</span>
+        </div>
+        <div class="exp-row">
+          <span><strong>Institution</strong> | Course / Certification</span>
+          <span>Year</span>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================================================================= -->
+    <!-- GAMEDEV: Hero (lead = short about) + GSAP demo → Stack → Games → Lab -->
+    <!-- ================================================================= -->
+    <main id="view-gamedev" class="page-view">
+      <section class="subpage-hero subpage-hero-split">
+        <div>
+          <span class="sys-label">[02 // REAL-TIME GRAPHICS &amp; INTERACTIVE SYSTEMS]</span>
+          <h1>Game Developer &amp; Technical Artist</h1>
+          <p class="subpage-lead">
+            Creación de mecánicas de juego, programación de shaders (HLSL/GLSL), sistemas de partículas en GPU, rigging y optimización de pipelines entre arte 3D y motor.
+          </p>
+          <div style="display: flex; gap: 0.75rem;">
+            <a href="#itch" class="btn-primary">Play on itch.io</a>
+            <a href="#cv-gamedev" class="btn-outline">Download CV</a>
+          </div>
+        </div>
+
+        <div class="media-placeholder" style="aspect-ratio: 16 / 9;">
+          <span class="media-badge">[MINI TECH DEMO // GSAP ANIMATION]</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Technical Stack</h2>
+          <span class="sys-label">SPECIFICATIONS</span>
+        </div>
+        <div class="stack-grid cols-4">
+          <div class="stack-card">
+            <h4>01 // ENGINE &amp; SCRIPTING</h4>
+            <ul>
+              <li>Unity / C#</li>
+              <li>Gameplay systems &amp; NPC AI</li>
+              <li>Editor scripting</li>
+            </ul>
+          </div>
+          <div class="stack-card">
+            <h4>02 // RENDERING &amp; OPTIMIZATION</h4>
+            <ul>
+              <li>URP / Shader Graph / HLSL</li>
+              <li>Profiler &amp; Frame Debugger</li>
+              <li>LODs / Batching / Occlusion</li>
+            </ul>
+          </div>
+          <div class="stack-card">
+            <h4>03 // TOOLS &amp; PIPELINE</h4>
+            <ul>
+              <li>Blender</li>
+              <li>Custom editor tools</li>
+              <li>Git LFS</li>
+            </ul>
+          </div>
+          <div class="stack-card">
+            <h4>04 // GAME AUDIO</h4>
+            <ul>
+              <li>FMOD / Wwise</li>
+              <li>Unity Audio Mixer</li>
+              <li>Reaper / DAW</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Games &amp; Technical Art Breakdowns</h2>
+          <span class="sys-label">SELECTED WORK</span>
+        </div>
+
+        <div class="projects-stack">
+          <article id="neon-drift" class="project-row gamedev-row">
+            <div class="media-placeholder">
+              <span class="media-badge">IMAGE: FINAL STYLIZED RENDER</span>
+            </div>
+            <div class="project-info">
+              <div>
+                <h3>Neon Drift</h3>
+                <p class="project-subtitle">Fast-paced Stylized Arcade Racer.</p>
+              </div>
+              <p class="project-desc">
+                Físicas arcade personalizadas y estética neón con post-procesado custom en HLSL. Optimización de draw calls y partículas reactivas a la velocidad y música.
+              </p>
+              <div class="tags-row">
+                <span class="tag">Unreal Engine</span>
+                <span class="tag">HLSL</span>
+                <span class="tag">C++ / Blueprints</span>
+              </div>
+              <div class="sys-label"><strong>Role:</strong> Solo Dev &amp; Technical Artist</div>
+              <div class="result-box">
+                <strong>Result:</strong> Locked 60fps con +10k partículas activas en GPU.
+              </div>
+              <div style="display: flex; gap: 1.25rem; font-family: var(--font-mono); font-size: 0.78rem;">
+                <a href="#play" class="link-underline">Playable Build ↗</a>
+                <a href="#breakdown" class="link-underline">Shader Breakdown ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article id="mecha-strike" class="project-row gamedev-row">
+            <div class="media-placeholder">
+              <span class="media-badge">IMAGE: PROCEDURAL ANIMATION RIG</span>
+            </div>
+            <div class="project-info">
+              <div>
+                <h3>Mecha Strike</h3>
+                <p class="project-subtitle">Multiplayer Combat &amp; Procedural Animation Demo.</p>
+              </div>
+              <p class="project-desc">
+                Máquinas de estado de animación complejas con cinemática inversa (IK) procedural para terreno irregular y herramientas automatizadas de importación desde Blender.
+              </p>
+              <div class="tags-row">
+                <span class="tag">Unity</span>
+                <span class="tag">C#</span>
+                <span class="tag">Blender Rigging</span>
+              </div>
+              <div class="sys-label"><strong>Role:</strong> Technical Artist &amp; Gameplay Programmer</div>
+              <div class="result-box">
+                <strong>Result:</strong> Pipeline de exportación de assets reducido en un 60%.
+              </div>
+              <div style="display: flex; gap: 1.25rem; font-family: var(--font-mono); font-size: 0.78rem;">
+                <a href="#source" class="link-underline">Source Code ↗</a>
+                <a href="#demo" class="link-underline">Live WebGL Demo ↗</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="lab" class="section">
+        <div class="section-header">
+          <h2 class="section-title">Shader &amp; Tech Art Lab</h2>
+          <span class="sys-label">EXPERIMENTS // BENTO GRID</span>
+        </div>
+        <div class="bento-lab">
+          <div class="bento-item">
+            <span class="sys-label">[EXP_01 // GLSL POST-PROCESSING]</span>
+            <div class="media-placeholder" style="margin: 0.75rem 0; aspect-ratio: 16/9;">
+              <span class="media-badge">1-BIT DITHERING + CRT SHADER</span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">Filtro en tiempo real inspirado en consolas clásicas con tramado de matriz Bayer.</p>
+          </div>
+          <div class="bento-item">
+            <span class="sys-label">[EXP_02 // VFX]</span>
+            <div class="media-placeholder" style="margin: 0.75rem 0; aspect-ratio: 4/3;">
+              <span class="media-badge">VOLUMETRIC FOG &amp; LIGHT</span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">Raymarching ligero para niebla estilizada reactiva.</p>
+          </div>
+          <div class="bento-item">
+            <span class="sys-label">[EXP_03 // TOOLING]</span>
+            <div class="media-placeholder" style="margin: 0.75rem 0; aspect-ratio: 4/3;">
+              <span class="media-badge">BLENDER → ENGINE AUTO-RIG</span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted);">Script en Python para validación automática de pesos y huesos.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================================================================= -->
+    <!-- FILM: Hero (reel + roles + CV) → Tools → Works → About             -->
+    <!-- ================================================================= -->
+    <main id="view-film" class="page-view">
+      <section class="subpage-hero subpage-hero-split">
+        <div class="media-placeholder" style="aspect-ratio: 16 / 9;">
+          <span class="media-badge">▶ FEATURED REEL (YOUTUBE · LOADS ON CLICK)</span>
+        </div>
+        <div>
+          <h1>Animator &amp; Sound Designer</h1>
+          <p style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); margin-bottom: 1rem;">
+            Direction • Sound Design • Foley • 3D/2D Animation
+          </p>
+          <a href="#cv-filmmaker" class="btn-primary">Download CV</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Tools</h2>
+          <span class="sys-label">SPECIFICATIONS</span>
+        </div>
+        <div class="stack-grid">
+          <div class="stack-card">
+            <h4>01 // Editing</h4>
+            <ul>
+              <li>DaVinci Resolve</li>
+              <li>Premiere Pro</li>
+              <li>After Effects</li>
+            </ul>
+          </div>
+          <div class="stack-card">
+            <h4>02 // Sound Design</h4>
+            <ul>
+              <li>Reaper / Pro Tools</li>
+              <li>iZotope RX</li>
+              <li>Field recording &amp; Foley</li>
+            </ul>
+          </div>
+          <div class="stack-card">
+            <h4>03 // Animation</h4>
+            <ul>
+              <li>Blender</li>
+              <li>Toon Boom Harmony</li>
+              <li>Maya</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Selected Audiovisual Works</h2>
+          <span class="sys-label">PRODUCTION LOG</span>
+        </div>
+
+        <div class="projects-stack">
+          <article id="echoes-of-the-valley" class="project-row">
+            <div class="media-placeholder" style="aspect-ratio: 16 / 9;">
+              <span class="media-badge">▶ YOUTUBE (LOADS ON CLICK)</span>
+            </div>
+
+            <div class="project-info">
+              <h3>Echoes of the Valley</h3>
+              <div class="clapboard-meta">
+                <span>FORMAT: Short Film</span>
+                <span>CLIENT: IndieProd</span>
+                <span>YEAR: 2025</span>
+                <span>DURATION: 12:45</span>
+                <span>MIX: 5.1 Surround</span>
+                <span>AUDIO: Custom Foley</span>
+              </div>
+              <div class="sys-label"><strong>Role:</strong> Sound Designer &amp; Foley Artist</div>
+              <p class="project-desc">
+                Diseño sonoro integral y grabación de foley para cortometraje animado, enfocado en construir una atmósfera acústica inmersiva y orgánica.
+              </p>
+            </div>
+          </article>
+
+          <article id="mechanical-heart" class="project-row">
+            <div class="media-placeholder" style="aspect-ratio: 16 / 9;">
+              <span class="media-badge">▶ YOUTUBE (LOADS ON CLICK)</span>
+            </div>
+
+            <div class="project-info">
+              <h3>The Mechanical Heart</h3>
+              <div class="clapboard-meta">
+                <span>FORMAT: 3D Short</span>
+                <span>CLIENT: Personal Art</span>
+                <span>YEAR: 2025</span>
+                <span>SOFTWARE: Blender</span>
+                <span>RENDER: Cycles / NPR</span>
+                <span>SOUND: Synth + Foley</span>
+              </div>
+              <div class="sys-label"><strong>Role:</strong> Lead Animator &amp; Sound Designer</div>
+              <p class="project-desc">
+                Corto de animación guiado por el movimiento mecánico y narrativa sin diálogos, donde cada engranaje marca el compás musical y sonoro de la escena.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">About</h2>
+          <span class="sys-label">PROFILE // FILM &amp; SOUND</span>
+        </div>
+        <p style="max-width: 680px; color: var(--text-muted); font-size: 0.95rem;">
+          Short professional bio: what kind of audiovisual work I do, the roles I take on in a production, and what I bring to a team.
+        </p>
+      </section>
+    </main>
+
+    <!-- FOOTER = CONTACT SECTION (shared by all pages) -->
+    <footer id="contact" class="footer">
+      <div class="footer-cta">
+        <div>
+          <h3>Let's work together</h3>
+          <p>Open to software, game development and audiovisual projects.</p>
+        </div>
+        <a href="#email" class="btn-primary">hello@example.com</a>
+      </div>
+      <div class="footer-bottom">
+        <div>HOLMAN ALVARADO © 2026</div>
+        <div class="footer-links">
+          <a href="#github" class="link-underline">GitHub</a>
+          <a href="#itch" class="link-underline">itch.io</a>
+          <a href="#linkedin" class="link-underline">LinkedIn</a>
+          <a href="#youtube" class="link-underline">YouTube</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Mockup-only view switching. The real site uses separate pages and plain links.
+    function switchPage(pageId, anchorId) {
+      document.querySelectorAll('.page-view').forEach(view => view.classList.remove('active'));
+      document.getElementById('view-' + pageId).classList.add('active');
+
+      document.querySelectorAll('.nav-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.target === pageId);
+      });
+
+      const target = anchorId && document.getElementById(anchorId);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+      else window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Stand-in for the Three.js hero.
+    const canvas = document.getElementById('three-canvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let angle = 0;
+
+      function resizeCanvas() {
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      function animateCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        angle += 0.012;
+
+        ctx.strokeStyle = '#B8A9FF';
+        ctx.lineWidth = 1;
+
+        for (let i = 0; i < 6; i++) {
+          ctx.beginPath();
+          const r = 110;
+          ctx.ellipse(
+            cx, cy,
+            r, Math.abs(Math.sin(angle + i * 0.5)) * r,
+            angle * 0.4 + i, 0, Math.PI * 2
+          );
+          ctx.stroke();
+        }
+        requestAnimationFrame(animateCanvas);
+      }
+      animateCanvas();
+    }
+  </script>
+</body></html>
