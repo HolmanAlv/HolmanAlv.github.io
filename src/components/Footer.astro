@@ -1,0 +1,33 @@
+---
+const currentYear = new Date().getFullYear();
+---
+<footer id="contact">
+    <h2>Work with me :D</h2>
+    <p>I'm currently located in Colombia, but available to travel to almost any country</p>
+    <a href="mailto:alvholman@gmail.com">alvholman@gmail.com</a>
+    <ul>
+        <li><a href="https://instagram.com">Instagram</a></li>
+        <li><a href="https://youtube.com">YouTube</a></li>
+        <li><a href="https://linkedin.com">LinkedIn</a></li>
+        <li><a href="https://github.com">GitHub</a></li>
+        <li><a href="https://itch.io">itch.io</a></li>
+
+    </ul>
+    <p> © {currentYear} Holman Alvarado CC BY-NC 4.0</p>
+</footer>
+
+<style>
+    footer{
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    ul{
+        display: flex;
+        gap: var(--space-sm);
+        flex-wrap: wrap;
+        list-style: none;
+        padding: 0;
+    }
+</style>

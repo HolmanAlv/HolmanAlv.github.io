@@ -138,6 +138,7 @@ Emulate reduced motion: hover effects, the canvas fade and anchor scrolling are 
       - `og:image:alt`
       - `twitter:card` set to `summary_large_image`
 4. Pass the matching `ogImage` from each page.
+5. **Case studies** (Phase 7.5) pass their discipline's image: `/og/` + discipline + `.png`. The discipline values equal the route names, so the file names line up with no lookup.
 
 ### Check
 1. After deploying, paste each URL into **LinkedIn's Post Inspector** (see References). The right card appears, and the tool also refreshes LinkedIn's cache.
@@ -158,13 +159,13 @@ After deploying, visit `https://holmanalv.github.io/nope`. You see your page, no
 
 ## Step 6: Sitemap (optional)
 
-With 4 pages that all link to each other, search engines find everything anyway, so a sitemap adds little. If you want one, run `npx astro add sitemap`. It needs `site`, which you set in Phase 0, and builds `sitemap-index.xml` automatically.
+Every page is reachable through links (the header, and the rows that link to the case studies), so search engines find everything anyway and a sitemap adds little. If you want one, run `npx astro add sitemap`. It needs `site`, which you set in Phase 0, and builds `sitemap-index.xml` automatically.
 
 ---
 
 ## Step 7: Accessibility pass
 
-### Do it, on each of the 4 pages
+### Do it, on each of the 4 pages and one case study
 1. **The Astro dev toolbar:**
    - in `npm run dev`, open the toolbar at the bottom of the page and run the **Audit** app
    - it flags common accessibility and performance problems right on the page
@@ -196,6 +197,7 @@ With 4 pages that all link to each other, search engines find everything anyway,
    | GameDev | GSAP only, after idle | < 1.0 s |
    | Film | the facade (~1 KB) | < 1.5 s |
    | Home | Three.js, after idle, < 150 KB gzip | < 1.5 s |
+   | Case study | 0 KB (Film: the facade) | < 1.0 s |
 
 3. Fill in the **actual** numbers next to the budget in the plan.
 4. Run **PageSpeed Insights** on the live Home URL, for an outside opinion and field data if any exists.

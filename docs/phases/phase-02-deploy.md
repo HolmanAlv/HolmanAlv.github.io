@@ -9,7 +9,9 @@
 - how a GitHub Actions workflow is built
 - why you deploy a skeleton
 
-**Before you start:** Phase 1 is done, and `npm run build` passes (including `astro check`).
+**Before you start:**
+- Phase 1 is done, and `npm run build` passes (including `astro check`).
+- The experiments in `src/pages/projects/` (`glud.md`, `chat_at.astro`) and the `src/content/posts/` folder are deleted. Everything in `src/pages/` gets published, and Phase 7.5 builds the real project pages.
 
 **Files you will touch:**
 - `.github/workflows/deploy.yml` (new)

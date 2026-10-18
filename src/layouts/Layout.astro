@@ -1,13 +1,16 @@
 ---
+// Importa header, footer y los estilos globales
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
+// Propiedades de titulo y descripcion
 interface Props {
 	title: string;
 	description: string;
 }
 
+// Definicion del titulo y descripcion como propiedades de astro y la url canonica
 const {title, description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -15,21 +18,24 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 <!doctype html>
 <html lang="en">
 	<head>
+		{/* Configuración general del head con el titulo, descripción, iconos, etc */}
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width", initial-scale=1.0 />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="description" content={description} />
 		<title>{title}</title>
 		<link rel="canonical" href={canonical.href} />
-
+		
+		{/* Preview de cuando se envia el link */}
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical.href} />
-
 	</head>
+
 	<body>
+		{/* Body con el header al inicio, ventana del main, espacio del contenido (slot) y footer al final */}
 		<Header />
 			<main>
 				<slot />

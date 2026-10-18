@@ -118,8 +118,8 @@ Nothing renders differently yet, because no page uses the Layout. That's Step 4.
 
 ### What
 Write `src/components/Header.astro`:
-- the brand `HOLMAN_ALV`, linking to Home
-- three links: Developer, GameDev, Film
+- the brand `HOLMAN.ALV`, linking to Home
+- three links: Developer, GameDev, Artist
 - a `Contact` link that jumps to the footer
 
 ### Why
@@ -129,20 +129,21 @@ Write `src/components/Header.astro`:
 
 ### Do it
 1. **Frontmatter:**
-   1. Define an array of links, each with a `label` and an `href`: `Developer` → `/dev/`, `GameDev` → `/gamedev/`, `Film` → `/art/`.
+   1. Define an array of links, each with a `label` and an `href`: `Developer` → `/dev/`, `GameDev` → `/gamedev/`, `Artist` → `/art/`. **Keep the trailing slash:** the build always gives the path as `/dev/`, so an href without it never matches.
    2. Read the current path from `Astro.url.pathname`.
-   3. Write a tiny helper that removes a trailing slash, so `/dev` and `/dev/` compare as equal. The current path can arrive with or without the slash depending on dev or build.
 2. **Template:**
-   1. A `<header>` containing an `<a>` with the text `HOLMAN_ALV` and `href="/"`.
+   1. A `<header>` containing an `<a>` with the text `HOLMAN.ALV` and `href="/"`.
    2. A `<nav>` with an `aria-label` of "Main", containing a `<ul>` with one `<li><a>` per link from the array.
-   3. On each nav link, set `aria-current` to `"page"` when its normalized href equals the normalized current path, and to `undefined` otherwise. **An attribute set to `undefined` isn't rendered at all**, which is what you want on the inactive links. `"false"` would print `aria-current="false"` on every one of them.
+   3. On each nav link, set `aria-current` to `"page"` when its href equals the current path, and to `undefined` otherwise. **An attribute set to `undefined` isn't rendered at all**, which is what you want on the inactive links. `"false"` would print `aria-current="false"` on every one of them.
    4. An `<a>` with the text `Contact` and `href="#contact"`.
 3. **Styles (scoped, placeholder-level):**
-   - a flex row with a gap from your spacing tokens
-   - the brand pushed left with `margin-right: auto`
+   - the `<header>` as a flex row with a gap from your spacing tokens
+   - the `<ul>` as a flex row too: `display: flex` only lines up **direct children**, and the `<li>`s are grandchildren of the header, so without it they stack vertically
+   - the brand pushed left with `margin-right: auto` (give it a class, like `brand`; scoped styles keep short class names from leaking)
    - the list without bullets or padding
+   - the links without the browser's default color and underline, so the active one can stand out
    - the active link styled through the `[aria-current="page"]` selector, for example bold and underlined
-   - `flex-wrap: wrap`, so it fits on a phone without a hamburger menu (three links and a button fit)
+   - `flex-wrap: wrap` on both rows, so it fits on a phone without a hamburger menu (three links and a button fit)
 
 ### Check
 Nothing renders yet (Step 4).
@@ -241,7 +242,7 @@ You now have `interface Props` on the Layout. A page that forgets `description` 
 
 - **`import { Header } from ...` (with braces):** an `.astro` file has only a default export, so the import comes back empty. This is the bug the old Layout had.
 - **Importing `global.css` in several places:** it's deduplicated, so nothing breaks, but it hides where the global styles come from. Import it once, in the Layout.
-- **Comparing paths without normalizing:** the active link never lights up in one of the two environments (dev or build).
+- **An href without the trailing slash (`/dev`):** the build gives the path as `/dev/`, so that link never lights up. In dev, typing a URL without the slash also leaves it unlit. That's only dev, not a bug.
 - **`aria-current="false"`:** valid but noisy. Use `undefined` so the attribute disappears.
 - **More than one `<h1>` per page:** the page heading is the only `h1`. Section and footer headings are `h2`.
 - **Styling the header from a page:** scoped styles don't cross component boundaries. Style it inside `Header.astro`.

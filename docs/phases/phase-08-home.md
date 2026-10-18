@@ -16,7 +16,7 @@ After this phase the whole site is **publishable**, and the 3D becomes a bonus l
 - encapsulating a future island
 - the "publishable milestone" mindset
 
-**Before you start:** Phase 7 is done, and exactly one project per discipline has `featured: true`.
+**Before you start:** Phase 7.5 is done, and exactly one project per discipline has `featured: true`.
 
 **Files you will touch:**
 - `src/pages/index.astro`

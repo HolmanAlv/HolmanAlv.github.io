@@ -1,0 +1,60 @@
+---
+// Links de las paginas a las que apunta el header
+const links = [
+    {label: "Developer", href:"/dev/"},
+    {label: "GameDev", href: "/gamedev/"},
+    {label: "Artist",  href: "/art/"}
+]
+
+// Ruta actual del astro
+const currentPath = Astro.url.pathname 
+
+---
+<header>
+    <a href="/" class="brand">HOLMAN.ALV</a>
+    <nav aria-label="Main">
+        <ul>
+            {
+                // Crea un list item a traves de la funcion links.map que devuelve un array de todos los elementos del array anterior pero pasados a traves de una funcion, en este caso la funcion recibe el "item" que es la combinacion de label y href y por item crea un li de nombre label y y del a de href al href del arreglo
+                // Tambien se hace una comparacion del aria-current donde si el href del item es igual a la ruta actual entonces se renderiza si no es undefined que no se renderiza
+                links.map((item) =>
+                    (
+                        <li><a href={item.href} aria-current={item.href===currentPath ? "page" : undefined} >{item.label}</a></li>
+                    )
+                )
+            }
+        </ul>
+    </nav>
+    <a href="#contact">Contact</a>    
+</header>
+
+<style>
+    header{
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+        flex-wrap: wrap;
+    }
+    
+    ul{
+        display: flex;
+        gap: var(--space-sm);
+        flex-wrap: wrap;
+        list-style: none;
+        padding: 0;
+    }
+
+    a{
+        color: inherit;
+        text-decoration: none;
+    }
+
+    [aria-current="page"]{
+        font-weight: bold;
+        text-decoration: underline;
+    }
+    .brand{
+        margin-right: auto;
+    }
+    
+</style>

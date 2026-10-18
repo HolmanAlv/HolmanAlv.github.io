@@ -51,7 +51,7 @@ At build time (and in `npm run dev`) Astro validates every entry against the sch
 
 A Markdown file has two parts:
 - **The frontmatter** (YAML between `---` lines) holds structured fields: `title`, `role`, `tags`… These are what the schema validates.
-- **The body** (the Markdown below) holds prose. You'll use it for the project's long description and render it with `render()` in Phase 5.
+- **The body** (the Markdown below) holds prose: the project's **case study**, the long write-up that gets its own page at `/projects/<id>/` in Phase 7.5. It's optional, and a project with an empty body simply has no page. The short text on the cards and rows is the `summary` field.
 
 The rule: anything you filter, sort or show in a fixed slot goes in the **frontmatter**, and free-form text goes in the **body**.
 
@@ -75,7 +75,7 @@ A `.ts` file can also **import images** from `src/assets/`. The import gives the
 
 ### 6. Ids become anchors, and anchors are URLs
 
-With the `glob` loader, an entry's `id` comes from its file name: `project-alpha.md` → `project-alpha`. In Phase 5 that id becomes the HTML id on the page (`/dev/#project-alpha`), and Home links to it. **Renaming a project file changes its URL.** Choose file names like you chose route names in Phase 0.
+With the `glob` loader, an entry's `id` comes from its file name: `project-alpha.md` → `project-alpha`. In Phase 5 that id becomes the HTML id on the page (`/dev/#project-alpha`), and Home links to it. In Phase 7.5 it also becomes the case study's URL (`/projects/project-alpha/`). **Renaming a project file changes its URLs.** Choose file names like you chose route names in Phase 0.
 
 ---
 
@@ -108,7 +108,7 @@ Declare the `projects` collection with its schema.
    | `title` | string | yes | Card and row heading |
    | `discipline` | enum: `dev`, `gamedev`, `art` | yes | Which page shows it. **The values equal the route names**, so links can be built from it. |
    | `subtitle` | string | no | The one-line pitch under the title (Dev/GameDev rows) |
-   | `summary` | string | yes | The short text on the Home card |
+   | `summary` | string | yes | The short text on the Home card and the project row, and the description of its case study page |
    | `tags` | array of strings | no, default `[]` | `TagList` |
    | `role` | string | yes | "Role: …" |
    | `result` | string | no | The highlighted result box |
@@ -142,7 +142,7 @@ Declare the `projects` collection with its schema.
 3. **Frontmatter:** fill every required field.
    - `cover` is a path **relative to this `.md` file**, so from `src/content/projects/` it goes up two levels and into `assets/images/projects/`.
    - Quote any string that contains a colon. In YAML, `title: Alpha: the sequel` breaks and `title: "Alpha: the sequel"` works.
-4. **Body:** two or three sentences of description in Markdown.
+4. **Body (optional):** the case study, which gets its own page in Phase 7.5. Leave it empty for now or start a draft. Only projects with a body get a page.
 
 ### Check
 - `npm run dev` (or `npx astro sync`) runs without validation errors.
@@ -239,7 +239,7 @@ A schema designed against invented data always misses something real: a project 
 - **The `cover` path written relative to the project root** instead of relative to the `.md` file.
 - **Unquoted YAML strings with `:`** inside.
 - **Relying on collection order:** always sort.
-- **Renaming a `.md` file later:** it changes the anchor id and breaks links you've sent.
+- **Renaming a `.md` file later:** it changes the anchor id and the case study URL, and breaks links you've sent.
 - **Putting images in `public/`** and referencing them from the schema: they won't be optimized, and `image()` won't validate them.
 - **A schema field you never use:** delete it. Every field is something you'll have to fill in for every project.
 

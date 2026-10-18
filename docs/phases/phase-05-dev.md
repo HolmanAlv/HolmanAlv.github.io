@@ -5,7 +5,6 @@
 **You will learn:**
 - `astro:assets` (`<Image>` and `<Picture>`)
 - named slots and slot fallback content
-- rendering a Markdown body with `render()`
 - composing a page from data
 - why the CV goes in `public/`
 - anchors and `scroll-margin-top`
@@ -49,15 +48,11 @@ A slot can also hold **fallback content**: whatever you put between `<slot name=
 
 One component, no `if (discipline === 'art')` inside it.
 
-### 3. Rendering the Markdown body
-
-The project's long description is the `.md` body. `render(entry)` (from `astro:content`) compiles it and gives back a `Content` component. You place `<Content />` wherever the description goes.
-
-### 4. Why the CV goes in `public/`
+### 3. Why the CV goes in `public/`
 
 `src/assets/` gives files hashed names, which is perfect for images but wrong for a CV. You want a **stable, readable URL**, `/cv/dev.pdf`, that you can also paste in an email. `public/` files keep their exact path. This is the rule from the plan: **`public/` is for files whose exact URL matters.**
 
-### 5. Anchors and the sticky header
+### 4. Anchors and the sticky header
 
 Each project's `<article>` gets `id={entry.id}`, so `/dev/#project-alpha` scrolls straight to it. That's how the Home cards will link here (Phase 8). If your header is sticky, give the articles a `scroll-margin-top` so the target doesn't land under the header.
 
@@ -111,9 +106,7 @@ A component that renders one project as a two-column row: media on the left, inf
 1. **Props:**
    - `entry`: one collection entry. Its type is `CollectionEntry<'projects'>`, imported as a **type** from `astro:content`. Passing the whole entry keeps the call site short: `<ProjectRow entry={p} />`.
    - `wide` (optional boolean): GameDev will use it in Phase 6. You can leave it out until then.
-2. **Frontmatter:**
-   1. Destructure `entry.data` for the fields you need.
-   2. Get `Content` from `render(entry)`.
+2. **Frontmatter:** destructure `entry.data` for the fields you need. The row doesn't render the `.md` body: that's the case study, which gets its own page in Phase 7.5.
 3. **Template:**
    1. An `<article>` with `id` set to `entry.id`.
    2. **The media column:**
@@ -123,7 +116,7 @@ A component that renders one project as a two-column row: media on the left, inf
    3. **The info column**, in this order:
       1. an `<h3>` with the title
       2. the subtitle, only if present
-      3. `<Content />`, the description
+      3. the `summary`, in a `<p>`
       4. `<TagList>` with the tags
       5. the role line (`Role: …`)
       6. the result box, only if `result` exists
@@ -147,7 +140,7 @@ Use it on the page in the next step.
 2. Use `Section` with the title "Featured Engineering Projects" and the label "PRODUCTION SYSTEMS". Inside it, loop over the projects and render one `<ProjectRow>` each.
 
 ### Check
-- Each project shows its cover, description, tags, role, result and links.
+- Each project shows its cover, summary, tags, role, result and links.
 - Open `/dev/#<project-id>` in a fresh tab: the page scrolls straight to that project, and it isn't hidden under the header.
 
 ---
@@ -227,7 +220,6 @@ Run these checks against the **production build**, `npm run build && npm run pre
 - [Images in Astro](https://docs.astro.build/en/guides/images/) (`<Image>`, `<Picture>`, responsive images)
 - [`astro:assets` reference](https://docs.astro.build/en/reference/modules/astro-assets/)
 - [Named slots and fallback content](https://docs.astro.build/en/basics/astro-components/#named-slots)
-- [`render()` reference](https://docs.astro.build/en/reference/modules/astro-content/#render)
 - [web.dev: Cumulative Layout Shift](https://web.dev/articles/cls)
 - [MDN: `<dl>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl)
 - [Chrome DevTools: Lighthouse](https://developer.chrome.com/docs/lighthouse/overview)
@@ -239,7 +231,6 @@ Run these checks against the **production build**, `npm run build && npm run pre
 | `<Image>` / `<Picture>` | Resized, converted, hashed images with dimensions, so no layout shift. |
 | `srcset` / responsive sizes | Phones download small files, big screens get large ones. |
 | Named slot + fallback | One component, with media the caller can override. |
-| `render()` | Turns the `.md` body into a `<Content />` component. |
 | `public/` for the CV | A stable, human-readable URL. |
 | `id` + `scroll-margin-top` | Deep links to a project that aren't hidden under the header. |
 | `<dl>` | The semantic element for label/value pairs. |

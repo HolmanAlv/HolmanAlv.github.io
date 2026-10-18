@@ -19,7 +19,7 @@ How we work: one phase at a time. For each phase we go over the concepts first, 
 | Navigation | The header is the way into the subpages | Recruiters get the direct link to their section, so every subpage has to stand on its own. |
 | Contact | The footer is the contact section | It's shared by all 4 pages, and the header "Contact" button jumps to it. |
 | CV | One CV per subpage (3 different PDFs) | A "Download CV" button sits in each subpage hero. Home and the header have none. |
-| Project detail pages | None | Each project row carries its own description, stack, role, result and external links. |
+| Project detail pages | Only for projects with a case study | A project whose `.md` has a body gets its own page at `/projects/<id>/`, built by one dynamic route. The row shows the summary and links to it (Phase 7.5). |
 | Skip link | Not included | The header is short (3 links + Contact), and `<main>` already gives screen readers a landmark to jump to. |
 
 ---
@@ -30,7 +30,7 @@ The mockup gives the section order and hierarchy. Its colors, fonts, copy and sc
 
 ### Global
 
-- **Header:** `HOLMAN_ALV` (link to Home), then `Developer`, `GameDev` and `Film` (the active one is marked), then a `Contact` button that jumps to the footer.
+- **Header:** `HOLMAN.ALV` (link to Home), then `Developer`, `GameDev` and `Artist` (the active one is marked), then a `Contact` button that jumps to the footer.
 - **Footer (`#contact`):** a short call to action, then email, then GitHub, itch.io, LinkedIn and YouTube, then `© year`.
 - **Removed from the mockup:**
   - the Audio UI toggle
@@ -54,8 +54,9 @@ The mockup gives the section order and hierarchy. Its colors, fonts, copy and sc
 2. **Technical stack:** a grid of category cards.
 3. **Featured projects:** rows with:
    - a media slot (image or architecture diagram, still undecided)
-   - title, subtitle, description
+   - title, subtitle, summary
    - tags, role, result, links
+   - "Read the case study", only when the project has one
 4. **Experience:** formal roles.
 5. **Education:** it belongs on this page because a recruiter who lands here never sees the Home timeline.
 
@@ -83,6 +84,18 @@ The mockup gives the section order and hierarchy. Its colors, fonts, copy and sc
 3. **Selected works:** project rows with a YouTube facade, production metadata (format, client, year, duration, mix), role and description. The audio-layer, SFX and highlight buttons are gone.
 4. **About:** short, the last section before the footer.
 
+### Case study `/projects/<id>/`
+
+Only projects whose `.md` has a body get one. A single template builds them all.
+
+1. **Back link** to the project's row on its subpage.
+2. **Header:**
+   - label, title, subtitle
+   - role, tags, result
+   - external links, and the film metadata when present
+3. **Media:** the cover, or the YouTube facade for film projects.
+4. **The case study:** the `.md` body.
+
 All three subpages share the same building blocks (hero, skill grid, project row) and differ only in their data.
 
 ---
@@ -91,12 +104,13 @@ All three subpages share the same building blocks (hero, skill grid, project row
 
 ```
 src/
-├── pages/            index, dev, gamedev, art, 404 (each file is a URL)
+├── pages/            index, dev, gamedev, art, 404 (each file is a URL),
+│                     projects/[id].astro (one page per case study)
 ├── layouts/          Layout.astro (<head>, header, footer)
 ├── components/       Header, Footer, Section, TagList, SkillGrid, ProjectRow,
 │                     ExperienceList, ProjectCard, Timeline, YouTubeFacade,
 │                     GameDevDemo, Hero3D
-├── content/projects/ one .md per project
+├── content/projects/ one .md per project (the body is its optional case study)
 ├── content.config.ts schema for the projects collection
 ├── data/             profile, stacks, experience, timeline, lab (typed .ts files)
 ├── scripts/          gamedev-demo.ts, hero3d.ts (loaded on demand)
@@ -130,6 +144,7 @@ public/
 | 5. Developer page | [phase-05-dev.md](phases/phase-05-dev.md) |
 | 6. GameDev page | [phase-06-gamedev.md](phases/phase-06-gamedev.md) |
 | 7. Film page | [phase-07-art.md](phases/phase-07-art.md) |
+| 7.5. Project pages | [phase-07.5-projects.md](phases/phase-07.5-projects.md) |
 | 8. Home without 3D | [phase-08-home.md](phases/phase-08-home.md) |
 | 9. GSAP demo | [phase-09-gsap.md](phases/phase-09-gsap.md) |
 | 10. Three.js hero | [phase-10-threejs.md](phases/phase-10-threejs.md) |
@@ -159,8 +174,8 @@ Concepts: component frontmatter, props, `<slot />`, scoped styles, `aria-current
   - Header + `<main>` + Footer
 - [ ] Fix the Header/Footer imports: `.astro` components are default exports, so `import Header from ...` without braces.
 - [ ] Header:
-  - `HOLMAN_ALV` linking to `/`
-  - 3 links with `aria-current="page"` on the active one (normalize the trailing slash before comparing)
+  - `HOLMAN.ALV` linking to `/`
+  - 3 links with `aria-current="page"` on the active one (hrefs keep the trailing slash, so they match the build's path)
   - `Contact` linking to `#contact`
 - [ ] Footer as the contact section, with `id="contact"` and the year computed at build time.
 - [ ] Wrap the 4 pages in the Layout.
@@ -178,6 +193,7 @@ Concepts: CI/CD, and why to deploy a skeleton. Production-only bugs (paths, trai
 - [ ] Rename the GitHub repo to `HolmanAlv.github.io`, then update the local remote URL.
 - [ ] Add `.github/workflows/deploy.yml` with the official `withastro/action`. Trigger it on `master`, because the docs example uses `main`.
 - [ ] In GitHub, go to Settings → Pages → Source and choose "GitHub Actions".
+- [ ] Before the first push, delete the experiments in `src/pages/projects/` and `src/content/posts/`. Everything in `src/pages/` gets published, and Phase 7.5 builds the real project pages.
 
 **Verify:** `https://holmanalv.github.io/` and the 3 subpages load, and their canonical URLs are correct.
 
@@ -197,8 +213,9 @@ Concepts: when something deserves a component and when a CSS class is enough.
 Concepts: content collections, and schema validation at build time.
 
 - [ ] `src/content.config.ts`: a `projects` collection (glob loader).
-  - Fields: `title, discipline (dev | gamedev | art), summary, description, tags, role, result?, links { source?, demo?, play? }, media, featured, order`.
-  - Film-only optional fields: `format, client, year, duration, mix`.
+  - Fields: `title, discipline (dev | gamedev | art), subtitle?, summary, tags, role, result?, links[], cover, coverAlt, featured, order`.
+  - Film fields: `youtubeId?`, and `meta?` for the production metadata (format, client, year…).
+  - The body is the optional case study (Phase 7.5). Cards and rows show `summary`.
 - [ ] `src/data/`: profile (name, email, socials), stacks per page, experience + education, timeline.
 - [ ] 1–2 real projects per discipline, so the schema gets tested against real content.
 
@@ -214,7 +231,7 @@ Concepts: `astro:assets` (`<Image>`), and why the CV lives in `public/`.
 - [ ] Technical stack (`SkillGrid`).
 - [ ] `ProjectRow.astro`:
   - media slot (image or diagram)
-  - title, subtitle, description
+  - title, subtitle, summary
   - tags, role, result, links
   - an `id` on each project so Home can link to it
 - [ ] Experience list, then Education list. They can share one list component and differ only in their data.
@@ -250,6 +267,27 @@ Concepts: Astro `<script>` tags, which get bundled and deduplicated and run on p
 - [ ] Short About as the last section.
 
 **Verify:** loading `/art` makes no request to `youtube.com` or `youtube-nocookie.com` until you click play.
+
+### Phase 7.5: Project pages (case studies)
+
+It sits between Film and Home: it needs the collection (4), `ProjectRow` (5) and the facade (7), and coming before Home puts the case studies inside the publishable milestone.
+
+Concepts: dynamic routes, `getStaticPaths()`, `render()`, styling Markdown output with `:global()`.
+
+- [ ] `src/pages/projects/[id].astro`: `getStaticPaths()` returns one page per project whose body has text.
+- [ ] The page:
+  - a back link to the project's row
+  - the header (title, subtitle, role, tags, result, links, film metadata)
+  - the cover or the facade, with `priority`
+  - `<Content />` inside a `.prose` wrapper styled with `:global()`
+- [ ] Title and description come from the entry (`title`, `summary`).
+- [ ] `ProjectRow`: a "Read the case study" link, only when the project has a body.
+- [ ] At least one real case study, with an image.
+
+**Verify:**
+- `dist/projects/` has one folder per case study and none for projects without a body.
+- Developer and GameDev case studies ship 0 KB of JS, and Film ones only the facade.
+- No header link is marked on a case study, and the back link lands on the row.
 
 ### Phase 8: Home without 3D
 
@@ -300,11 +338,11 @@ Requires the hero concept to be defined.
 
 - [ ] Every image goes through `astro:assets`, always with width and height (no layout shift).
 - [ ] Visual identity applied to the tokens in `global.css`. Fonts are self-hosted: woff2, `font-display: swap`, and the LCP font preloaded.
-- [ ] One OG image per page in `public/og/`. Recruiters receive direct links, so the preview card is their first impression.
+- [ ] One OG image per page in `public/og/`. Recruiters receive direct links, so the preview card is their first impression. Case studies reuse their discipline's image.
 - [ ] A `404.astro` page (GitHub Pages serves `404.html` automatically).
 - [ ] Optional: `@astrojs/sitemap`. With 4 pages that all link to each other it adds little.
 - [ ] Accessibility pass: visible focus, contrast, keyboard navigation, real `alt` text.
-- [ ] Lighthouse on all 4 pages against the budget below.
+- [ ] Lighthouse on all 4 pages and one case study, against the budget below.
 
 ---
 
@@ -316,6 +354,7 @@ Requires the hero concept to be defined.
 | GameDev | GSAP only, loaded when idle (~30 KB gzip) | < 1.0 s (static image) |
 | Film | facade only (~1 KB) | < 1.5 s |
 | Home | Three.js, loaded when idle (< 150 KB gzip) | < 1.5 s (poster, not canvas) |
+| Case study | 0 KB (Film: the facade, ~1 KB) | < 1.0 s |
 
 ---
 
