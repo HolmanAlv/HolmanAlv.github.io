@@ -14,6 +14,7 @@ How we work: one phase at a time. For each phase we go over the concepts first, 
 |---|---|---|
 | Language | English only | No i18n routing. Pages live directly under `src/pages/`. |
 | Hosting | GitHub Pages user site | `site: 'https://holmanalv.github.io'`, no `base`, so links stay plain (`/dev`). |
+| Branches and CI | `develop` for work, `master` for production | A push to `develop` only builds (a check). Merging `develop` into `master` and pushing deploys. There's no PR or auto-merge: for one person the build is the same gate either way, and you decide when to publish. |
 | Videos | All on YouTube | No video files in the repo. Embeds load behind a click-to-play facade. |
 | GameDev demo | GSAP animation | The second (and smaller) piece of JS on the site, used only on `/gamedev`. |
 | Navigation | The header is the way into the subpages | Recruiters get the direct link to their section, so every subpage has to stand on its own. |
@@ -167,19 +168,19 @@ Concepts: file-based routing, and build-time config versus code that ships to th
 
 Concepts: component frontmatter, props, `<slot />`, scoped styles, `aria-current`, computing values at build time.
 
-- [ ] Layout:
+- [x] Layout:
   - per-page `title` and `description` props
   - `<html lang="en">`
   - canonical and Open Graph tags (they can always be emitted now, since `site` is set)
   - Header + `<main>` + Footer
-- [ ] Fix the Header/Footer imports: `.astro` components are default exports, so `import Header from ...` without braces.
-- [ ] Header:
+- [x] Fix the Header/Footer imports: `.astro` components are default exports, so `import Header from ...` without braces.
+- [x] Header:
   - `HOLMAN.ALV` linking to `/`
   - 3 links with `aria-current="page"` on the active one (hrefs keep the trailing slash, so they match the build's path)
   - `Contact` linking to `#contact`
-- [ ] Footer as the contact section, with `id="contact"` and the year computed at build time.
-- [ ] Wrap the 4 pages in the Layout.
-- [ ] Add `@astrojs/check` and make the `build` script run `astro check` first, so a type error stops the build (locally and in CI).
+- [x] Footer as the contact section, with `id="contact"` and the year computed at build time.
+- [x] Wrap the 4 pages in the Layout.
+- [x] Add `@astrojs/check` and make the `build` script run `astro check` first, so a type error stops the build (locally and in CI).
 
 **Verify:**
 - The 4 pages link to each other and the active link is marked.
@@ -188,14 +189,19 @@ Concepts: component frontmatter, props, `<slot />`, scoped styles, `aria-current
 
 ### Phase 2: Deploy early
 
-Concepts: CI/CD, and why to deploy a skeleton. Production-only bugs (paths, trailing slashes) show up now instead of at the end.
+Concepts: CI/CD, running a job on one branch only (`if:`), a `develop`/`master` flow, and why to deploy a skeleton. Production-only bugs (paths, trailing slashes) show up now instead of at the end.
 
 - [ ] Rename the GitHub repo to `HolmanAlv.github.io`, then update the local remote URL.
-- [ ] Add `.github/workflows/deploy.yml` with the official `withastro/action`. Trigger it on `master`, because the docs example uses `main`.
+- [ ] Add `.github/workflows/deploy.yml` with the official `withastro/action`:
+  - trigger it on `master` and `develop` (the docs example uses `main`)
+  - the `deploy` job only runs on `master`: `if: github.ref == 'refs/heads/master'`
 - [ ] In GitHub, go to Settings → Pages → Source and choose "GitHub Actions".
 - [ ] Before the first push, delete the experiments in `src/pages/projects/` and `src/content/posts/`. Everything in `src/pages/` gets published, and Phase 7.5 builds the real project pages.
+- [ ] Create `develop` from `master`. From now on you work there, and publish by merging `develop` into `master`.
 
-**Verify:** `https://holmanalv.github.io/` and the 3 subpages load, and their canonical URLs are correct.
+**Verify:**
+- `https://holmanalv.github.io/` and the 3 subpages load, and their canonical URLs are correct.
+- A push to `develop` runs `build` and skips `deploy`. A broken build on `develop` leaves the live site untouched.
 
 ### Phase 3: Primitives
 
@@ -340,7 +346,7 @@ Requires the hero concept to be defined.
 - [ ] Visual identity applied to the tokens in `global.css`. Fonts are self-hosted: woff2, `font-display: swap`, and the LCP font preloaded.
 - [ ] One OG image per page in `public/og/`. Recruiters receive direct links, so the preview card is their first impression. Case studies reuse their discipline's image.
 - [ ] A `404.astro` page (GitHub Pages serves `404.html` automatically).
-- [ ] Optional: `@astrojs/sitemap`. With 4 pages that all link to each other it adds little.
+- [ ] Optional: `@astrojs/sitemap`. Every page is reachable through links, so it adds little.
 - [ ] Accessibility pass: visible focus, contrast, keyboard navigation, real `alt` text.
 - [ ] Lighthouse on all 4 pages and one case study, against the budget below.
 

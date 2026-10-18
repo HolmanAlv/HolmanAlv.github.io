@@ -229,7 +229,7 @@ Run these checks against the **production build**, `npm run build && npm run pre
 8. **The back link** lands on the project's row, not hidden under the header (the `scroll-margin-top` from Phase 5).
 9. **Section links:** `/projects/<id>/#<heading-id>` scrolls to that heading.
 10. **Mobile and Lighthouse:** 360px wide with no horizontal scroll, then Lighthouse on mobile.
-11. **Push**, and repeat checks 2 and 10 on the live URL.
+11. **Publish** (merge `develop` into `master` and push), and repeat checks 2 and 10 on the live URL.
 
 ---
 

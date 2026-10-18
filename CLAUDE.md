@@ -60,5 +60,5 @@ Where the mockup and the structure in `docs/PLAN.md` differ, `docs/PLAN.md` wins
   - Skip loading GSAP or Three.js when `prefers-reduced-motion` is set (and, for Three.js, when WebGL isn't available).
 - **Images:** put them in `src/assets/` and render them with `astro:assets` (`<Image>`/`<Picture>`) so Astro hashes, resizes and converts them. `public/` is copied as-is, so it should only hold favicons, fonts, OG images and files that need a fixed URL.
 - **Videos:** every video is on YouTube. Embed them behind a click-to-load facade, never as an iframe that loads with the page. Don't commit video files to the repo.
-- **Deploy:** the GitHub Actions workflow uses `withastro/action` and must trigger on `master`. The Astro docs example uses `main`.
+- **Deploy:** the GitHub Actions workflow uses `withastro/action` and triggers on `master` and `develop` (the Astro docs example uses `main`). The `deploy` job runs only on `master` (`if: github.ref == 'refs/heads/master'`). The user works on `develop` and publishes by merging into `master`, with no PRs or auto-merge.
 - **Content as data:** keep projects, stack and experience in content collections or typed data files, not hardcoded in page markup. That way the three subpages share components and differ only in their data.

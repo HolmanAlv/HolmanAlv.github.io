@@ -182,7 +182,7 @@ Against `npm run build && npm run preview`:
    ```
    The core is around 30 KB gzip. Note the number in `docs/PLAN.md`.
 8. **Lighthouse** on `/gamedev/`: performance is still in the 90s, and Total Blocking Time is close to 0.
-9. Push, and verify live.
+9. Publish (merge `develop` into `master` and push), and verify live.
 
 ---
 

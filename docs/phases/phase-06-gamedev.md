@@ -158,7 +158,7 @@ Against `npm run build && npm run preview`:
 3. **Only one** image on the page has `fetchpriority="high"`.
 4. Heading outline, keyboard pass and 360px width, same checks as Phase 5.
 5. `/dev/` is unchanged (regression check).
-6. Push, and check the live page.
+6. Publish (merge `develop` into `master` and push), and check the live page.
 
 ---
 

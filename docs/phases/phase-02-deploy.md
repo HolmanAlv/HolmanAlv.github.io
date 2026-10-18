@@ -1,12 +1,14 @@
 # Phase 2: Deploy early
 
-**Goal:** `https://holmanalv.github.io` serves the 4 pages, and every push to `master` deploys automatically.
+**Goal:** `https://holmanalv.github.io` serves the 4 pages. Every push to `develop` is built and checked without publishing anything, and every push to `master` deploys automatically.
 
 **You will learn:**
 - static hosting
 - GitHub Pages site types
 - what CI/CD is
 - how a GitHub Actions workflow is built
+- running a job only on one branch (`if:`)
+- a two-branch flow: `develop` for work, `master` for production
 - why you deploy a skeleton
 
 **Before you start:**
@@ -17,6 +19,7 @@
 - `.github/workflows/deploy.yml` (new)
 - your GitHub repository settings
 - your local git remote
+- a new `develop` branch
 
 **Out of scope:** a custom domain and a custom 404 page (Phase 11).
 
@@ -54,7 +57,28 @@ A **workflow** is a YAML file in `.github/workflows/`. Its parts:
   1. **`build`** checks out the code. Then Astro's official action installs dependencies (it picks npm because you committed `package-lock.json`), runs your `build` script and uploads `dist/` as an *artifact*.
   2. **`deploy`** waits for `build` (`needs: build`) and publishes that artifact to Pages.
 
-### 4. Why deploy now, with an almost empty site
+**`deploy` only runs if `build` succeeds.** A broken build never reaches the live site: the last good version stays online.
+
+### 4. Two branches: `develop` and `master`
+
+| Branch | What it is | A push to it… |
+|---|---|---|
+| `master` | Production: exactly what's live | builds **and deploys** |
+| `develop` | Where you work every day | **only builds**, as a check. Nothing is published. |
+
+When something on `develop` is ready, you **merge `develop` into `master`** and push `master`. That push is what publishes. The decision to publish is always yours.
+
+One workflow file handles both branches:
+- `on` lists both branches, so a push to either one starts a run.
+- The `deploy` job gets a condition, **`if: github.ref == 'refs/heads/master'`**. `github.ref` is the full name of what triggered the run, and branches are written `refs/heads/<name>`. On `develop` the condition is false, so `deploy` shows as **skipped**.
+
+**Why there's no automatic merge from `develop` to `master`:**
+- **It wouldn't add safety.** The automatic merge would wait for the same build that already guards the deploy. What the build can't catch, like broken CSS or a wrong text, would slip through both ways. What catches those is you looking at the site before publishing.
+- **It needs workarounds.** Actions done with a workflow's default token (`GITHUB_TOKEN`) don't start other workflows. A merge made by a workflow wouldn't trigger the deploy without a personal access token stored as a secret, which expires and needs maintenance.
+
+For one person, a manual merge is one action, and it's the moment you decide "this is ready".
+
+### 5. Why deploy now, with an almost empty site
 
 Some bugs only exist in production: paths, trailing slashes, case-sensitive file names (your Linux machine is case-sensitive too, but Windows and macOS users aren't), missing files that only worked from your cache. If you deploy on the last day, they all appear at once. If you deploy now, **each phase is tested live as you finish it**, and when something breaks you know it's whatever you just changed.
 
@@ -95,16 +119,18 @@ It's the deployment method Astro maintains, and it needs almost no configuration
 ### Do it
 1. Create the folders `.github/workflows/` at the project root.
 2. Open the official guide ([Deploy to GitHub Pages](https://docs.astro.build/en/guides/deploy/github/)) and copy the workflow from the **How to deploy** section into `.github/workflows/deploy.yml`.
-3. **Change the branch:** the example triggers on `main`, and your branch is **`master`**. Edit `branches: [ main ]` to `branches: [ master ]`. *If you skip this, the workflow never runs and nothing tells you why.*
-4. Leave the commented `with:` options commented:
+3. **Change the branches:** the example triggers on `main`, and your branches are **`master`** and **`develop`**. Edit `branches: [ main ]` to `branches: [ master, develop ]`. *If you leave `main`, the workflow never runs and nothing tells you why.*
+4. **Deploy only from `master`:** in the `deploy` job, next to `needs: build`, add `if: github.ref == 'refs/heads/master'` (concept 4).
+5. Leave the commented `with:` options commented:
    - `path`: your project is at the repo root
    - `node-version`: the action's default (24) satisfies the `>=22.12.0` in your `package.json`
    - `package-manager`: detected from `package-lock.json`
-5. Read the file once, top to bottom, and find in it each part from concept 3: `on`, `permissions`, the `build` job and the `deploy` job with its `needs`.
+6. Read the file once, top to bottom, and find in it each part from concepts 3 and 4: `on` with both branches, `permissions`, the `build` job, and the `deploy` job with its `needs` and its `if`.
 
 ### Check
 - The file is at exactly `.github/workflows/deploy.yml` (the folder name starts with a dot).
-- It triggers on `master`.
+- It triggers on `master` and `develop`.
+- The `deploy` job has the `if` with the full `refs/heads/master`.
 
 ---
 
@@ -156,17 +182,52 @@ Both jobs are green, and the `deploy` job shows the site URL.
 
 ---
 
+## Step 6: Create `develop` and test the safety net
+
+### What
+Create the work branch, then prove that a push to it checks the build without publishing, even when the build breaks.
+
+### Why
+Same lesson as `astro check` in Phase 1: you trust the safety net after you've seen it catch something.
+
+### Do it
+1. Create a branch named `develop` **from `master`**, and publish it to GitHub.
+2. **A good push:** on `develop`, change something visible (the `<h1>` placeholder of a page, for example), commit and push.
+   - In the Actions tab, the run shows `build` green and `deploy` **skipped**.
+   - The live site **doesn't** show the change.
+3. **A broken push:** on `develop`, delete the `description` from one page, commit and push.
+   - The run is red: `build` fails at `astro check`, and the log names the missing prop.
+   - The live site is untouched.
+4. Restore the `description`, commit and push. The run is green again.
+
+### Check
+- `develop` exists on GitHub.
+- A push to `develop` never changes the live site, whether the build passes or fails.
+
+---
+
 ## From now on
 
-- **Every push to `master` publishes.** If you don't want work in progress to go public, work on a branch and merge it into `master` when a phase is done. For a portfolio under construction it's also fine to publish as you go.
-- **A red X in the Actions tab means production didn't change.** The last good version stays online, so a failed build never takes your site down.
-- **To deploy without new commits** (for example to update the footer year), the workflow has `workflow_dispatch`, which adds a **Run workflow** button in the Actions tab.
+1. **Work on `develop`.** Commit and push as often as you like: each push is checked, and nothing is published. A red X means you fix it on `develop`. Production is never affected.
+2. **When something is ready** (a finished phase, or a change you want live):
+   1. the last run on `develop` is green
+   2. you checked it locally with `npm run build && npm run preview`, which is the visual check no CI can do for you
+3. **Publish:** merge `develop` into `master` and push `master`. That run builds and deploys.
+4. **Go back to `develop`** to keep working.
+5. **Never commit directly on `master`.** It only receives merges from `develop`, so `develop` always contains everything that's live. If you ever do commit on `master`, merge `master` back into `develop` right after.
+6. **If something ugly goes live:**
+   - the usual fix: correct it on `develop` and publish again, a few minutes in total
+   - an emergency undo: in the Actions tab, open the last good run on `master` and click **Re-run all jobs**. A re-run builds the same commit it built originally, so the previous version goes back online. Your next publish replaces it.
+7. **To deploy without new commits** (for example to update the footer year), the workflow has `workflow_dispatch`, which adds a **Run workflow** button in the Actions tab. Run it on `master`. On `develop` it only builds.
 
 ---
 
 ## Common pitfalls
 
 - **The workflow is set to `main` while your branch is `master`:** nothing runs, silently.
+- **`if: github.ref == 'master'`**, without `refs/heads/`: the condition is never true, so `deploy` is skipped on `master` too, silently.
+- **No `if` on the `deploy` job:** a push to `develop` tries to publish. GitHub's `github-pages` environment normally lets only the default branch deploy, so the run fails with a protection-rules error. It's the `if` that keeps `develop` from ever publishing.
+- **Commits made directly on `master`:** `develop` falls behind, and the next merge can conflict. Merge `master` back into `develop`.
 - **The Pages source is left on "Deploy from a branch":** GitHub serves the raw repo (your README) instead of the site.
 - **A typo in the repo name** (`HolmanAlv.github.com`, a missing dot…): the site ends up at a sub-path, or isn't served at all.
 - **Testing in a cached tab:** after a deploy, hard-reload with `Ctrl+Shift+R`.
@@ -177,10 +238,11 @@ Both jobs are green, and the `deploy` job shows the site URL.
 ## Done when
 
 - [ ] The repo is named `HolmanAlv.github.io`, and `git remote -v` shows it.
-- [ ] `.github/workflows/deploy.yml` exists and triggers on `master`.
+- [ ] `.github/workflows/deploy.yml` exists, triggers on `master` and `develop`, and deploys only from `master`.
 - [ ] Pages' source is GitHub Actions.
-- [ ] The first run is green.
+- [ ] The first run on `master` is green.
 - [ ] All 4 URLs work live, with and without the trailing slash.
+- [ ] `develop` exists. A push to it runs `build`, skips `deploy`, and a broken build there leaves the live site untouched.
 - [ ] Phase 2 is checked off in `docs/PLAN.md`.
 
 ---
@@ -190,7 +252,9 @@ Both jobs are green, and the `deploy` job shows the site URL.
 - [Astro: deploy to GitHub Pages](https://docs.astro.build/en/guides/deploy/github/)
 - [GitHub: types of GitHub Pages sites](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#types-of-github-pages-sites)
 - [GitHub: renaming a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/renaming-a-repository)
-- [GitHub Actions: workflow syntax](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions)
+- [GitHub Actions: workflow syntax](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions) (`on`, `jobs.<job_id>.if`)
+- [GitHub Actions: the `github` context](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs#github-context) (`github.ref`)
+- [GitHub Actions: re-running workflows](https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/re-running-workflows-and-jobs)
 
 ## Concepts recap
 
@@ -201,4 +265,7 @@ Both jobs are green, and the `deploy` job shows the site URL.
 | CI | Every push is built and checked on a clean machine. |
 | CD | A green build is published automatically. |
 | Workflow parts | Trigger (`on`), `permissions`, and `jobs` (build → artifact → deploy). |
+| `develop` / `master` | Push to `develop` to check, and merge into `master` to publish. |
+| `if: github.ref == 'refs/heads/master'` | The deploy job runs only for `master`. |
+| Re-run | Rebuilds the same commit, which makes it an emergency undo. |
 | Deploy early | Production-only bugs show up one at a time, next to the change that caused them. |

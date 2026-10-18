@@ -196,7 +196,7 @@ Against `npm run build && npm run preview`:
 5. Keyboard: every facade is reachable and plays with Enter.
 6. JavaScript disabled: every facade opens YouTube.
 7. Heading outline, 360px width and Lighthouse, as before.
-8. Push, and verify live.
+8. Publish (merge `develop` into `master` and push), and verify live.
 
 ---
 

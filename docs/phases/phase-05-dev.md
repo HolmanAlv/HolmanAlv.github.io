@@ -187,7 +187,7 @@ Run these checks against the **production build**, `npm run build && npm run pre
    - Accessibility and Best Practices at 100, or close, with every failure understood
    - fix what it flags before moving on
 7. **Mobile:** use device mode at 360px wide. There's no horizontal scrolling, and the rows stack to one column.
-8. **Push**, and repeat checks 1 and 6 on the live URL.
+8. **Publish** (merge `develop` into `master` and push), and repeat checks 1 and 6 on the live URL.
 
 ---
 

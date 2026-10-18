@@ -228,7 +228,7 @@ Against `npm run build && npm run preview`:
    - **CPU throttling doesn't slow your GPU**, so if you can, open the live site on a real mid-range phone; that's the true test
 7. **Frame rate:** DevTools → Rendering → **Frame rendering stats**. The scene holds a steady frame rate on your machine.
 8. **Lighthouse (Mobile) on Home:** compare with the baseline from Phase 8. Performance should stay in the 90s. If it dropped, find out which metric moved and why.
-9. Push, and verify live.
+9. Publish (merge `develop` into `master` and push), and verify live.
 
 ---
 
