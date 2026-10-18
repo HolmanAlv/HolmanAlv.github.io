@@ -165,7 +165,7 @@ Against `npm run build && npm run preview`, walk the **whole site** as a recruit
    - the LCP is the poster
    - all three cards land on the right project anchors
 2. **Developer and GameDev:** still 0 JS. **Film:** only the facade script.
-3. Header navigation between all 4 pages, the active state, the skip link and Contact work everywhere.
+3. Header navigation between all 4 pages, the active state and Contact work everywhere.
 4. Lighthouse (Mobile) on **all 4 pages**: write the four Performance scores down in `docs/PLAN.md` next to the budget, as your baseline before the animations.
 5. 360px width on all 4 pages.
 6. **Push.** This is **v1 of your portfolio, live.** From here, Phases 9–10 add the animations on top, and if either ever breaks, this version still works underneath.

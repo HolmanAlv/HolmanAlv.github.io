@@ -150,7 +150,7 @@ Both jobs are green, and the `deploy` job shows the site URL.
 3. **Without** the trailing slash too: `/dev` redirects to `/dev/`.
 4. *View page source* on a subpage: the canonical link is `https://holmanalv.github.io/dev/`.
 5. A made-up path like `/nope` shows GitHub's default 404. Your own 404 page comes in Phase 11.
-6. Header links, the active state, the skip link and Contact all behave as they did locally.
+6. Header links, the active state and Contact all behave as they did locally.
 
 ---
 

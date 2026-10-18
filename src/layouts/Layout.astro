@@ -9,28 +9,31 @@ interface Props {
 }
 
 const {title, description } = Astro.props;
-const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width", initial-scale=1.0 />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="description" content={description} />
 		<title>{title}</title>
-
-		{canonical && <link rel="canonical" href={canonical.href} />}
+		<link rel="canonical" href={canonical.href} />
 
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		{canonical && <meta property="og:url" content={canonical.href} />}
+		<meta property="og:url" content={canonical.href} />
 
 	</head>
 	<body>
-		<slot />
+		<Header />
+			<main>
+				<slot />
+			</main>
+		<Footer />
 	</body>
 </html>

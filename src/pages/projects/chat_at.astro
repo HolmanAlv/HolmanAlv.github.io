@@ -1,4 +1,7 @@
 ---
+layout: "../../layouts/Layout.astro"
+title: "Chat at"
+description: "A project about chat at"
 import * as greatPost from "../../content/posts/chat_at.md";
 const compiled = await greatPost.compiledContent();
 const posts = Object.values(import.meta.glob("../../content/posts/*.md", { eager: true }));

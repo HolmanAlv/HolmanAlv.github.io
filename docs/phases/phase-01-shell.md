@@ -8,7 +8,7 @@
 - `<slot />` and default imports
 - scoped styles
 - what each `<head>` tag does
-- `aria-current` and skip links
+- `aria-current`
 - computing values at build time
 - type-checking with `astro check`
 
@@ -70,10 +70,9 @@ A `<style>` inside a component applies **only to that component's markup**. At b
 | `<link rel="icon">` | The favicon. Your `public/` already has `.svg` and `.ico` versions. |
 | `og:title`, `og:description`, `og:url`, `og:type` | The card LinkedIn, WhatsApp or Slack shows when someone pastes your link. Recruiters receive direct links, so this is a first impression. `og:image` comes in Phase 11. |
 
-### 6. `aria-current` and the skip link
+### 6. `aria-current`
 
-- **`aria-current="page"`** marks the link to the current page. Screen readers announce it, and you can style it with the selector `[aria-current="page"]`. That way the accessible state and the visual state come from the same source and can't disagree. A `class="active"` would only be visual.
-- **The skip link** is the first focusable element on the page: a link to `#main` that stays hidden until it receives keyboard focus. Without it, a keyboard or screen-reader user has to Tab through the whole header on every page before reaching the content. It's the best effort-to-impact accessibility fix there is.
+**`aria-current="page"`** marks the link to the current page. Screen readers announce it, and you can style it with the selector `[aria-current="page"]`. That way the accessible state and the visual state come from the same source and can't disagree. A `class="active"` would only be visual.
 
 ### 7. Computing at build time
 
@@ -106,14 +105,9 @@ Every page needs the same `<html>`, `<head>`, header and footer. Writing them on
    6. the two favicon links
    7. the four `og:` meta tags
 5. **`<body>`**, in this order:
-   1. the skip link: an `<a>` to `#main` with the text "Skip to content"
-   2. `<Header />`
-   3. `<main id="main">` containing the `<slot />`
-   4. `<Footer />`
-6. **Skip-link styles** go in the Layout's own `<style>`:
-   - position it off-screen (for example `position: absolute` with a negative `top`)
-   - on `:focus`, bring it back on screen (`top` set to a spacing token)
-   - give it a background, text color and border from your color tokens so it's readable
+   1. `<Header />`
+   2. `<main>` containing the `<slot />`
+   3. `<Footer />`
 
 ### Check
 Nothing renders differently yet, because no page uses the Layout. That's Step 4.
@@ -213,9 +207,8 @@ For each of the 4 pages:
 2. The header links move between pages. On `/gamedev/`, the GameDev link looks active.
 3. Right-click the GameDev link → *Inspect*. It has `aria-current="page"`, and the other two links **don't have the attribute at all**.
 4. *View page source* (not the inspector). It starts with `<!DOCTYPE html>` / `<html lang="en">`, and `<head>` has the charset first and the canonical link pointing to `https://holmanalv.github.io/gamedev/`.
-5. Reload the page and press **Tab once** without clicking anything. "Skip to content" appears. Press Enter: focus jumps to the main content.
-6. Click **Contact**: the page scrolls to the footer.
-7. DevTools → **Network** → filter **JS** → reload. Apart from the dev server's own scripts (Vite and the Astro toolbar), there's **nothing from you**. The production build (`npm run build && npm run preview`) shows zero JS files.
+5. Click **Contact**: the page scrolls to the footer.
+6. DevTools → **Network** → filter **JS** → reload. Apart from the dev server's own scripts (Vite and the Astro toolbar), there's **nothing from you**. The production build (`npm run build && npm run preview`) shows zero JS files.
 
 ---
 
@@ -260,7 +253,6 @@ You now have `interface Props` on the Layout. A page that forgets `description` 
 - [ ] All 4 pages use the Layout and have their own title and description.
 - [ ] The view-source checks in Step 4 pass (charset first, `lang="en"`, absolute canonical).
 - [ ] The active link has `aria-current="page"`, and the inactive ones don't have the attribute.
-- [ ] Tab reveals the skip link, and Enter moves focus to `<main>`.
 - [ ] Contact scrolls to the footer on every page.
 - [ ] The production build ships 0 JS files.
 - [ ] `npm run build` runs `astro check` first, and a missing prop fails it.
@@ -276,7 +268,6 @@ You now have `interface Props` on the Layout. A page that forgets `description` 
 - [Styles and CSS](https://docs.astro.build/en/guides/styling/): scoped styles, global styles
 - [TypeScript in Astro](https://docs.astro.build/en/guides/typescript/) and the [`astro check` command](https://docs.astro.build/en/reference/cli-reference/#astro-check)
 - [MDN: `aria-current`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-current)
-- [WebAIM: skip navigation links](https://webaim.org/techniques/skipnav/)
 - [The Open Graph protocol](https://ogp.me/)
 
 ## Concepts recap
@@ -291,6 +282,5 @@ You now have `interface Props` on the Layout. A page that forgets `description` 
 | Charset first | Late charset means re-parsing and broken accents. |
 | Canonical / OG | The official URL and the link-preview card. |
 | `aria-current` | One attribute for both the accessible and the visual active state. |
-| Skip link | Keyboard users jump past the header in one keypress. |
 | Build-time values | The footer year is computed on your machine, so it ships as plain text. |
 | `astro check` | The build strips types without checking them, and this command is what checks them. |

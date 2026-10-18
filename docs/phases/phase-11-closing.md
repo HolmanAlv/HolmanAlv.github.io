@@ -172,7 +172,6 @@ With 4 pages that all link to each other, search engines find everything anyway,
 2. **Keyboard only** (put the mouse away):
    - Tab through everything
    - focus is always visible, and the order matches the visual order
-   - the skip link works
    - video facades play with Enter
 3. **Zoom to 200%** (`Ctrl` `+`): nothing overlaps or gets cut off, and no horizontal scrolling appears at normal widths.
 4. **Images:** every meaningful image has a descriptive `alt`, and decorative ones have `alt=""`. Read your alts aloud: do they describe what the image *shows* and why it matters?

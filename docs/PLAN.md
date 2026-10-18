@@ -20,6 +20,7 @@ How we work: one phase at a time. For each phase we go over the concepts first, 
 | Contact | The footer is the contact section | It's shared by all 4 pages, and the header "Contact" button jumps to it. |
 | CV | One CV per subpage (3 different PDFs) | A "Download CV" button sits in each subpage hero. Home and the header have none. |
 | Project detail pages | None | Each project row carries its own description, stack, role, result and external links. |
+| Skip link | Not included | The header is short (3 links + Contact), and `<main>` already gives screen readers a landmark to jump to. |
 
 ---
 
@@ -155,8 +156,7 @@ Concepts: component frontmatter, props, `<slot />`, scoped styles, `aria-current
   - per-page `title` and `description` props
   - `<html lang="en">`
   - canonical and Open Graph tags (they can always be emitted now, since `site` is set)
-  - skip link
-  - Header + `<main id="main">` + Footer
+  - Header + `<main>` + Footer
 - [ ] Fix the Header/Footer imports: `.astro` components are default exports, so `import Header from ...` without braces.
 - [ ] Header:
   - `HOLMAN_ALV` linking to `/`
@@ -168,7 +168,6 @@ Concepts: component frontmatter, props, `<slot />`, scoped styles, `aria-current
 
 **Verify:**
 - The 4 pages link to each other and the active link is marked.
-- Pressing Tab reveals the skip link.
 - `Contact` scrolls to the footer.
 - DevTools → Network → JS is empty.
 
