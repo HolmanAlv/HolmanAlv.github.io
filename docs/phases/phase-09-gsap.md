@@ -1,5 +1,7 @@
 # Phase 9: GSAP demo (GameDev hero)
 
+> **As built (2026-10-18):** the inline SVG from Phase 6 is both the still and the animated scene, so nothing is hidden or swapped, and Step 2's "ready" class doesn't exist. In `src/scripts/gamedev-demo.ts`, the runner stays in place while six layers scroll left at different speeds (each layer is two copies of a 1600-unit tile). It jumps at 1 s and 3 s of a 4 s loop. An `IntersectionObserver` pauses the timeline off-screen. Every silhouette is the same white; the layers stay readable through cuts in the sky's color (a dark copy of each ground layer shifted up, dark outlines on pines and clouds, an SVG `feMorphology` halo around the runner). Nothing fades with opacity, because a fade would turn the white gray.
+
 **Goal:** the GameDev hero's static image comes alive with a GSAP animation, and three rules hold:
 - GSAP loads **only on `/gamedev/`**
 - it loads **after the page is idle**

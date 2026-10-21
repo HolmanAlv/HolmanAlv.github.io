@@ -1,8 +1,108 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Hero3D from '../components/Hero3D.astro';
+import Section from '../components/Section.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Timeline from '../components/Timeline.astro';
+import { disciplines } from '../data/disciplines';
+import { profile } from '../data/profile';
+import { timeline } from '../data/timeline';
+import portrait from '../assets/images/home/portrait.png';
 
+// One featured project per discipline, always in the header's order.
+const order = Object.keys(disciplines);
+const featured = (await getCollection('projects', ({ data }) => data.featured)).sort(
+    (a, b) => order.indexOf(a.data.discipline) - order.indexOf(b.data.discipline),
+);
 ---
 
-<Layout title="Holman's Portfolio" description="This is the main page of my portfolio, it contains general information about me, highlight projects and my academic and working path">
-    <h1>Hola h1 este es el indice</h1>
+<Layout
+    title="Holman Alvarado · Developer, game developer and filmmaker"
+    description="Portfolio of Holman Alvarado: software engineering, game development and technical art, animation and sound for film."
+>
+    <Hero3D />
+
+    <Section title="Selected projects" id="projects">
+        <ul class="cards">
+            {
+                featured.map((entry, index) => (
+                    <li>
+                        <ProjectCard entry={entry} large={index === 0} />
+                    </li>
+                ))
+            }
+        </ul>
+    </Section>
+
+    <Section title="About me" id="about">
+        <div class="about">
+            <Image src={portrait} alt="Placeholder for a portrait of Holman Alvarado." widths={[320, 480, 640]} sizes="(min-width: 60rem) 16rem, 60vw" />
+            <div class="text">
+                {profile.about.home.map((paragraph) => <p>{paragraph}</p>)}
+            </div>
+        </div>
+    </Section>
+
+    <Section title="Timeline" id="timeline">
+        <Timeline items={timeline} />
+    </Section>
 </Layout>
+
+<style>
+    /* A contact sheet: the 1px gaps show the line color behind the cards, so
+       every card shares its borders with its neighbours. */
+    .cards {
+        display: grid;
+        gap: 1px;
+        padding: 0;
+        list-style: none;
+        background: var(--color-line);
+        border: 1px solid var(--color-line);
+    }
+
+    /* Bento: the first card takes the wide column and both rows. */
+    @media (min-width: 48rem) {
+        .cards {
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+        }
+
+        .cards li:first-child {
+            grid-row: span 2;
+        }
+    }
+
+    .about {
+        display: grid;
+        gap: var(--space-xl);
+        align-items: start;
+    }
+
+    @media (min-width: 48rem) {
+        .about {
+            grid-template-columns: 16rem minmax(0, 1fr);
+        }
+    }
+
+    .about img {
+        width: 100%;
+        max-width: 20rem;
+        height: auto;
+    }
+
+    .text {
+        display: grid;
+        gap: var(--space-sm);
+        max-width: var(--measure);
+    }
+
+    .text p:first-child {
+        font-size: var(--text-lg);
+        line-height: 1.7;
+    }
+
+    .text p + p {
+        color: var(--color-muted);
+    }
+</style>

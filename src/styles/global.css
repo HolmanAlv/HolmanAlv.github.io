@@ -1,4 +1,4 @@
-/*  ----------- Reset del estilo default -----------*/
+/* ------------------------------ Reset ------------------------------ */
 
 *,
 *::before,
@@ -40,81 +40,223 @@ h6 {
     overflow-wrap: break-word;
 }
 
-/*  -------------------- Tokens --------------------*/
+/* ------------------------------ Tokens ------------------------------ */
 
 :root {
     color-scheme: light dark;
-    /* Escala de espaciado — base 8px.
-Todo margin, padding y gap del sitio sale de aquí. */
 
-    --space-3xs: 0.25rem;
-    /*  4px */
-    --space-2xs: 0.5rem;
-    /*  8px */
-    --space-xs: 0.75rem;
-    /* 12px */
-    --space-sm: 1rem;
-    /* 16px */
-    --space-md: 1.5rem;
-    /* 24px */
-    --space-lg: 2rem;
-    /* 32px */
-    --space-xl: 3rem;
-    /* 48px */
-    --space-2xl: 4rem;
-    /* 64px */
-    --space-3xl: 6rem;
-    /* 96px */
+    /* Palette: a gray scale, no hue. These never change with the theme; the
+       semantic tokens below pick from them. */
+    --white: #ffffff;
+    --gray-50: #f4f4f4;
+    --gray-100: #ececec;
+    --gray-300: #c8c8c8;
+    --gray-400: #9e9e9e;
+    --gray-500: #6b6b6b;
+    --gray-700: #3a3a3a;
+    --gray-900: #1a1a1a;
+    --gray-950: #121212;
 
-    /* Escala tipográfica */
-    --text-xs: 0.75rem;
-    /* 12px */
-    --text-sm: 0.875rem;
-    /* 14px */
-    --text-base: 1rem;
-    /* 16px — cuerpo */
-    --text-lg: 1.25rem;
-    /* 20px */
-    --text-xl: 1.5rem;
-    /* 24px */
-    --text-2xl: 2rem;
-    /* 32px */
-    --text-3xl: clamp(2.5rem, 6vw, 4rem);
-    /* display, fluido */
+    /* Semantic colors: components only use these. */
+    --color-bg: var(--gray-50);
+    --color-fg: var(--gray-900);
+    --color-muted: var(--gray-500);
+    --color-line: var(--gray-300);
+    --color-night: var(--gray-900); /* the dark boxes behind the GameDev scene and videos */
 
-    /* Color — PLACEHOLDER NEUTRO. Se reemplaza al definir identidad visual. */
-    --color-bg: #a14949;
-    --color-fg: #111111;
-    --color-muted: #6b6b6b;
-    --color-line: #e0e0e0;
-    --color-accent: #111111;
+    /* Spacing, on an 8px base. Every margin, padding and gap comes from here. */
+    --space-3xs: 0.25rem; /*  4px */
+    --space-2xs: 0.5rem; /*  8px */
+    --space-xs: 0.75rem; /* 12px */
+    --space-sm: 1rem; /* 16px */
+    --space-md: 1.5rem; /* 24px */
+    --space-lg: 2rem; /* 32px */
+    --space-xl: 3rem; /* 48px */
+    --space-2xl: 4rem; /* 64px */
+    --space-3xl: 6rem; /* 96px */
+    --space-4xl: 9rem; /* 144px */
+
+    /* Type scale (the classic 12/14/16/21/24/36/48+ steps). */
+    --text-xs: 0.75rem; /* 12px */
+    --text-sm: 0.875rem; /* 14px */
+    --text-base: 1rem; /* 16px, body */
+    --text-lg: 1.3125rem; /* 21px */
+    --text-xl: 1.5rem; /* 24px */
+    --text-2xl: 2.25rem; /* 36px */
+    --text-3xl: clamp(2.75rem, 4vw + 1.5rem, 4.75rem); /* display, fluid */
 
     /* Layout */
-    --container: 75rem;
-    /* 1200px */
-    --measure: 68ch;
-    /* ancho máximo de un bloque de texto */
+    --container: 75rem; /* 1200px */
+    --gutter: clamp(1rem, 4vw, 3rem);
+    --measure: 64ch; /* longest comfortable line */
 
-    /* Tipografía — stack del sistema mientras no haya identidad */
-    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    /* Type family. --font-noto comes from the Fonts API. */
+    --font-sans: var(--font-noto), system-ui, sans-serif;
 }
 
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: var(--gray-950);
+        --color-fg: var(--gray-100);
+        --color-muted: var(--gray-400);
+        --color-line: var(--gray-700);
+    }
+}
+
+/* ------------------------------ Base ------------------------------ */
+
+/* Header, main and footer are three framed boxes stacked down the page. */
 body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-xs);
     background: var(--color-bg);
     color: var(--color-fg);
     font-family: var(--font-sans);
     font-size: var(--text-base);
-    line-height: 1.6;
+    font-weight: 400;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* modo oscuro */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-bg: #0e0e0e;
-        --color-fg: #f2f2f2;
-        --color-muted: #a1a1a1;
-        --color-line: #2a2a2a;
-        --color-accent: #f2f2f2;
+h1,
+h2,
+h3 {
+    line-height: 1.3;
+    font-weight: 400;
+}
+
+a {
+    color: inherit;
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--color-line);
+    text-underline-offset: 0.3em;
+    transition: color 0.2s, text-decoration-color 0.2s;
+}
+
+a:hover {
+    text-decoration-color: currentColor;
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-fg);
+    outline-offset: 3px;
+}
+
+::selection {
+    background: var(--color-fg);
+    color: var(--color-bg);
+}
+
+/* Page width and frame: header, main and footer all sit in the same column. */
+.wrap {
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+    border: 1px solid var(--color-line);
+}
+
+main.wrap {
+    flex: 1;
+}
+
+/* ------------------------------ Buttons ------------------------------ */
+/* Links styled as buttons: a link goes somewhere, so it stays an <a>. */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    padding: var(--space-xs) var(--space-md);
+    border: 1px solid var(--color-fg);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn-primary {
+    background: var(--color-fg);
+    color: var(--color-bg);
+}
+
+.btn-primary:hover {
+    background: var(--color-muted);
+    border-color: var(--color-muted);
+    color: var(--color-bg);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--color-fg);
+}
+
+.btn-outline:hover {
+    background: var(--color-fg);
+    color: var(--color-bg);
+}
+
+.btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+/* ------------------------------ Page heroes ------------------------------ */
+/* The top of every page: the h1, a lead and links.
+   .hero-split adds a media column (the cube, the GSAP scene, the reel). */
+
+.hero {
+    display: grid;
+    gap: var(--space-xl);
+    align-items: center;
+    padding-block: var(--space-2xl) var(--space-3xl);
+}
+
+@media (min-width: 60rem) {
+    .hero {
+        padding-block: var(--space-3xl) var(--space-4xl);
+    }
+
+    .hero-split {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: var(--space-2xl);
+    }
+}
+
+.hero h1 {
+    max-width: 18ch;
+    font-size: clamp(2.5rem, 2.5vw + 1.5rem, 3.75rem);
+    font-weight: 300;
+    line-height: 1.15;
+}
+
+.lead {
+    max-width: 44ch;
+    margin-top: var(--space-md);
+    font-size: var(--text-lg);
+    line-height: 1.7;
+    color: var(--color-muted);
+}
+
+.hero .btn-row {
+    margin-top: var(--space-xl);
+}
+
+/* ------------------------------ Motion ------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0s !important;
+        animation-duration: 0s !important;
+        scroll-behavior: auto !important;
     }
 }

@@ -1,60 +1,95 @@
 ---
-// Links de las paginas a las que apunta el header
-const links = [
-    {label: "Developer", href:"/dev/"},
-    {label: "GameDev", href: "/gamedev/"},
-    {label: "Artist",  href: "/art/"}
-]
+import { disciplines } from '../data/disciplines';
 
-// Ruta actual del astro
-const currentPath = Astro.url.pathname 
-
+// Build paths end with a slash (/dev/), so the hrefs do too.
+const currentPath = Astro.url.pathname;
+const links = Object.entries(disciplines).map(([key, { label }]) => ({ label, href: `/${key}/` }));
 ---
-<header>
-    <a href="/" class="brand">HOLMAN.ALV</a>
+
+<header class="site-header wrap">
+    <a href="/" class="brand">
+        <span class="mark" aria-hidden="true">H</span>
+        Holman Alvarado
+    </a>
     <nav aria-label="Main">
         <ul>
             {
-                // Crea un list item a traves de la funcion links.map que devuelve un array de todos los elementos del array anterior pero pasados a traves de una funcion, en este caso la funcion recibe el "item" que es la combinacion de label y href y por item crea un li de nombre label y y del a de href al href del arreglo
-                // Tambien se hace una comparacion del aria-current donde si el href del item es igual a la ruta actual entonces se renderiza si no es undefined que no se renderiza
-                links.map((item) =>
-                    (
-                        <li><a href={item.href} aria-current={item.href===currentPath ? "page" : undefined} >{item.label}</a></li>
-                    )
-                )
+                links.map((link) => (
+                    <li>
+                        <a href={link.href} aria-current={link.href === currentPath ? 'page' : undefined}>
+                            {link.label}
+                        </a>
+                    </li>
+                ))
             }
         </ul>
     </nav>
-    <a href="#contact">Contact</a>    
+    <a href="#contact" class="btn btn-outline contact">Contact</a>
 </header>
 
 <style>
-    header{
+    .site-header {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
-        gap: var(--space-md);
-        flex-wrap: wrap;
-    }
-    
-    ul{
-        display: flex;
-        gap: var(--space-sm);
-        flex-wrap: wrap;
-        list-style: none;
-        padding: 0;
+        gap: var(--space-xs) var(--space-lg);
+        padding-block: var(--space-md);
     }
 
-    a{
-        color: inherit;
+    a {
         text-decoration: none;
     }
 
-    [aria-current="page"]{
-        font-weight: bold;
-        text-decoration: underline;
-    }
-    .brand{
+    .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-xs);
         margin-right: auto;
+        font-weight: 500;
+        letter-spacing: 0.04em;
     }
-    
+
+    /* The monogram, the same square as the favicon. */
+    .mark {
+        display: grid;
+        place-items: center;
+        width: 1.75rem;
+        aspect-ratio: 1;
+        background: var(--color-fg);
+        color: var(--color-bg);
+        font-size: var(--text-sm);
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-lg);
+        padding: 0;
+        list-style: none;
+    }
+
+    nav a {
+        display: inline-block;
+        padding-block: var(--space-3xs);
+        font-size: var(--text-sm);
+        letter-spacing: 0.04em;
+        border-bottom: 1px solid transparent;
+    }
+
+    nav a[aria-current='page'] {
+        border-bottom-color: currentColor;
+    }
+
+    .contact {
+        padding: var(--space-2xs) var(--space-sm);
+    }
+
+    @media (max-width: 40rem) {
+        nav {
+            order: 3;
+            width: 100%;
+        }
+    }
 </style>

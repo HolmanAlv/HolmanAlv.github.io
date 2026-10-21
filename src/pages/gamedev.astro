@@ -1,8 +1,104 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import SkillGrid from '../components/SkillGrid.astro';
+import ProjectRow from '../components/ProjectRow.astro';
+import GameDevDemo from '../components/GameDevDemo.astro';
+import { profile } from '../data/profile';
+import { stacks } from '../data/stacks';
+import { lab } from '../data/lab';
 
+const projects = (await getCollection('projects', ({ data }) => data.discipline === 'gamedev')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<Layout title="Holman | GameDev" description="Welcome to my portfolio, it contains information about my most relevant works, information about me and a little demonstration about my abilities">
-    <h1>Hola h1 este es el desarrollador de juegos</h1>
+<Layout
+    title="GameDev · Holman Alvarado"
+    description="Game development and technical art by Holman Alvarado: gameplay and NPC systems in Unity, rendering optimization, tools and game audio."
+    ogImage="/og/gamedev.png"
+>
+    <section class="hero hero-split">
+        <div class="hero-text">
+            <div>
+                <h1>Game developer and technical artist</h1>
+                <!-- PLACEHOLDER: the short about for game studios. -->
+                <p class="lead">
+                    I build gameplay systems and NPC behaviour in Unity, write the shaders and tools around them, keep rendering fast on web and mobile, and design the sound.
+                </p>
+                <div class="btn-row">
+                    <a class="btn btn-primary" href={profile.socials.itch.url}>Play on itch.io</a>
+                    <a class="btn btn-outline" href={profile.cv.gamedev}>Download CV</a>
+                </div>
+            </div>
+        </div>
+        <GameDevDemo />
+    </section>
+
+    <Section title="Technical stack" id="stack">
+        <SkillGrid groups={stacks.gamedev} />
+    </Section>
+
+    <Section title="Games and breakdowns" id="projects">
+        {projects.map((entry) => <ProjectRow entry={entry} wide />)}
+    </Section>
+
+    <Section title="Shader and tech art lab" id="lab">
+        <ul class="lab">
+            {
+                lab.map((item) => (
+                    <li>
+                        <Image src={item.image} alt={item.imageAlt} widths={[400, 640, 960]} sizes="(min-width: 60rem) 30vw, 100vw" />
+                        <p class="label">{item.label}</p>
+                        <h3>{item.title}</h3>
+                        <p>{item.description}</p>
+                    </li>
+                ))
+            }
+        </ul>
+    </Section>
 </Layout>
+
+<style>
+    .lab {
+        display: grid;
+        gap: var(--space-xl) var(--space-lg);
+        padding: 0;
+        list-style: none;
+    }
+
+    /* Bento: the first experiment gets the wider column. */
+    @media (min-width: 48rem) {
+        .lab {
+            grid-template-columns: 1.4fr 1fr 1fr;
+        }
+    }
+
+    li {
+        display: grid;
+        gap: var(--space-2xs);
+        align-content: start;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        margin-bottom: var(--space-2xs);
+    }
+
+    .label {
+        font-size: var(--text-xs);
+        letter-spacing: 0.06em;
+        color: var(--color-muted);
+    }
+
+    h3 {
+        font-size: var(--text-lg);
+    }
+
+    li > p:last-child {
+        color: var(--color-muted);
+    }
+</style>

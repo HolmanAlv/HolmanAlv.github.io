@@ -1,5 +1,7 @@
 # Phase 11: Closing
 
+> **As built (2026-10-18):** done: the tokens (a gray scale, in `global.css`), the fonts, the reduced-motion rule, the OG images (generated placeholders) and the 404. Not done yet: the optional sitemap, the accessibility pass and Lighthouse.
+
 **Goal:** the portfolio goes from "works" to "finished":
 - a visual identity
 - self-hosted fonts
@@ -104,6 +106,7 @@ Toggle dark mode (DevTools → Rendering → `prefers-color-scheme`). Every page
    - the `name`
    - a **`cssVariable`** (for example `--font-display`)
    - only the weights and styles you actually use
+   - **for a Japanese font like Noto Sans JP**, the exact characters you use, in `options.experimental.glyphs`. Google serves Japanese fonts as ~120 slices that `subsets` can't filter, so without a glyph list the build preloads all of them (5.6 MB here). With one, Google returns a single small file. `astro.config.mjs` lists the Latin-1 characters.
 2. In the Layout's `<head>`, add `<Font />` (from `astro:assets`) for each family, with **`preload` only on the one font used above the fold**, restricted to its weight.
 3. In `global.css`, point your font tokens (`--font-sans`, `--font-mono`…) at the new CSS variables, keeping the system stack as the final fallback.
 

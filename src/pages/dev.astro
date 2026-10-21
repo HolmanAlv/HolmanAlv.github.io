@@ -1,8 +1,52 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import SkillGrid from '../components/SkillGrid.astro';
+import ProjectRow from '../components/ProjectRow.astro';
+import ExperienceList from '../components/ExperienceList.astro';
+import { profile } from '../data/profile';
+import { stacks } from '../data/stacks';
+import { experience, education } from '../data/experience';
 
+const projects = (await getCollection('projects', ({ data }) => data.discipline === 'dev')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<Layout title="Holman | Developer" description="This is my portfolio, it contains information about my works, information about me, my academic and working path">
-    <h1>Hola h1 este es el developer senio</h1>
+<Layout
+    title="Developer · Holman Alvarado"
+    description="Software engineering by Holman Alvarado: web apps from the database to the interface, built on solid programming foundations and Linux."
+    ogImage="/og/dev.png"
+>
+    <section class="hero">
+        <div class="hero-text">
+            <div>
+                <h1>Software developer</h1>
+                <!-- PLACEHOLDER: the short about for software recruiters. -->
+                <p class="lead">
+                    I build web applications from the database to the interface, with solid programming foundations and years of working in Linux. I care about software that
+                    stays fast and simple to run.
+                </p>
+                <div class="btn-row">
+                    <a class="btn btn-primary" href={profile.socials.github.url}>View GitHub</a>
+                    <a class="btn btn-outline" href={profile.cv.dev}>Download CV</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <Section title="Technical stack" id="stack">
+        <SkillGrid groups={stacks.dev} />
+    </Section>
+
+    <Section title="Featured projects" id="projects">
+        {projects.map((entry) => <ProjectRow entry={entry} />)}
+    </Section>
+
+    <Section title="Experience" id="experience">
+        <ExperienceList items={experience} />
+    </Section>
+
+    <Section title="Education" id="education">
+        <ExperienceList items={education} />
+    </Section>
 </Layout>

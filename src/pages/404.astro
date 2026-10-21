@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { disciplines } from '../data/disciplines';
+---
+
+<Layout title="Page not found · Holman Alvarado" description="This page doesn't exist. Go back to the portfolio of Holman Alvarado.">
+    <section class="hero">
+        <div class="hero-text">
+            <div>
+                <h1>This page doesn't exist</h1>
+                <p class="lead">The link may be old, or the address has a typo. Try one of these instead.</p>
+                <ul class="btn-row">
+                    <li><a class="btn btn-primary" href="/">Home</a></li>
+                    {
+                        Object.entries(disciplines).map(([key, { label }]) => (
+                            <li>
+                                <a class="btn btn-outline" href={`/${key}/`}>
+                                    {label}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    ul {
+        padding: 0;
+        list-style: none;
+    }
+</style>

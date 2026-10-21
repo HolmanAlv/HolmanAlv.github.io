@@ -1,45 +1,52 @@
 ---
-// Importa header, footer y los estilos globales
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import "../styles/global.css";
+import { Font } from 'astro:assets';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
 
-// Propiedades de titulo y descripcion
 interface Props {
 	title: string;
 	description: string;
+	/** Social preview image, a path inside public/og/ (1200×630). */
+	ogImage?: string;
 }
 
-// Definicion del titulo y descripcion como propiedades de astro y la url canonica
-const {title, description } = Astro.props;
+const { title, description, ogImage = '/og/home.png' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImageUrl = new URL(ogImage, Astro.site);
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		{/* Configuración general del head con el titulo, descripción, iconos, etc */}
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" href="/favicon.ico" sizes="32x32" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="description" content={description} />
 		<title>{title}</title>
+		<meta name="description" content={description} />
 		<link rel="canonical" href={canonical.href} />
-		
-		{/* Preview de cuando se envia el link */}
+
+		<!-- Self-hosted font, preloaded: it paints the first screen. -->
+		<Font cssVariable="--font-noto" preload />
+
+		<!-- Link previews (LinkedIn, WhatsApp, Slack...) -->
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical.href} />
+		<meta property="og:image" content={ogImageUrl.href} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={title} />
+		<meta name="twitter:card" content="summary_large_image" />
 	</head>
 
 	<body>
-		{/* Body con el header al inicio, ventana del main, espacio del contenido (slot) y footer al final */}
 		<Header />
-			<main>
-				<slot />
-			</main>
+		<main class="wrap">
+			<slot />
+		</main>
 		<Footer />
 	</body>
 </html>

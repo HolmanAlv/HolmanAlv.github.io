@@ -1,0 +1,74 @@
+---
+import { Image } from 'astro:assets';
+import type { Milestone } from '../data/timeline';
+
+interface Props {
+    items: Milestone[];
+}
+
+const { items } = Astro.props;
+---
+
+<ol class="timeline">
+    {
+        items.map((item) => (
+            <li>
+                <p class="period">{item.period}</p>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+                {item.image && <Image src={item.image.src} alt={item.image.alt} widths={[480, 800, 1200]} sizes="(min-width: 40rem) 32rem, 100vw" />}
+            </li>
+        ))
+    }
+</ol>
+
+<style>
+    .timeline {
+        display: grid;
+        gap: var(--space-xl);
+        padding: 0 0 0 var(--space-lg);
+        border-left: 1px solid var(--color-line);
+        list-style: none;
+    }
+
+    li {
+        position: relative;
+        display: grid;
+        gap: var(--space-2xs);
+        max-width: var(--measure);
+    }
+
+    /* The dot on the line. */
+    li::before {
+        content: '';
+        position: absolute;
+        top: 0.55em;
+        left: calc(-1 * var(--space-lg) - 4.5px);
+        width: 8px;
+        height: 8px;
+        background: var(--color-fg);
+    }
+
+    .period {
+        font-size: var(--text-sm);
+        font-variant-numeric: tabular-nums;
+        color: var(--color-muted);
+    }
+
+    h3 {
+        font-size: var(--text-lg);
+    }
+
+    li > p:not(.period) {
+        color: var(--color-muted);
+    }
+
+    img {
+        width: 100%;
+        max-width: 32rem;
+        height: auto;
+        aspect-ratio: 16 / 6;
+        object-fit: cover;
+        margin-top: var(--space-xs);
+    }
+</style>

@@ -25,25 +25,24 @@ The user knows some frontend but is new to Astro. They want a mentor, not a code
 ```sh
 npm ci            # install (Node >= 22.12)
 npm run dev       # dev server on localhost:4321
-npm run build     # static build to dist/
+npm run build     # astro check, then static build to dist/
+npm run check     # type-check only
 npm run preview   # serve dist/
 ```
 
 For a dev server that doesn't block the terminal, use `npx astro dev --background` and manage it with `astro dev stop|status|logs`.
 
-Nothing is set up for tests, linting or type checking. `astro build` strips TypeScript types without checking them. The plan is to add `astro check` with `npx astro add check`.
+`npm run build` runs `astro check` first, so a type error fails the build, locally and in CI. There are no tests or linting.
 
-## Current state: mid-migration
+## Current state
 
-The repo comes from an earlier version of the project, which was bilingual (EN/ES) and hadn't picked a host. The brief has since changed to English only, hosted on GitHub Pages. These leftovers need removing or reworking:
-- **i18n:** the `i18n` block in `astro.config.mjs`, `src/i18n/`, `src/pages/{en,es}/`, the meta-refresh redirect in `src/pages/index.astro`, and the hreflang/`stripLang` logic in `Layout.astro`. Pages should live directly under `src/pages/`.
-- **Broken imports in `src/layouts/Layout.astro`:** it imports `{ Header }` and `{ Footer }` as named imports. `.astro` components only have a default export, so this breaks as soon as a page uses the Layout. The build passes today only because no page imports it.
-- **Empty files:** `Header.astro`, `Footer.astro` and the dev/gamedev/art pages.
-- **README.md** is still the Astro starter.
+Every phase is built, with placeholder content. The files that hold it are marked `PLACEHOLDER` (`grep -rn PLACEHOLDER src`), and `public/cv/*.pdf` and `public/og/*.png` are generated placeholders too. Don't merge to `master` until the real content is in. Where the code differs from a phase guide, the guide opens with an "As built" note, and the code wins.
 
-Keep `src/styles/global.css`: a reset plus design tokens on an 8px spacing scale. Its colors are neutral placeholders on purpose until there is a visual identity.
-
-Phase 0 in `docs/PLAN.md` covers this cleanup.
+The visual identity is grayscale minimalism:
+- `src/styles/global.css` holds the reset, the tokens (a gray scale with no hue, an 8px spacing scale), the 1px frames around header, main and footer (`.wrap`), and the shared hero and button classes.
+- Noto Sans JP comes from the Fonts API in `astro.config.mjs`, limited to an exact Latin-1 glyph list. A character outside that list renders in a fallback font, so add new ones there.
+- No Japanese text, no red. Section titles sit above their content.
+- The dev server needs `three` and `gsap` in `vite.optimizeDeps.include` (already in `astro.config.mjs`); without it, the first dynamic import can fail with "504 Outdated Optimize Dep" and neither hero animates.
 
 ## Mockups
 

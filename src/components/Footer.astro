@@ -1,33 +1,55 @@
 ---
+import Section from './Section.astro';
+import { profile } from '../data/profile';
+
 const currentYear = new Date().getFullYear();
 ---
-<footer id="contact">
-    <h2>Work with me :D</h2>
-    <p>I'm currently located in Colombia, but available to travel to almost any country</p>
-    <a href="mailto:alvholman@gmail.com">alvholman@gmail.com</a>
-    <ul>
-        <li><a href="https://instagram.com">Instagram</a></li>
-        <li><a href="https://youtube.com">YouTube</a></li>
-        <li><a href="https://linkedin.com">LinkedIn</a></li>
-        <li><a href="https://github.com">GitHub</a></li>
-        <li><a href="https://itch.io">itch.io</a></li>
 
-    </ul>
-    <p> © {currentYear} Holman Alvarado CC BY-NC 4.0</p>
+<footer id="contact" class="wrap">
+    <Section title="Work with me">
+        <p class="location">{profile.location}</p>
+        <a class="email" href={`mailto:${profile.email}`}>{profile.email}</a>
+        <ul class="socials">
+            {
+                Object.values(profile.socials).map((social) => (
+                    <li>
+                        <a href={social.url}>{social.label}</a>
+                    </li>
+                ))
+            }
+        </ul>
+    </Section>
+    <p class="legal">
+        © {currentYear} {profile.name} · <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>
+    </p>
 </footer>
 
 <style>
-    footer{
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-sm);
+    .location {
+        color: var(--color-muted);
     }
 
-    ul{
+    .email {
+        display: inline-block;
+        margin-top: var(--space-sm);
+        font-size: clamp(var(--text-xl), 3vw + 0.5rem, var(--text-2xl));
+        font-weight: 300;
+        overflow-wrap: anywhere;
+    }
+
+    .socials {
         display: flex;
-        gap: var(--space-sm);
         flex-wrap: wrap;
-        list-style: none;
+        gap: var(--space-2xs) var(--space-lg);
+        margin-top: var(--space-xl);
         padding: 0;
+        list-style: none;
+        font-size: var(--text-sm);
+    }
+
+    .legal {
+        padding-block: var(--space-lg);
+        font-size: var(--text-xs);
+        color: var(--color-muted);
     }
 </style>

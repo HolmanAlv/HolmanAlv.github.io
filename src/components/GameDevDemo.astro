@@ -1,0 +1,174 @@
+---
+// The GameDev hero demo: one-color white silhouettes on a dark sky. The SVG
+// below is already a complete still frame, so without JS (or with reduced
+// motion) the visitor sees the runner mid-stride. GSAP only moves what's there.
+// Every layer is a 1600-unit tile drawn twice, so scrolling it one tile left loops.
+//
+// With a single color, overlapping shapes would melt together, so depth comes
+// from cuts in the background color: a dark copy of each ground layer shifted
+// up (.band), a dark outline on free-standing shapes (.cut) and a dark halo
+// around the runner (#gd-halo).
+---
+
+<div class="demo" data-gamedev-demo>
+    <svg
+        viewBox="0 0 1600 900"
+        role="img"
+        aria-label="A kid with spiky hair, a tail and a staff on his back runs right across a moonlit landscape of mountains, pines and a torii gate, jumping over rocks."
+    >
+        <defs>
+            <path id="gd-far" d="M0 600 L90 585 L150 600 C320 520 470 400 560 338 L640 338 C730 400 880 520 1050 600 L1130 590 L1210 560 L1290 585 L1370 548 L1460 590 L1530 575 L1600 600 V900 H-2 Z" />
+            <path id="gd-snow" d="M512 372 L540 392 L562 380 L586 398 L610 382 L634 398 L656 380 L682 394 L706 376" />
+            <g id="gd-clouds">
+                <rect x="120" y="300" width="380" height="18" rx="9" />
+                <rect x="200" y="326" width="220" height="14" rx="7" />
+                <rect x="860" y="190" width="300" height="16" rx="8" />
+                <rect x="1300" y="400" width="260" height="14" rx="7" />
+            </g>
+            <path id="gd-mid" d="M0 690 L70 650 L120 668 L210 575 L262 612 L330 535 L420 628 L480 600 L560 655 L640 580 L700 618 L790 515 L860 598 L930 568 L1010 645 L1090 598 L1160 628 L1250 540 L1320 606 L1400 578 L1480 646 L1550 660 L1600 690 V900 H-2 Z" />
+            <g id="gd-birds" stroke-width="4" stroke-linecap="round">
+                <path data-bird d="M366 170 Q373 162 380 170 Q387 162 394 170" />
+                <path data-bird d="M410 150 Q416 143 422 150 Q428 143 434 150" />
+                <path data-bird d="M440 188 Q445 182 450 188 Q455 182 460 188" />
+            </g>
+            <g id="gd-pine">
+                <path d="M-5 0 L-2 -58 L2 -58 L5 0 Z" />
+                <ellipse cx="0" cy="-58" rx="42" ry="9" />
+                <ellipse cx="-12" cy="-74" rx="30" ry="8" />
+                <ellipse cx="8" cy="-88" rx="21" ry="7" />
+            </g>
+            <path id="gd-hill" d="M0 745 C130 712 260 700 400 722 C540 744 640 708 790 698 C930 690 1050 724 1190 734 C1330 744 1460 712 1600 745 V900 H-2 Z" />
+            <g id="gd-props">
+                <use href="#gd-pine" x="290" y="716" />
+                <use href="#gd-pine" transform="translate(360 724) scale(0.7)" />
+                <use href="#gd-pine" transform="translate(760 706) scale(0.85)" />
+                <use href="#gd-pine" transform="translate(1440 730) scale(1.1)" />
+                <g transform="translate(1080 730)">
+                    <rect x="-34" y="-96" width="9" height="96" />
+                    <rect x="25" y="-96" width="9" height="96" />
+                    <rect x="-46" y="-80" width="92" height="7" />
+                    <rect x="-3" y="-100" width="6" height="20" />
+                    <rect x="-48" y="-104" width="96" height="6" />
+                    <path d="M-60 -116 Q0 -103 60 -116 L57 -106 Q0 -95 -57 -106 Z" />
+                </g>
+            </g>
+            <!-- The ground and its two rocks as one shape, so the cut follows the rocks too. -->
+            <path id="gd-ground" d="M-2 900 V770 H86 C92 752 104 742 120 740 C140 741 152 756 156 770 H878 C882 748 898 734 920 732 C944 732 958 750 964 770 H1602 V900 Z" />
+            <filter id="gd-halo" x="-20%" y="-20%" width="140%" height="140%">
+                <feMorphology in="SourceAlpha" operator="dilate" radius="4" result="grown" />
+                <feFlood class="halo-color" />
+                <feComposite in2="grown" operator="in" result="halo" />
+                <feMerge>
+                    <feMergeNode in="halo" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+            </filter>
+        </defs>
+
+        <circle cx="1210" cy="230" r="86" />
+        <g data-layer="far">
+            <use href="#gd-far" /><use href="#gd-far" x="1600" />
+            <g class="line"><use href="#gd-snow" /><use href="#gd-snow" x="1600" /></g>
+        </g>
+        <g data-layer="clouds" class="cut"><use href="#gd-clouds" /><use href="#gd-clouds" x="1600" /></g>
+        <g data-layer="mid">
+            <use href="#gd-mid" y="-10" class="band" /><use href="#gd-mid" />
+            <use href="#gd-mid" x="1600" y="-10" class="band" /><use href="#gd-mid" x="1600" />
+        </g>
+        <g data-layer="birds" class="stroke"><use href="#gd-birds" /><use href="#gd-birds" x="1600" /></g>
+        <g data-layer="near">
+            <use href="#gd-hill" y="-10" class="band" /><use href="#gd-hill" />
+            <use href="#gd-hill" x="1600" y="-10" class="band" /><use href="#gd-hill" x="1600" />
+            <g class="cut"><use href="#gd-props" /><use href="#gd-props" x="1600" /></g>
+        </g>
+        <g data-layer="ground">
+            <use href="#gd-ground" y="-10" class="band" /><use href="#gd-ground" />
+            <use href="#gd-ground" x="1600" y="-10" class="band" /><use href="#gd-ground" x="1600" />
+        </g>
+
+        <g transform="translate(520 770) scale(1.5)" filter="url(#gd-halo)">
+            <g data-dust opacity="0">
+                <circle cx="-16" cy="-5" r="7" />
+                <circle cx="-30" cy="-9" r="5" />
+                <circle cx="2" cy="-4" r="5" />
+            </g>
+            <g data-runner>
+                <g data-body class="stroke" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline data-limb="leg-far" points="0,-54 -10,-30 -26,-12 -16,-8" stroke-width="13" />
+                    <polyline data-limb="arm-far" points="6,-98 20,-82 32,-94" stroke-width="10" />
+                    <path data-tail d="M-10 -56 C-34 -54 -48 -66 -46 -84 C-45 -94 -36 -98 -30 -92" stroke-width="7" />
+                    <line x1="-38" y1="-40" x2="22" y2="-176" stroke-width="6" />
+                    <line x1="6" y1="-100" x2="0" y2="-58" stroke-width="30" />
+                    <circle cx="14" cy="-126" r="18" class="solid" />
+                    <path d="M30 -134 L22 -152 L14 -140 L8 -166 L-2 -144 L-14 -160 L-12 -140 L-30 -146 L-16 -128 L-32 -120 L-10 -116 Z" class="solid" />
+                    <polyline data-limb="leg-near" points="0,-54 14,-30 8,-6 20,-4" stroke-width="13" />
+                    <polyline data-limb="arm-near" points="6,-98 -8,-80 -20,-90" stroke-width="10" />
+                </g>
+            </g>
+        </g>
+    </svg>
+</div>
+
+<script>
+    // Load GSAP only when the browser is idle, and never for reduced motion.
+    // No static import of gsap here: the dynamic import() keeps it in its own chunk.
+    const box = document.querySelector<HTMLElement>('[data-gamedev-demo]');
+    if (box && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const run = () =>
+            import('../scripts/gamedev-demo')
+                .then(({ start }) => {
+                    const timeline = start(box);
+                    // Pause while the scene is scrolled out of view.
+                    new IntersectionObserver(([entry]) => (entry.isIntersecting ? timeline.play() : timeline.pause())).observe(box);
+                })
+                .catch(console.error);
+        'requestIdleCallback' in window ? requestIdleCallback(run, { timeout: 2000 }) : setTimeout(run, 300);
+    }
+</script>
+
+<style>
+    .demo {
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background: var(--color-night);
+        border: 1px solid var(--color-line); /* the white ground would melt into a light page */
+    }
+
+    /* Every silhouette is the same white. The cuts are the sky's color. */
+    svg {
+        width: 100%;
+        height: 100%;
+        fill: var(--white);
+    }
+
+    .band {
+        fill: var(--color-night);
+    }
+
+    .cut {
+        stroke: var(--color-night);
+        stroke-width: 12;
+        paint-order: stroke;
+    }
+
+    .line {
+        fill: none;
+        stroke: var(--color-night);
+        stroke-width: 8;
+        stroke-linejoin: round;
+    }
+
+    .stroke {
+        fill: none;
+        stroke: var(--white);
+    }
+
+    .stroke .solid {
+        fill: var(--white);
+        stroke: none;
+    }
+
+    .halo-color {
+        flood-color: var(--color-night);
+    }
+</style>

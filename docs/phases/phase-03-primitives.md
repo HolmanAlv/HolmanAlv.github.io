@@ -1,5 +1,7 @@
 # Phase 3: Primitives
 
+> **As built (2026-10-18):** `Section` has no `label` prop: just the `<h2>` on top and the content below it. The labels the later guides name (`SPECIFICATIONS`, `CAREER LOG`…) don't exist.
+
 **Goal:** the small building blocks every page reuses: a section wrapper, a tag list, button styles and a skill grid.
 
 **You will learn:**

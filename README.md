@@ -40,7 +40,8 @@ Requires Node.js 22.12 or later.
 | :-- | :-- |
 | `npm ci` | Install dependencies from the lockfile |
 | `npm run dev` | Start the dev server at `localhost:4321` |
-| `npm run build` | Build the static site to `dist/` |
+| `npm run build` | Type-check with `astro check`, then build the static site to `dist/` |
+| `npm run check` | Type-check only |
 | `npm run preview` | Serve the build locally |
 
 ## Project structure
@@ -48,24 +49,28 @@ Requires Node.js 22.12 or later.
 ```text
 /
 ├── public/
-│   ├── favicon.svg
-│   └── cv/                    CVs folder
+│   ├── favicon.svg, favicon.ico
+│   ├── cv/                    One CV per subpage (dev, gamedev, art)
+│   └── og/                    One social preview image per page
 ├── src/
 │   ├── pages/                 File-based routing
 │   │   ├── index.astro        → /
 │   │   ├── dev.astro          → /dev
 │   │   ├── gamedev.astro      → /gamedev
-│   │   └── art.astro          → /art
+│   │   ├── art.astro          → /art
+│   │   ├── 404.astro          → /404.html
+│   │   └── projects/[id].astro → /projects/<id>, one per case study
 │   ├── layouts/
 │   │   └── Layout.astro       Document shell
 │   ├── components/            Header, Footer and the shared building blocks
-│   │   ├── Header.astro
-│   │   └── Footer.astro
-│   ├── content/posts/         One Markdown file per project
-│   │   └── post_[*].md
+│   ├── content/projects/      One Markdown file per project (the body is its case study)
+│   ├── content.config.ts      Schema for the projects collection
+│   ├── data/                  Profile, stacks, experience, timeline and lab, as typed .ts
+│   ├── scripts/               hero3d.ts (Three.js) and gamedev-demo.ts (GSAP), loaded on demand
+│   ├── assets/images/         Every image the site shows, optimized by Astro
 │   └── styles/
 │       └── global.css         Reset and design tokens
-├── astro.config.mjs           Site URL and build settings
+├── astro.config.mjs           Site URL and fonts
 └── package.json
 ```
 ---

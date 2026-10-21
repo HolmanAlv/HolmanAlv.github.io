@@ -1,0 +1,96 @@
+---
+import { Image } from 'astro:assets';
+import { profile } from '../data/profile';
+// The first frame of the 3D scene, captured from the canvas. It loads first (the
+// LCP), and it's what stays when the scene doesn't run.
+import poster from '../assets/images/home/cube-poster.png';
+---
+
+<section class="hero hero-split">
+    <div class="hero-text">
+        <div>
+            <h1 class="name">{profile.name}</h1>
+            <p class="lead">{profile.roles}</p>
+        </div>
+    </div>
+    <div class="stage" data-hero3d>
+        <Image class="poster" src={poster} alt="" format="png" priority />
+        <!-- hero3d.ts appends the canvas here, on top of the poster. -->
+        <p class="hint" aria-hidden="true">Drag to turn the cube</p>
+    </div>
+</section>
+
+<script>
+    // Decide before downloading anything: no Three.js for reduced motion,
+    // Save-Data or browsers without WebGL 2. The poster stays in all three cases.
+    const stage = document.querySelector<HTMLElement>('[data-hero3d]');
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    const canRun = !matchMedia('(prefers-reduced-motion: reduce)').matches && !saveData && document.createElement('canvas').getContext('webgl2');
+    if (stage && canRun) {
+        const run = () =>
+            import('../scripts/hero3d')
+                .then(({ init }) => init(stage))
+                .catch(console.error);
+        'requestIdleCallback' in window ? requestIdleCallback(run, { timeout: 2000 }) : setTimeout(run, 300);
+    }
+</script>
+
+<style>
+    /* The name is the one place the display size goes all the way up. */
+    .name {
+        max-width: 10ch;
+        font-size: var(--text-3xl);
+        line-height: 1.1;
+    }
+
+    .stage {
+        position: relative;
+        width: 100%;
+        max-width: 32rem;
+        aspect-ratio: 1;
+        justify-self: center;
+    }
+
+    .poster,
+    .stage :global(canvas) {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        image-rendering: pixelated;
+        transition: opacity 0.6s;
+    }
+
+    .stage :global(canvas) {
+        opacity: 0;
+        cursor: grab;
+        touch-action: pan-y; /* vertical swipes still scroll the page on phones */
+    }
+
+    .stage.is-ready :global(canvas) {
+        opacity: 1;
+    }
+
+    .stage.is-ready .poster {
+        opacity: 0;
+    }
+
+    .stage.is-dragging :global(canvas) {
+        cursor: grabbing;
+    }
+
+    .hint {
+        position: absolute;
+        inset: auto 0 calc(-1 * var(--space-md));
+        text-align: center;
+        font-size: var(--text-xs);
+        letter-spacing: 0.06em;
+        color: var(--color-muted);
+        opacity: 0;
+        transition: opacity 0.6s 0.6s;
+    }
+
+    .stage.is-ready .hint {
+        opacity: 1;
+    }
+</style>

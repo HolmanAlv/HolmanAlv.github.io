@@ -1,5 +1,7 @@
 # Phase 8: Home without 3D
 
+> **As built (2026-10-18):** the hero is split instead of text over a full-bleed image. The name and roles sit on the left. On the right, a square stage shows `cube-poster.png`: the 3D scene's real first frame at 160×160 px, scaled up with `image-rendering: pixelated`. It's rendered as PNG (`format="png"`), since a lossy format would smear the dither. The featured cards are a bento grid with 1px shared borders: the first card takes two rows, the image dominates, and the caption inverts on hover.
+
 **Goal:** Home is complete with:
 - a static hero (name and roles over a poster image)
 - 3 featured project cards linking into the subpages

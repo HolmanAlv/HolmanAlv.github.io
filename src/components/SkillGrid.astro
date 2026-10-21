@@ -1,0 +1,48 @@
+---
+import type { SkillGroup } from '../data/stacks';
+
+interface Props {
+    groups: SkillGroup[];
+}
+
+const { groups } = Astro.props;
+---
+
+<ul class="grid">
+    {
+        groups.map((group) => (
+            <li>
+                <h3>{group.category}</h3>
+                <ul>
+                    {group.items.map((item) => (
+                        <li>{item}</li>
+                    ))}
+                </ul>
+            </li>
+        ))
+    }
+</ul>
+
+<style>
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+        gap: var(--space-xl) var(--space-lg);
+        padding: 0;
+        list-style: none;
+    }
+
+    h3 {
+        padding-top: var(--space-sm);
+        border-top: 1px solid var(--color-fg);
+        margin-bottom: var(--space-xs);
+        font-size: var(--text-base);
+        font-weight: 500;
+    }
+
+    li ul {
+        padding: 0;
+        list-style: none;
+        color: var(--color-muted);
+    }
+</style>

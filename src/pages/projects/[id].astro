@@ -1,0 +1,196 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import TagList from '../../components/TagList.astro';
+import YouTubeFacade from '../../components/YouTubeFacade.astro';
+import { disciplines } from '../../data/disciplines';
+
+// One page per project whose .md body has text. ProjectRow and ProjectCard use
+// the same check to decide whether to link here.
+export async function getStaticPaths() {
+    const projects = await getCollection('projects', (entry) => Boolean(entry.body?.trim()));
+    return projects.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+interface Props {
+    entry: CollectionEntry<'projects'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, discipline, subtitle, summary, role, tags, result, links, meta, cover, coverAlt, youtubeId } = entry.data;
+const { label } = disciplines[discipline];
+// The fact sheet: role and result first, then the film metadata if any.
+const facts = [['Role', role], ...(result ? [['Result', result]] : []), ...Object.entries(meta ?? {})];
+---
+
+<Layout title={`${title} · Holman Alvarado`} description={summary} ogImage={`/og/${discipline}.png`}>
+    <article>
+        <a class="back" href={`/${discipline}/#${entry.id}`}><span aria-hidden="true">←</span> Back to the {label} page</a>
+
+        <header class="hero">
+            <div class="head">
+                <h1>{title}</h1>
+                {subtitle && <p class="lead">{subtitle}</p>}
+                <TagList tags={tags} />
+            </div>
+            <dl class="facts">
+                {
+                    facts.map(([key, value]) => (
+                        <div>
+                            <dt>{key}</dt>
+                            <dd>{value}</dd>
+                        </div>
+                    ))
+                }
+                {
+                    links.length > 0 && (
+                        <div>
+                            <dt>Links</dt>
+                            <dd>
+                                <ul class="links">
+                                    {links.map((link) => (
+                                        <li>
+                                            <a href={link.url}>
+                                                {link.label} <span aria-hidden="true">↗</span>
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </dd>
+                        </div>
+                    )
+                }
+            </dl>
+        </header>
+
+        <div class="media">
+            {
+                youtubeId ? (
+                    <YouTubeFacade id={youtubeId} title={title} poster={cover} priority />
+                ) : (
+                    <Image src={cover} alt={coverAlt} widths={[640, 960, 1280, 1920]} sizes="(min-width: 75rem) 1100px, 100vw" priority />
+                )
+            }
+        </div>
+
+        <div class="prose">
+            <Content />
+        </div>
+    </article>
+</Layout>
+
+<style>
+    .back {
+        display: inline-block;
+        margin-top: var(--space-lg);
+        font-size: var(--text-sm);
+    }
+
+    .hero {
+        gap: var(--space-xl);
+        padding-block: var(--space-2xl);
+    }
+
+    .head {
+        display: grid;
+        gap: var(--space-md);
+        justify-items: start;
+    }
+
+    .head .lead {
+        margin-top: 0;
+    }
+
+    /* A fact sheet of 1px cells, like the cards on Home. */
+    .facts {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+        gap: 1px;
+        background: var(--color-line);
+        border: 1px solid var(--color-line);
+        font-size: var(--text-sm);
+    }
+
+    .facts > div {
+        padding: var(--space-xs) var(--space-sm);
+        background: var(--color-bg);
+    }
+
+    dt {
+        font-size: var(--text-xs);
+        letter-spacing: 0.04em;
+        color: var(--color-muted);
+    }
+
+    dd {
+        margin: 0;
+    }
+
+    .links {
+        padding: 0;
+        list-style: none;
+        font-weight: 500;
+    }
+
+    .media :global(img) {
+        width: 100%;
+        height: auto;
+    }
+
+    /* The post. Scoped styles can't reach <Content />, so every rule is
+       .prose :global(...): scoped to this wrapper, global inside it. Text keeps
+       a reading width; paragraphs that only hold an image use the full width. */
+    .prose {
+        padding-block: var(--space-3xl);
+    }
+
+    /* In rem, not ch: ch follows each element's font size, so headings and
+       paragraphs would get different widths and stop sharing a left edge. */
+    .prose :global(> *) {
+        max-width: 38rem;
+        margin-inline: auto;
+    }
+
+    .prose :global(> p:has(> img)) {
+        max-width: none;
+    }
+
+    .prose :global(* + *) {
+        margin-top: var(--space-sm);
+    }
+
+    .prose :global(h2) {
+        margin-top: var(--space-2xl);
+        font-size: var(--text-xl);
+    }
+
+    .prose :global(h2 + *) {
+        margin-top: var(--space-xs);
+    }
+
+    .prose :global(ul),
+    .prose :global(ol) {
+        padding-left: var(--space-md);
+    }
+
+    .prose :global(li + li) {
+        margin-top: var(--space-2xs);
+    }
+
+    .prose :global(img) {
+        width: 100%;
+        height: auto;
+        margin-block: var(--space-xl);
+    }
+
+    .prose :global(blockquote) {
+        margin-block: var(--space-xl);
+        padding-left: var(--space-md);
+        border-left: 2px solid var(--color-fg);
+        font-size: var(--text-lg);
+        line-height: 1.6;
+    }
+</style>

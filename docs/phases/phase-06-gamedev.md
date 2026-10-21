@@ -1,5 +1,7 @@
 # Phase 6: GameDev page
 
+> **As built (2026-10-18):** there's no raster still. `GameDevDemo.astro` is an inline SVG scene (Mount Fuji, clouds, birds, pines, a torii and the runner), and the SVG itself is the static frame, so Step 1's `<Picture>` doesn't exist. The SVG has `role="img"` and an `aria-label`.
+
 **Goal:** `/gamedev/` is complete, with a split hero, its own technical stack (including Game Audio), the games and breakdowns, and the Shader & Tech Art Lab. Everything reuses Phase 5's components, and the page still ships zero JavaScript.
 
 **You will learn:**

@@ -1,0 +1,138 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import { disciplines } from '../data/disciplines';
+
+interface Props {
+    entry: CollectionEntry<'projects'>;
+    /** The big card of the grid: on wide screens its image fills two rows. */
+    large?: boolean;
+}
+
+const { entry, large = false } = Astro.props;
+const { title, summary, discipline, cover, coverAlt } = entry.data;
+const { label } = disciplines[discipline];
+// A project with a body has its own page; one without links to its row.
+const href = entry.body?.trim() ? `/projects/${entry.id}/` : `/${discipline}/#${entry.id}`;
+const sizes = large ? '(min-width: 75rem) 680px, (min-width: 48rem) 58vw, 100vw' : '(min-width: 75rem) 450px, (min-width: 48rem) 40vw, 100vw';
+---
+
+<article class:list={['card', { large }]}>
+    <div class="media">
+        <Image src={cover} alt={coverAlt} widths={[480, 720, 960, 1440]} sizes={sizes} />
+    </div>
+    <div class="caption">
+        <p class="discipline">{label}</p>
+        <!-- One link per card; its ::after stretches over the whole card. -->
+        <h3><a href={href}>{title}</a></h3>
+        <p class="summary">{summary}</p>
+    </div>
+</article>
+
+<style>
+    /* The image is the card: the caption below it is a short strip. */
+    .card {
+        position: relative;
+        display: grid;
+        grid-template-rows: 1fr auto;
+        height: 100%;
+        background: var(--color-bg);
+    }
+
+    .media {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 16 / 10;
+        background: var(--color-night);
+    }
+
+    .large .media {
+        aspect-ratio: 4 / 3;
+    }
+
+    /* Wide screens: the large card is as tall as the two cards beside it. */
+    @media (min-width: 48rem) {
+        .large .media {
+            aspect-ratio: auto;
+            min-height: 20rem;
+        }
+    }
+
+    img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: scale 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    .caption {
+        display: grid;
+        gap: var(--space-3xs);
+        padding: var(--space-sm) var(--space-md) var(--space-md);
+        border-top: 1px solid var(--color-line);
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+    .discipline {
+        font-size: var(--text-xs);
+        letter-spacing: 0.06em;
+    }
+
+    .discipline,
+    .summary {
+        color: var(--color-muted);
+    }
+
+    h3 {
+        font-size: var(--text-lg);
+    }
+
+    .large h3 {
+        font-size: var(--text-xl);
+    }
+
+    h3 a {
+        text-decoration: none;
+    }
+
+    h3 a::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+    }
+
+    .summary {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        font-size: var(--text-sm);
+    }
+
+    /* Hover: the image pushes in and the caption inverts. */
+    .card:hover img {
+        scale: 1.04;
+    }
+
+    .card:hover .caption {
+        background: var(--color-fg);
+        color: var(--color-bg);
+    }
+
+    .card:hover .discipline,
+    .card:hover .summary {
+        color: inherit;
+        opacity: 0.75;
+    }
+
+    h3 a:focus-visible {
+        outline: none;
+    }
+
+    h3 a:focus-visible::after {
+        outline: 2px solid var(--color-fg);
+        outline-offset: -4px;
+    }
+</style>

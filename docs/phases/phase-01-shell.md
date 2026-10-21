@@ -1,5 +1,7 @@
 # Phase 1: Shell (Layout, Header, Footer)
 
+> **As built (2026-10-18):** the brand is a small `H` monogram plus the name, not `HOLMAN.ALV`. Header, main and footer are each framed by a 1px border (`.wrap` in `global.css`).
+
 **Goal:** the 4 pages share a real HTML document (head, header, main, footer). They link to each other and show which page you're on, and a type error stops the build.
 
 **You will learn:**

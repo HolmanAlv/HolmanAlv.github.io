@@ -237,13 +237,13 @@ Same lesson as `astro check` in Phase 1: you trust the safety net after you've s
 
 ## Done when
 
-- [ ] The repo is named `HolmanAlv.github.io`, and `git remote -v` shows it.
-- [ ] `.github/workflows/deploy.yml` exists, triggers on `master` and `develop`, and deploys only from `master`.
-- [ ] Pages' source is GitHub Actions.
-- [ ] The first run on `master` is green.
-- [ ] All 4 URLs work live, with and without the trailing slash.
-- [ ] `develop` exists. A push to it runs `build`, skips `deploy`, and a broken build there leaves the live site untouched.
-- [ ] Phase 2 is checked off in `docs/PLAN.md`.
+- [x] The repo is named `HolmanAlv.github.io`, and `git remote -v` shows it.
+- [x] `.github/workflows/deploy.yml` exists, triggers on `master` and `develop`, and deploys only from `master`.
+- [x] Pages' source is GitHub Actions.
+- [x] The first run on `master` is green.
+- [x] All 4 URLs work live, with and without the trailing slash.
+- [x] `develop` exists. A push to it runs `build`, skips `deploy`, and a broken build there leaves the live site untouched.
+- [x] Phase 2 is checked off in `docs/PLAN.md`.
 
 ---
 

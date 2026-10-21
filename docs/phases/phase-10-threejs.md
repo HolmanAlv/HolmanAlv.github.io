@@ -1,5 +1,11 @@
 # Phase 10: Three.js hero (Home)
 
+> **As built (2026-10-18):** the concept is a lo-fi dithered cube in two grays. You drag it to turn it, it keeps some inertia, and it spins slowly when idle.
+> - The renderer always draws 160×160 px (`setPixelRatio(1)`), and CSS scales the canvas up with `image-rendering: pixelated`. The pixel count never changes, so there's no `ResizeObserver` and no pixel-ratio cap.
+> - A 4×4 Bayer dither in a `ShaderMaterial` turns the lighting into paper and ink.
+> - The low-end check is Save-Data (`navigator.connection.saveData`). At 160×160 even weak GPUs cope, so the download is what's worth skipping.
+> - The interaction is a drag on the canvas, not `pointermove` on the section. `touch-action: pan-y` keeps vertical swipes scrolling the page.
+
 **Goal:** a WebGL scene **fades in over the Home poster**:
 - it loads after idle, and stays under 150 KB gzip
 - it never becomes the LCP

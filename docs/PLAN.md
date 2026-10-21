@@ -6,6 +6,8 @@ Language: English only.
 
 How we work: one phase at a time. For each phase we go over the concepts first, then you build it, verify it, and confirm before we move on. Each phase has a step-by-step guide in `docs/phases/` (index below, under **Phases**). This file is the summary and the checklist.
 
+**Status (2026-10-18):** every phase is built, with placeholder content. `grep -rn PLACEHOLDER src` lists what still needs real data, and the CVs in `public/cv/` and the OG images in `public/og/` are placeholders too. Where the code differs from a phase guide, the guide opens with an "As built" note.
+
 ---
 
 ## Decisions
@@ -16,12 +18,14 @@ How we work: one phase at a time. For each phase we go over the concepts first, 
 | Hosting | GitHub Pages user site | `site: 'https://holmanalv.github.io'`, no `base`, so links stay plain (`/dev`). |
 | Branches and CI | `develop` for work, `master` for production | A push to `develop` only builds (a check). Merging `develop` into `master` and pushing deploys. There's no PR or auto-merge: for one person the build is the same gate either way, and you decide when to publish. |
 | Videos | All on YouTube | No video files in the repo. Embeds load behind a click-to-play facade. |
-| GameDev demo | GSAP animation | The second (and smaller) piece of JS on the site, used only on `/gamedev`. |
+| GameDev demo | GSAP animation: one-color white silhouettes, a runner jumping across a parallax landscape | The second (and smaller) piece of JS on the site, used only on `/gamedev`. |
 | Navigation | The header is the way into the subpages | Recruiters get the direct link to their section, so every subpage has to stand on its own. |
 | Contact | The footer is the contact section | It's shared by all 4 pages, and the header "Contact" button jumps to it. |
 | CV | One CV per subpage (3 different PDFs) | A "Download CV" button sits in each subpage hero. Home and the header have none. |
-| Project detail pages | Only for projects with a case study | A project whose `.md` has a body gets its own page at `/projects/<id>/`, built by one dynamic route. The row shows the summary and links to it (Phase 7.5). |
+| Project detail pages | Only for projects with a case study | A project whose `.md` has a body gets its own page at `/projects/<id>/`, built by one dynamic route. The row shows the summary and links to it (Phase 7.5). For now all six placeholder projects have a lorem ipsum body, so all six have a page. |
 | Skip link | Not included | The header is short (3 links + Contact), and `<main>` already gives screen readers a landmark to jump to. |
+| Visual identity | Grayscale minimalism | A gray scale with no hue, Noto Sans JP (Latin glyphs only, no Japanese text), section titles above their content, and 1px frames around the header, the content and the footer. It all lives in the tokens in `global.css` and the `fonts` config. |
+| Hero 3D | A lo-fi dithered cube | You drag it to turn it. It renders at a fixed 160×160 px with a dither, so it needs no resize logic. |
 
 ---
 
@@ -31,7 +35,7 @@ The mockup gives the section order and hierarchy. Its colors, fonts, copy and sc
 
 ### Global
 
-- **Header:** `HOLMAN.ALV` (link to Home), then `Developer`, `GameDev` and `Artist` (the active one is marked), then a `Contact` button that jumps to the footer.
+- **Header:** an `H` monogram and the name (link to Home), then `Developer`, `GameDev` and `Artist` (the active one is marked), then a `Contact` button that jumps to the footer.
 - **Footer (`#contact`):** a short call to action, then email, then GitHub, itch.io, LinkedIn and YouTube, then `© year`.
 - **Removed from the mockup:**
   - the Audio UI toggle
@@ -113,7 +117,7 @@ src/
 │                     GameDevDemo, Hero3D
 ├── content/projects/ one .md per project (the body is its optional case study)
 ├── content.config.ts schema for the projects collection
-├── data/             profile, stacks, experience, timeline, lab (typed .ts files)
+├── data/             profile, disciplines, stacks, experience, timeline, lab (typed .ts files)
 ├── scripts/          gamedev-demo.ts, hero3d.ts (loaded on demand)
 ├── assets/images/    every image the site shows (Astro optimizes them)
 └── styles/global.css reset + design tokens
@@ -128,7 +132,7 @@ public/
   - `public/` is copied as-is, with stable URLs.
   - So images go in `src/assets/`. CVs, OG images and favicons go in `public/`, because something outside the site (a download, LinkedIn's crawler, the browser) needs their exact URL.
 - **Videos:** none in the repo, because they're all on YouTube.
-- **3D models:** where they live gets decided in Phase 10, once we know whether there are any.
+- **3D models:** none. The cube is built in code.
 - **"Monorepo":** this is a single Astro project, not a monorepo. A monorepo holds several packages in one repository and needs workspace tooling, which this site doesn't.
 
 ---
@@ -191,13 +195,13 @@ Concepts: component frontmatter, props, `<slot />`, scoped styles, `aria-current
 
 Concepts: CI/CD, running a job on one branch only (`if:`), a `develop`/`master` flow, and why to deploy a skeleton. Production-only bugs (paths, trailing slashes) show up now instead of at the end.
 
-- [ ] Rename the GitHub repo to `HolmanAlv.github.io`, then update the local remote URL.
-- [ ] Add `.github/workflows/deploy.yml` with the official `withastro/action`:
+- [x] Rename the GitHub repo to `HolmanAlv.github.io`, then update the local remote URL.
+- [x] Add `.github/workflows/deploy.yml` with the official `withastro/action`:
   - trigger it on `master` and `develop` (the docs example uses `main`)
   - the `deploy` job only runs on `master`: `if: github.ref == 'refs/heads/master'`
-- [ ] In GitHub, go to Settings → Pages → Source and choose "GitHub Actions".
-- [ ] Before the first push, delete the experiments in `src/pages/projects/` and `src/content/posts/`. Everything in `src/pages/` gets published, and Phase 7.5 builds the real project pages.
-- [ ] Create `develop` from `master`. From now on you work there, and publish by merging `develop` into `master`.
+- [x] In GitHub, go to Settings → Pages → Source and choose "GitHub Actions".
+- [x] Before the first push, delete the experiments in `src/pages/projects/` and `src/content/posts/`. Everything in `src/pages/` gets published, and Phase 7.5 builds the real project pages.
+- [x] Create `develop` from `master`. From now on you work there, and publish by merging `develop` into `master`.
 
 **Verify:**
 - `https://holmanalv.github.io/` and the 3 subpages load, and their canonical URLs are correct.
@@ -207,10 +211,10 @@ Concepts: CI/CD, running a job on one branch only (`if:`), a `develop`/`master` 
 
 Concepts: when something deserves a component and when a CSS class is enough.
 
-- [ ] `Section.astro`: title, small label and slot. It sets the vertical rhythm for the whole site.
-- [ ] `TagList.astro`: the tags and chips.
-- [ ] Button styles (primary and outline) as classes in `global.css`. A styled `<a>` doesn't need a component.
-- [ ] `SkillGrid.astro`: category cards with a list. The Developer stack, GameDev stack and Film tools all use it.
+- [x] `Section.astro`: title, small label and slot. It sets the vertical rhythm for the whole site.
+- [x] `TagList.astro`: the tags and chips.
+- [x] Button styles (primary and outline) as classes in `global.css`. A styled `<a>` doesn't need a component.
+- [x] `SkillGrid.astro`: category cards with a list. The Developer stack, GameDev stack and Film tools all use it.
 
 **Verify:** they render on a test page, and the site still ships 0 KB of JS.
 
@@ -218,12 +222,12 @@ Concepts: when something deserves a component and when a CSS class is enough.
 
 Concepts: content collections, and schema validation at build time.
 
-- [ ] `src/content.config.ts`: a `projects` collection (glob loader).
+- [x] `src/content.config.ts`: a `projects` collection (glob loader).
   - Fields: `title, discipline (dev | gamedev | art), subtitle?, summary, tags, role, result?, links[], cover, coverAlt, featured, order`.
   - Film fields: `youtubeId?`, and `meta?` for the production metadata (format, client, year…).
   - The body is the optional case study (Phase 7.5). Cards and rows show `summary`.
-- [ ] `src/data/`: profile (name, email, socials), stacks per page, experience + education, timeline.
-- [ ] 1–2 real projects per discipline, so the schema gets tested against real content.
+- [x] `src/data/`: profile (name, email, socials), stacks per page, experience + education, timeline.
+- [x] 1–2 projects per discipline, so the schema gets tested (placeholders until the real ones arrive).
 
 **Verify:** delete a required field from a `.md` file and `npm run build` fails with a clear error. That failure is the feature working.
 
@@ -233,14 +237,14 @@ It comes first because it has no video or animation, just the bare structure. Th
 
 Concepts: `astro:assets` (`<Image>`), and why the CV lives in `public/`.
 
-- [ ] Hero with the lead paragraph and GitHub + Download CV (`/cv/dev.pdf`).
-- [ ] Technical stack (`SkillGrid`).
-- [ ] `ProjectRow.astro`:
+- [x] Hero with the lead paragraph and GitHub + Download CV (`/cv/dev.pdf`).
+- [x] Technical stack (`SkillGrid`).
+- [x] `ProjectRow.astro`:
   - media slot (image or diagram)
   - title, subtitle, summary
   - tags, role, result, links
   - an `id` on each project so Home can link to it
-- [ ] Experience list, then Education list. They can share one list component and differ only in their data.
+- [x] Experience list, then Education list. They can share one list component and differ only in their data.
 
 **Verify:**
 - DevTools → Network → JS shows 0 KB.
@@ -249,10 +253,10 @@ Concepts: `astro:assets` (`<Image>`), and why the CV lives in `public/`.
 
 ### Phase 6: GameDev page
 
-- [ ] Split hero, with a static image in the demo slot.
-- [ ] Technical stack with GameDev categories.
-- [ ] Games & breakdowns using `ProjectRow` (images only).
-- [ ] Shader & Tech Art Lab bento grid.
+- [x] Split hero. The demo slot is an inline SVG scene, which is its own static frame.
+- [x] Technical stack with GameDev categories.
+- [x] Games & breakdowns using `ProjectRow` (images only).
+- [x] Shader & Tech Art Lab bento grid.
 
 **Verify:** 0 KB JS, and `ProjectRow` and `SkillGrid` were reused without changes.
 
@@ -260,17 +264,17 @@ Concepts: `astro:assets` (`<Image>`), and why the CV lives in `public/`.
 
 Concepts: Astro `<script>` tags, which get bundled and deduplicated and run on page load. `client:*` directives don't apply to them.
 
-- [ ] `YouTubeFacade.astro`:
+- [x] `YouTubeFacade.astro`:
   - shows the thumbnail and a play button
   - injects the `youtube-nocookie.com` iframe only on click
   - is keyboard accessible and has a `title`
   - Simpler alternatives:
     - a thumbnail that links to YouTube (zero JS, but it takes the visitor off the site)
     - the `@astro-community/astro-embed-youtube` package
-- [ ] Hero with the reel, the title, the roles line and Download CV.
-- [ ] Tools (`SkillGrid`).
-- [ ] Selected works: `ProjectRow` with the facade plus production metadata.
-- [ ] Short About as the last section.
+- [x] Hero with the reel, the title, the roles line and Download CV.
+- [x] Tools (`SkillGrid`).
+- [x] Selected works: `ProjectRow` with the facade plus production metadata.
+- [x] Short About as the last section.
 
 **Verify:** loading `/art` makes no request to `youtube.com` or `youtube-nocookie.com` until you click play.
 
@@ -280,15 +284,15 @@ It sits between Film and Home: it needs the collection (4), `ProjectRow` (5) and
 
 Concepts: dynamic routes, `getStaticPaths()`, `render()`, styling Markdown output with `:global()`.
 
-- [ ] `src/pages/projects/[id].astro`: `getStaticPaths()` returns one page per project whose body has text.
-- [ ] The page:
+- [x] `src/pages/projects/[id].astro`: `getStaticPaths()` returns one page per project whose body has text.
+- [x] The page:
   - a back link to the project's row
   - the header (title, subtitle, role, tags, result, links, film metadata)
   - the cover or the facade, with `priority`
   - `<Content />` inside a `.prose` wrapper styled with `:global()`
-- [ ] Title and description come from the entry (`title`, `summary`).
-- [ ] `ProjectRow`: a "Read the case study" link, only when the project has a body.
-- [ ] At least one real case study, with an image.
+- [x] Title and description come from the entry (`title`, `summary`).
+- [x] `ProjectRow`: a "Read the case study" link, only when the project has a body.
+- [x] At least one case study, with an image (placeholders for now).
 
 **Verify:**
 - `dist/projects/` has one folder per case study and none for projects without a body.
@@ -297,10 +301,10 @@ Concepts: dynamic routes, `getStaticPaths()`, `render()`, styling Markdown outpu
 
 ### Phase 8: Home without 3D
 
-- [ ] Hero with name and roles over a static poster image (it stands in for the canvas).
-- [ ] `ProjectCard.astro`: 3 featured projects, one per discipline, each linking to `/<page>#<project>`.
-- [ ] About with portrait.
-- [ ] `Timeline.astro` built from the data files.
+- [x] Hero with name and roles beside a static poster image: the cube's first frame, so it stands in for the canvas.
+- [x] `ProjectCard.astro`: 3 featured projects, one per discipline, in a bento grid where the image dominates. Each links to its project page (or to `/<page>#<project>` if it has no body).
+- [x] About with portrait.
+- [x] `Timeline.astro` built from the data files.
 
 **Verify:** the whole site is complete and navigable, and the facade is its only JS. This is the publishable milestone: if the 3D fails later, the portfolio still works.
 
@@ -311,9 +315,9 @@ Concepts:
 - how a dynamic `import()` splits a separate chunk that loads later
 - what blocking the main thread means
 
-- [ ] Install `gsap`. Load it with a dynamic import once the browser is idle (the hero is already on screen at load).
-- [ ] With `prefers-reduced-motion`, keep the static image and never load GSAP.
-- [ ] Animate only `transform` and `opacity`, which the GPU compositor handles, never layout properties.
+- [x] Install `gsap`. Load it with a dynamic import once the browser is idle (the hero is already on screen at load).
+- [x] With `prefers-reduced-motion`, keep the static image and never load GSAP.
+- [x] Animate only `transform` and `opacity`, which the GPU compositor handles, never layout properties.
 
 **Verify:**
 - The GSAP chunk is only requested on `/gamedev`, never on the other pages.
@@ -324,16 +328,16 @@ Concepts:
 
 Requires the hero concept to be defined.
 
-- [ ] Choose how it loads:
-  - (a) a plain `<script>` plus a dynamic import when the browser is idle. No framework; recommended.
+- [x] Choose how it loads:
+  - (a) a plain `<script>` plus a dynamic import when the browser is idle. No framework; recommended. **Chosen.**
   - (b) a Preact component with `client:idle`. It uses the directive directly, at the cost of a few KB of runtime.
-- [ ] The poster from Phase 8 stays under the canvas, so the LCP element is always an image and never WebGL.
-- [ ] Early exits that keep the poster in place:
+- [x] The poster from Phase 8 stays under the canvas, so the LCP element is always an image and never WebGL.
+- [x] Early exits that keep the poster in place:
   - `prefers-reduced-motion`
   - no WebGL support
-  - a low-end device heuristic
-- [ ] Named imports from `three`. Compress models (Draco/meshopt) if there are any, and decide where they live.
-- [ ] Pause the render loop when the tab is hidden or the hero is off-screen.
+  - a low-end device heuristic: Save-Data. At 160×160 px the GPU cost is tiny, so the download is what's worth skipping.
+- [x] Named imports from `three`. Compress models (Draco/meshopt) if there are any, and decide where they live. (None: the cube is built in code.)
+- [x] Pause the render loop when the tab is hidden or the hero is off-screen.
 
 **Verify:**
 - The island bundle is under 150 KB gzip.
@@ -342,10 +346,10 @@ Requires the hero concept to be defined.
 
 ### Phase 11: Closing
 
-- [ ] Every image goes through `astro:assets`, always with width and height (no layout shift).
-- [ ] Visual identity applied to the tokens in `global.css`. Fonts are self-hosted: woff2, `font-display: swap`, and the LCP font preloaded.
-- [ ] One OG image per page in `public/og/`. Recruiters receive direct links, so the preview card is their first impression. Case studies reuse their discipline's image.
-- [ ] A `404.astro` page (GitHub Pages serves `404.html` automatically).
+- [x] Every image goes through `astro:assets`, always with width and height (no layout shift).
+- [x] Visual identity applied to the tokens in `global.css`. Fonts are self-hosted: woff2, `font-display: swap`, and the LCP font preloaded.
+- [x] One OG image per page in `public/og/`. Recruiters receive direct links, so the preview card is their first impression. Case studies reuse their discipline's image. (Generated placeholders for now.)
+- [x] A `404.astro` page (GitHub Pages serves `404.html` automatically).
 - [ ] Optional: `@astrojs/sitemap`. Every page is reachable through links, so it adds little.
 - [ ] Accessibility pass: visible focus, contrast, keyboard navigation, real `alt` text.
 - [ ] Lighthouse on all 4 pages and one case study, against the budget below.
@@ -366,10 +370,10 @@ Requires the hero concept to be defined.
 
 ## Open items
 
-1. **Hero 3D concept:** blocks Phase 10 only. It should say something about the profile, not be a generic tech demo.
-2. **Visual identity:** can happen any time after Phase 3. It only means editing the tokens in `global.css`, without touching components.
-3. **Game Audio card:** replace its placeholder tools with the real ones.
-4. **Real content:**
+The hero 3D concept and the visual identity are decided (see **Decisions**).
+
+1. **Game Audio card:** replace its placeholder tools with the real ones.
+2. **Real content:**
    - 3 CVs
    - projects
    - timeline
